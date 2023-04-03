@@ -64,7 +64,7 @@ image.loading::after {
 switch,
 checkbox,
 radio {
-	position: relative;
+	/* position: relative; */
 }
 
 switch::after,
@@ -441,7 +441,7 @@ radio.white.checked .uni-radio-input {
 .dashed-right,
 .dashed-bottom,
 .dashed-left {
-	position: relative;
+	/* position: relative; */
 }
 
 .solid::after,

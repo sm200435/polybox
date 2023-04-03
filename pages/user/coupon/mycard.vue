@@ -1,7 +1,7 @@
 <template>
 	<view class="wanl-order-list" style="background: #f7f7f7;">
 		<view class="navbar">
-			<view class="nav-item text-df" v-for="(item, index) in navList" :key="item.state" :class="{ current: tabCurrentIndex === index }" @tap="tabClick(index)">
+			<view class="nav-item text-df" style="background: #ffffff;" v-for="(item, index) in navList" :key="item.state" :class="{ current: tabCurrentIndex === index }" @tap="tabClick(index)">
 				{{ item.text }}
 			</view>
 		</view>

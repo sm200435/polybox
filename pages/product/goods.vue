@@ -78,26 +78,30 @@
 				</view>
 			</view> -->
 			<!-- 普通 -->
-			<view  class="price margin-bottom-sm padding-lr-bj padding-top-bj align-start">
-				<view>
-					<view class="text-price wanl-orange text-xxl margin-right-xs">{{ goodsData.interval_price || '0.00' }}</view>
-					<view class="text-sm wanl-gray text-dec">
-						市场价
-						<text class="text-price margin-left-xs ">{{ goodsData.market_price || 0.0 }}</text>
+			<view  class="margin-bottom-sm align-start" style="margin-top: 30rpx;margin-left: 20rpx;display: flex;justify-content: space-between;">
+				<view style="display: flex;">
+					<view class="text-price wanl-orange margin-right-xs" style="font-size: 38rpx;font-weight: bold;">{{ goodsData.interval_price || '0.00' }}</view>
+					<view class="wanl-gray text-dec" style="font-size: 24rpx;margin-top: 16rpx;">
+						<!-- 市场价 -->
+						<text class="text-price" style="margin-left: 15rpx;">{{ goodsData.market_price || 0.0 }}</text>
 					</view>
 				</view>
-				<!-- <view class="follow wanl-black" v-if="goodsData.follow" @tap="follow">
-					<text class="wlIcon-yiguanzhu1 text-red"></text>
-					<text class="text-xs">取关</text>
+				<view>
+					<view class="follow wanl-black" style="margin-right: 27rpx;" v-if="goodsData.follow" @tap="follow" >
+						<image src="../../static/images/user/collection.png" style="height: 36rpx;width: 36rpx;"></image>
+						<!-- <text class="wlIcon-yiguanzhu1 text-red"></text>
+						<text class="text-xs">取关</text> -->
+					</view>
+					<view class="follow wanl-black" style="margin-right: 27rpx;" v-else @tap="follow">
+						<image src="../../static/images/user/collect.png" style="height: 36rpx;width: 36rpx;"></image>
+						<!-- <text class="wlIcon-gerenguanzhu"></text>
+						<text class="text-xs">关注</text> -->
+					</view>
 				</view>
-				<view class="follow wanl-black" v-else @tap="follow">
-					<text class="wlIcon-gerenguanzhu"></text>
-					<text class="text-xs">关注</text>
-				</view> -->
 			</view>
 			<!-- 标题，分享 -->
 			<view class="title padding-lr-bj padding-bottom-bj">
-				<view class="name wanl-black text-lg text-cut-2">
+				<view class="name wanl-blac text-cut-2" style="font-size: 30rpx;">
 					<view v-if="goodsData.shop.isself == 1" class="cu-tag radius margin-right-xs sm bg-red">自营</view>
 					{{ goodsData.title || '加载中...' }}
 				</view>

@@ -4,6 +4,10 @@
 			<image src="../../static/images/user/door.png" mode="aspectFit" style="width: 100rpx;height: 100rpx;"></image>
 			<view class="anges">热门商品</view>
 		</view>
+		<view class="arrs" @tap="onCollect()">
+			<image src="../../static/images/user/cang.png" mode="aspectFit" style="width: 100rpx;height: 100rpx;"></image>
+			<view class="anges">收藏商品</view>
+		</view>
 		<view class="arrs" @tap="onVolume()">
 			<image src="../../static/images/user/centre.png" mode="aspectFit" style="width: 100rpx;height: 100rpx;"></image>
 			<view class="anges">领券中心</view>
@@ -29,6 +33,18 @@
 					url:'/pages/user/group/hot'
 				})
 			},
+			//收藏
+			onCollect(){
+				if(this.$store.state.user.isLogin==false){
+					uni.navigateTo({
+						url:'/pages/user/auth/auth'
+					})
+				}else{
+					uni.navigateTo({
+						url:'/pages/user/collect'
+					})
+				}
+			},
 			//领劵是否登录
 			onVolume(){
 				if(this.$store.state.user.isLogin==false){
@@ -53,7 +69,6 @@
 						url:'/pages/user/group/client'
 					})
 				}
-				
 			}
 		}
 	}

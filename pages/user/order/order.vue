@@ -70,7 +70,7 @@
 						</view>
 						<view class="action-box padding-bottom-bj" v-if="order.state == 1">
 							<button class="cu-btn round line-black margin-lr-bj" @tap="editAddress(order.id)">修改地址</button>
-							<button class="cu-btn round line-black" @tap="cancelOrder(order)">取消订单</button>
+							<button class="cu-btn round line-black" style="margin-right: 5rpx;" @tap="cancelOrder(order)">取消订单</button>
 							<button class="cu-btn round margin-lr-bj wanl-bg-orange" @tap="paymentOrder(order.id)">立即支付</button>
 						</view>
 						<view class="action-box padding-bottom-bj" v-if="order.state == 2">

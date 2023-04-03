@@ -63,14 +63,16 @@
 								
 								<view class="wanl-numberBox solid">
 									<view @tap="bcsub(goods)">
-										<text class="wlIcon-jian round text-gray"></text>
+										<!-- <text class="wlIcon-jian round text-gray"></text> -->
+										<image src="../static/images/user/jian.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 									</view>
-									<view class="text-lg text-number">
+									<view class="text-number" style="font-size: 24rpx;">
 										<!-- {{ goods.number }}	 -->
 										<input type="number" v-model="goods.number" :data-index="keys" @input="numberInput($event,goods)" @blur="numberBlur($event,goods)"/>
 									</view>
 									<view @tap="bcadd(goods)">
-										<text class="wlIcon-tianjia round text-gray"></text>
+										<!-- <text class="wlIcon-tianjia round text-gray"></text> -->
+										<image src="../static/images/user/jia.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 									</view>
 								</view>
 								<!-- <uni-number-box :min="1" :max="selectshop.stock" :value="goods.number" @change="changeNum" :keys=keys></uni-number-box> -->
@@ -269,6 +271,7 @@
 			toEmpty() {
 				uni.showModal({
 					content: '是否删除商品？',
+					confirmColor: '#F31064',
 					success: res => {
 						if (res.confirm) {
 							this.$store.dispatch('cart/del');

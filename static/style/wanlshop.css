@@ -378,9 +378,9 @@ image{will-change: transform}
 
 /* 数字框 */
 .wanl-numberBox {
-	width: 200rpx;
+	width: 150rpx;
 	height: 55rpx;
-	border-radius: 100rpx;
+	/* border-radius: 100rpx; */
 	padding: 6rpx 6rpx 6rpx 6rpx;
 	line-height: 55rpx;
 	display: flex;

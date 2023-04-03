@@ -17,12 +17,12 @@
 						<!-- <view class="text-xxl"><text class="wlIcon-saoyisao"></text></view> -->
 					<!-- </view> -->
 					<view class="search flex align-center margin-lr-sm round">
-						<view class="icon text-df text-bold wanl-gray-dark">
-							<text class="wlIcon-sousuo1"></text>
+						<view class="text-df text-bold wanl-gray-dark" style="margin-left: 16rpx;margin-right: 6rpx;">
+							<image src="../../../static/images/user/searchs.png" style="width: 33rpx;height: 33rpx;"></image>
 						</view>
 						<swiper vertical autoplay circular interval="3000">
 							<swiper-item @tap="handleSearch('')">
-								<text class="wanl-gray-dark text-cut" style="font-size: 30rpx;">请输入您要搜索的商品</text>
+								<text class="text-cut" style="font-size: 24rpx;color: #999999;">请输入您要搜索的商品</text>
 							</swiper-item>
 							<swiper-item v-for="(item, index) in common.modulesData.searchModules" :key="item.keywords" @tap="handleSearch(item.keywords)" >
 								<text class="wanl-gray-dark text-cut">{{ item.keywords }}</text>
