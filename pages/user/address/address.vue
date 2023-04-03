@@ -29,8 +29,8 @@
 			</view>
 		</view>
 		<uni-load-more :status="status" :content-text="contentText" />
-		<view class="edgeInsetBottom"></view>
 		<view class="wanlian cu-bar tabbar foot"><button @tap="addAddress('add')" class="wanl-bg-orange" style="width: 584rpx;margin-bottom: 90rpx;border-radius: 40rpx;font-size: 30rpx;">+ 增加收货地址</button></view>
+		<!-- <view class="wanlian cu-bar tabbar foot"><button @tap="addAddress('add')" class="wanl-bg-orange" style="width: 584rpx;margin-bottom: 90rpx;border-radius: 40rpx;font-size: 30rpx;">导入微信地址</button></view> -->
 	</view>
 </template>
 

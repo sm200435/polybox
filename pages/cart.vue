@@ -24,21 +24,21 @@
 				<view class="wanl-cart-shop radius-bock margin-bj padding-bj" v-for="(item, index) in cart.list"
 					:key="index">
 					<!-- <view class="shop margin-bottom" @tap="onShop(item.shop_id)"> -->
-					<view class="shop margin-bottom">
-						<!-- 店铺选择 -->
+				<!-- 	<view class="shop margin-bottom">
+						店铺选择
 						<view class="text-xxl margin-right-sm" @tap.stop="shopchoose(item)">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.check"></image>
 							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
-							<!-- <text v-if="item.check" class="wlIcon-xuanze-danxuan wanl-orange"></text>
-							<text v-else class="wlIcon-xuanze wanl-gray-light"></text> -->
+							<text v-if="item.check" class="wlIcon-xuanze-danxuan wanl-orange"></text>
+							<text v-else class="wlIcon-xuanze wanl-gray-light"></text>
 						</view>
 						<view class="shopname">
 							<text class="wlIcon-dianpu1 margin-right-xs"></text>
 							<text class="text-30">{{ item.shop_name }}</text>
 						</view>
-						<!-- <view class="info"><text class="wlIcon-fanhui2 margin-left-xs"></text></view> -->
-					</view>
-					<view class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys">
+						<view class="info"><text class="wlIcon-fanhui2 margin-left-xs"></text></view>
+					</view> -->
+					<view class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys" v-if="goods.sku.stock!=0">
 						<!-- 商品选择 -->
 						<view class="text-xxl margin-right-sm" @tap="choose({ index: index, keys: keys })">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="goods.checked"></image>
@@ -53,7 +53,7 @@
 							<view class="text-cut-2 wanl-gray-dark text-lg" @tap="onGoods(goods.goods_id)">
 								{{ goods.title }}
 							</view>
-							<view class="cu-tag wanl-gray opt">
+							<view class="cu-tag wanl-gray opt" style="background-color: #ffffff;">
 								规格：{{ goods.sku.difference.join(' ') }}
 							</view>
 							<view class="flex justify-between align-center">
@@ -74,6 +74,41 @@
 									</view>
 								</view>
 								<!-- <uni-number-box :min="1" :max="selectshop.stock" :value="goods.number" @change="changeNum" :keys=keys></uni-number-box> -->
+							</view>
+						</view>
+					</view>
+					<!-- 已失效没库存商品 -->
+					<view v-if="item.products.some(item=> item.sku.stock==0)" style="font-size: 30rpx;font-weight: 600;color: #141414;line-height: 42rpx;margin: 36rpx 0 36rpx 0;">
+						已失效商品
+					</view>
+					<view v-if="goods.sku.stock==0" class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys" style="position: relative;">
+						<!-- 商品选择 -->
+						<view class="text-xxl margin-right-sm" @tap="choose({ index: index, keys: keys })" v-if="cart.operate">
+							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="goods.checked"></image>
+							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
+							<!-- <text v-if="goods.checked" class="wlIcon-xuanze-danxuan wanl-orange"></text>
+							<text v-else class="wlIcon-xuanze wanl-gray-light"></text> -->
+						</view>
+						<view class="text-xxl margin-right-sm" v-else>
+							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;"></image>
+						</view>
+						<view class="picture" @tap="onGoods(goods.goods_id)" style="position: relative;">
+							<view class="replenishment">
+								补货中
+							</view>
+							<image :src="$wanlshop.oss(goods.image, 100, 100, 1)" mode="aspectFill" style="opacity: 0.4;"></image>
+						</view>
+						<view class="content" style="opacity: 0.4;">
+							<view class="text-cut-2 wanl-gray-dark text-lg" @tap="onGoods(goods.goods_id)">
+								{{ goods.title }}
+							</view>
+							<view class="cu-tag wanl-gray opt" style="background-color: #ffffff;">
+								规格：{{ goods.sku.difference.join(' ') }}
+							</view>
+							<view class="flex justify-between align-center">
+								<view class="text-price wanl-orange text-lg">
+									{{ goods.sku.price }}
+								</view>
 							</view>
 						</view>
 					</view>
@@ -211,6 +246,7 @@
 		},
 		methods: {
 			numberBlur(e,val){
+				console.log("val666",val.sku.stock);
 				const {index}=e.currentTarget.dataset
 				let cartList=this.cart.list
 				// console.log("cartList[0].products[index].sku.stock",cartList[0].products[index].sku.stock);
@@ -219,7 +255,16 @@
 					cartList[0].products[index].number=1
 				}
 				if(cartList[0].products[index].number>cartList[0].products[index].sku.stock){
-					this.$wanlshop.msg(`数量不能超过库存 ${cartList[0].products[index].sku.stock} 件`);
+					// this.$wanlshop.msg(`数量不能超过库存 ${cartList[0].products[index].sku.stock} 件`);
+					uni.showModal({
+						content: `商品最多还有 ${cartList[0].products[index].sku.stock} 件`,
+						showCancel:false,
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定');
+							}
+						}
+					});
 					cartList[0].products[index].number=cartList[0].products[index].sku.stock
 				}
 				this.$store.dispatch('cart/zdyBcadd',cartList[0].products[index]);
@@ -478,5 +523,20 @@
 		margin: 0 auto;
 		margin-bottom: 20px;
 		border-radius: 39.25rpx;
+	}
+	.replenishment{
+		width: 93rpx;
+		height: 40rpx;
+		font-size: 23rpx;
+		font-weight: 400;
+		color: #FFFFFF;
+		line-height: 40rpx;
+		background: #141414;
+		position: absolute;
+		top: 70rpx;
+		left: 50rpx;
+		border-radius: 20rpx;
+		opacity: 0.4;
+		text-align: center;
 	}
 </style>

@@ -16,8 +16,12 @@ export default {
 		operate: false //管理购物车状态
 	},
 	actions: {
-		async operate({state}) {
+		async operate({state,dispatch}) {
 			state.operate = !state.operate;
+			// console.log("state.list",state.list[0]);
+			if(state.operate){
+				dispatch("shoptrue",state.list[0])
+			}
 		},
 		async get({state, dispatch, rootState}){
 			setTimeout(()=> {
@@ -70,6 +74,10 @@ export default {
 					state.status = false;
 				}
 			}
+			// 如果商品库存为0不计算到总数和总价里
+			if(goods.sku.stock==0){
+				return
+			}
 			state.allsum = fun.bcadd(state.allsum, goods.sum);
 			state.allnum += Number(goods.number);
 		},
@@ -85,6 +93,10 @@ export default {
 				state.allchoose--; 
 			}
 			state.status = false; //无论之前全选的状态，将其改为false就行
+			// 如果商品库存为0不计算到总数和总价里
+			if(goods.sku.stock==0){
+				return
+			}
 			state.allsum = fun.bcsub(state.allsum, goods.sum); //商品总计价格变动
 			state.allnum -= Number(goods.number);
 		},
@@ -92,9 +104,13 @@ export default {
 		async shopchoose({dispatch}, cart) {
 			!cart.check ? dispatch('shoptrue', cart) : dispatch('shopfalse', cart);
 		},
-		async shoptrue({dispatch}, cart) {
+		async shoptrue({state,dispatch}, cart) {
 			//循环店铺中的商品，先筛选出目前没选中的商品，给它执行choosetrue
+			// console.log("cart77777",cart);
 			cart.products.forEach((goods) => {
+				if(state.operate==false&&goods.sku.stock==0){
+					return
+				}
 				goods.checked === false && dispatch('choosetrue', {cart:cart, goods:goods}); 
 			})
 		},
@@ -180,11 +196,25 @@ export default {
 					state.allnum=num
 					state.allsum = sum.toFixed(2)
 				}
-			dispatch('storage', {type: 'zdyBcadd', goods: goods});
+			dispatch('storage', {type: 'bcadd', goods: goods});
 		},
 		// 加
 		async bcadd({state, dispatch}, goods) {
 			goods.number++;
+			console.log("goods",goods);
+			if(goods.number>goods.sku.stock){
+				uni.showModal({
+					content: `商品最多还有 ${goods.sku.stock} 件`,
+					showCancel:false,
+					success: function (res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+						}
+					}
+				});
+				goods.number=goods.sku.stock
+				return 
+			}
 			goods.sum = fun.bcadd(goods.sum, goods.sku.price);
 			if (goods.checked) {
 				state.allnum++;

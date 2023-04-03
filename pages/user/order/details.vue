@@ -165,7 +165,8 @@ export default {
 					status: '',
 					time: ''
 				},
-				statetime: ''
+				statetime: '',
+				state:1
 			},
 			logisticsType: false,
 			infoMore: false
@@ -191,8 +192,14 @@ export default {
 						var days = Math.floor(diff / 86400);
 						var hours = Math.floor(diff % 86400 / 3600); 
 						var minutes = Math.floor(diff % 86400 % 3600 / 60);
-						if (minutes > 0) {
+						console.log("minutes",minutes);
+						if (minutes => 0) {
 							this.orderData.statetime = '还剩' +minutes+ '分自动关闭订单';
+							this.orderData.state=1
+						}
+						if(minutes<0){
+							this.orderData.statetime = '订单已经关闭';
+							this.orderData.state=8
 						}
 						if (hours > 0) {
 							this.orderData.statetime = '还剩' +hours+ '天' +minutes+ '分自动关闭订单';
@@ -242,7 +249,7 @@ export default {
 			return ["img_order_payment3x.png", "img_order_send3x.png", "img_order_received3x.png", "img_order_signed3x.png", "img_order_closed3x.png", "img_order_signed3x.png", "img_order_closed3x.png"][status - 1];
 		},
 		getStatusText(status) {
-			return ["等待您付款", "付款成功", "待收货", "待评论", "退款订单", "订单已完成", "交易关闭"][status - 1];
+			return ["等待您付款", "付款成功", "待收货", "待评论", "退款订单", "订单已完成", "交易关闭","超时未支付"][status - 1];
 		},
 		getRefund(status) {
 			return ["退款", "退款中", "待退货", "退款完成", "退款关闭", "退款被拒"][status];

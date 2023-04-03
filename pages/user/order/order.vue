@@ -306,7 +306,65 @@ export default {
 		},
 		//支付订单
 		paymentOrder(id){
-			this.$wanlshop.to(`/pages/user/money/pay?order_id=${id}&order_type=goods`);
+			let token=""
+			let code=""
+			// 获取token
+			this.$api.post({
+				url: '/wanlshop/pay/getPay',
+				data: {
+					order_id: id,
+					order_type: "goods"
+				},
+				success: res => {
+					console.log("res",res);
+					token = res.token;
+					// 获取code
+					uni.login({
+						success: (e) => {
+							code=e.code
+							this.$api.post({
+								url: '/wanlshop/pay/payment',
+								data: {
+									order_type: "goods",
+									type: 'wechat',
+									method: 'miniapp',
+									code: code,
+									order_id: id,
+									token: token
+								},
+								success: res => {
+									// 微信小程序支付
+									uni.requestPayment({
+										appId: res.appId,
+										nonceStr: res.nonceStr,
+										package: res.package,
+										paySign: res.paySign,
+										signType: res.signType,
+										timeStamp: res.timeStamp,
+										success: (e) => {
+											this.paySuccess(data[0].type);
+										},
+										fail: (e) => {
+											// uni.showModal({
+											//     content: "支付失败,原因为: " + e.errMsg,
+											//     showCancel: false,
+											// })
+											this.payErr(data, token, code);
+										}
+									})
+								}
+							});
+						},
+						fail: (e) => {
+							uni.showModal({
+								content: "无法获取微信code,原因为: " + e.errMsg,
+								showCancel: false
+							})
+						}
+					})
+				}
+			});	
+			// this.$wanlshop.to(`/pages/user/money/pay?order_id=${id}&order_type=goods`);
 		},
 		//确认收货- 全局
 		confirmOrder(item){

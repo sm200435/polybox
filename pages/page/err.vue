@@ -52,10 +52,24 @@
 					url: '/pages/user'
 				});
 			},
+			data(){
+				return{
+					// 商品信息
+					data:[],
+					token:"",
+					// 用户code
+					code:""
+				}
+			},
+			onLoad(option){
+				console.log("option",option);
+				this.data=JSON.parse(option.data)
+			},
 			// 点击重新支付
 			payAgain(){
-				let id=uni.getStorageSync('order_id')
-				this.$wanlshop.to(`/pages/user/money/pay?order_id=${id}&order_type=goods`);
+				uni.redirectTo({
+					url:`/pages/user/order/addorder?data=${JSON.stringify(this.data)}`
+				})
 			},
 			// 点击查看订单
 			goOrder(){

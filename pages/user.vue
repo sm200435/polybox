@@ -71,7 +71,7 @@
 					<view class="cu-tag wanl-bg-pink sm radius">Hi，欢迎登录</view>
 				</view>
 			</view>
-			<!-- <view class="operate">
+			<view class="operate">
 				<view class="text-sm" @tap="$wanlshop.auth('/pages/user/collect')">
 					<text class="text-bold">{{ statistics.dynamic.collection }}</text>
 					收藏夹
@@ -89,7 +89,7 @@
 					全部订单
 				</view>
 				
-			</view> -->
+			</view>
 		</view>
 		<!-- <view class="wanl-user-order-s margin-bj padding-sm" v-if="user.isLogin"> -->
 			<!-- <view class="my-coup" v-if="user.isLogin"> -->
