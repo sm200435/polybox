@@ -1,6 +1,6 @@
 <template>
 	<view class="collect-container">
-		<view class="collect-container__head bg-white" :style="{ height: headHeight + 'px' }">
+		<!-- <view class="collect-container__head bg-white" :style="{ height: headHeight + 'px' }">
 			<view :style="{ height: headHeight + 'px', paddingTop: headTop + 'px' }">
 				<view class="navigater flex align-center justify-between">
 					<view class="back" :style="{height: headHeight + 'px', lineHeight: headHeight + 'px'}"
@@ -9,33 +9,47 @@
 					</view>
 					<scroll-view scroll-x class="nav text-center">
 						<view v-for="(item, index) in navList" :key="index" class="cu-item flex-sub"
-							:class="currentItemId === item.type ? 'text-orange cur' : ''"
+							:class="currentItemId === item.type ? '' : ''"
 							@tap="handleSelect(item.type, index)">
 							<text class="text-30">{{item.type_text}}</text>
 						</view>
 					</scroll-view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- 主体 -->
-		<swiper class="collect-container__main" :current-item-id="currentItemId"
-			:style="{ height: windowHeight + 'px' }" @change="changeCurrent" @animationfinish="animationFinish">
+	<!-- 	<swiper class="collect-container__main" :current-item-id="currentItemId"
+			:style="{ height: windowHeight + 'px' }" @change="changeCurrent" @animationfinish="animationFinish"> -->
+			<view class="collect-container__main" :current-item-id="currentItemId"
+			:style="{ height: windowHeight + 'px' }">
 			<swiper-item v-for="(data, keys) in navList" :key="keys" :item-id="data.type">
 				<wanl-empty text="你还没有任何收藏" src="collect_default3x" v-if="data.dataList.length === 0 && data.loaded" />
+				<view class="action" @click="sho">
+					<text v-if="cang">取消</text>
+					<text v-else>多选</text>
+				</view>
 				<scroll-view class="content" scroll-y @scrolltolower="loadData">
 					<view class="item margin-bj padding-sm bg-white radius-bock" v-for="(item, index) in data.dataList"
-						:key="index" @click="handleGoods(item.id)">
+						:key="index" >
+							<!-- 商品选择 -->
+						<view class="wanl-cart-goods text-xxl margin-right-sm" v-if="cang">
+							<image src="../../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.checked"></image>
+							<image src="../../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
+						</view>
 						<view class="cu-avatar margin-right-bj radius"
-							:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}"></view>
-						<view class="subject">
-							<view class="text-sm wanl-gray-dark text-cut-2">
+							:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}"  @click="handleGoods(item.id)"></view>
+						<view class="subject" @click="handleGoods(item.id)">
+							<view class="text-cut-2" style="font-size: 30rpx;color: #353535;">
 								<view v-if="currentItemId === 'groups'" class="cu-tag sm bg-gradual-red radius margin-right-xs">
 									{{item.is_ladder === 1 ?'阶梯': item.people_num + '人'}}拼团
 								</view>
 								{{item.title}}
 							</view>
-							<view class="text-price text-red text-df"> {{item.price}} </view>
-							<view class="menu">
+							<view class="flex align-center justify-between">
+								<view class="text-red text-bold text-lg" style="margin: 0 14rpx;">
+									<text class="text-price">{{ item.price }}</text>
+								</view>
+							<!-- <view class="menu">
 								<view class="wanl-gray-light text-sm">
 									<text class="margin-right-sm">喜欢 {{item.like}}</text>
 									<text v-if="currentItemId === 'goods'">付款 {{item.payment}}</text>
@@ -45,13 +59,18 @@
 									<text class="wlIcon-lajitong" @click.stop="loadFollow(item.id, index)"></text>
 									<text class="wlIcon-dianpu1" @click.stop="onShop(item.shop_id)"></text>
 								</view>
+							</view> -->
+								<view class="text-sm" style="margin-right: 20rpx;">
+									<image class="addcart" src="../../static/images/user/jiahao.png" @tap.stop="addcartclick(item)"></image>
+								</view>
 							</view>
 						</view>
 					</view>
 					<uni-load-more :status="data.loadingType" :content-text="contentText" />
 				</scroll-view>
 			</swiper-item>
-		</swiper>
+		<!-- </swiper> --></view>
+		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
 	</view>
 </template>
 
@@ -64,20 +83,24 @@
 				headTop: 0,
 				currentId: 0,
 				currentItemId: 'goods',
+				cang:false,
+				selegoods:null,
+				showcart:false,
 				navList: [{
 						type: 'goods',
 						type_text: '商品收藏',
 						dataList: [],
 						loadingType: 'more',
 						current_page: 1
-					},
-					{
-						type: 'groups',
-						type_text: '团购收藏',
-						dataList: [],
-						loadingType: 'more',
-						current_page: 1
 					}
+					// ,
+					// {
+					// 	type: 'groups',
+					// 	type_text: '团购收藏',
+					// 	dataList: [],
+					// 	loadingType: 'more',
+					// 	current_page: 1
+					// }
 				],
 				contentText: {
 					contentdown: ' ',
@@ -155,23 +178,23 @@
 					}
 				});
 			},
-			// 选择Tag
-			handleSelect(id, index) {
-				this.currentItemId = id;
-				this.currentId = index;
-			},
-			// 动画
-			animationFinish(e) {
-				//#ifdef APP-PLUS
-				this.changeCurrent(e)
-				//#endif
-			},
-			// 滚动的tag
-			changeCurrent(e) {
-				this.currentItemId = e.detail.currentItemId;
-				this.currentId = e.detail.current;
-				this.loadData('tabChange');
-			},
+			// // 选择Tag
+			// handleSelect(id, index) {
+			// 	this.currentItemId = id;
+			// 	this.currentId = index;
+			// },
+			// // 动画
+			// animationFinish(e) {
+			// 	//#ifdef APP-PLUS
+			// 	this.changeCurrent(e)
+			// 	//#endif
+			// },
+			// // 滚动的tag
+			// changeCurrent(e) {
+			// 	this.currentItemId = e.detail.currentItemId;
+			// 	this.currentId = e.detail.current;
+			// 	this.loadData('tabChange');
+			// },
 			handleBack() {
 				this.$wanlshop.back(1);
 			},
@@ -181,14 +204,28 @@
 				}else if(this.currentItemId === 'groups'){
 					this.$wanlshop.to(`/pages/apps/groups/goods?id=${id}`)
 				}
+			},
+			addcartclick(good){
+				console.log("good",good);
+				this.selegoods=good
+				this.showcart=true
+			},
+			hidecart(){
+				this.showcart=false
+			},
+			sho(){
+				this.cang=true;
 			}
-			
 		}
 	}
 </script>
 
 <style lang="scss">
+	.action{
+		margin: 30rpx 25rpx 0rpx;
+	}
 	.collect-container {
+		background: #f7f7f7;
 		&__head {
 			.navigater {
 				position: relative;
@@ -245,5 +282,32 @@
 				}
 			}
 		}
+		.addcart{
+			width: 40rpx;
+			height: 40rpx;
+			text-align: center;
+			line-height: 40rpx;
+		}
+		.wanl-cart-goods {
+				display: flex;
+				align-items: center;
+				margin-bottom: 30rpx;
+			}
+		
+			.wanl-cart-goods:last-child {
+				margin-bottom: 18rpx;
+			}
+		
+			.wanl-cart-goods .picture {
+				width: 180rpx;
+				height: 180rpx;
+			}
+		
+			.wanl-cart-goods .picture image {
+				width: 180rpx;
+				height: 180rpx;
+				overflow: hidden;
+				border-radius: 20rpx;
+			}
 	}
 </style>

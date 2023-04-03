@@ -45,7 +45,7 @@
 								<view class="list-box" v-for="(category, infokey) in categoryData" :key="category.id">
 									<image lazy-load style="border-radius: 8rpx;" :src="$wanlshop.oss(category.image, 60, 60)" class="list-image" @tap="gogoods(category.id)"/>
 									<!-- <view class="text-sm">{{ category.name }}</view> -->
-									<view class="list-content">
+									<view class="list-content" @tap="gogoods(category.id)">
 										<view>
 											<view class="content-tit">{{ category.title }}</view>
 											<view class="content-dis">{{ category.description }}</view>

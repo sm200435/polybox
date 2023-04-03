@@ -33,7 +33,7 @@
 		</view>
 		<view class="cu-form-group margin-top-bj" v-show="addressType">
 			<view class="title">设为默认</view>
-			<switch @change="switchChange" :class="addressData.default == 1?'checked':''" :checked="addressData.default == 1"></switch>
+			<switch color="#F31064" @change="switchChange" :class="addressData.default == 1?'checked':''" :checked="addressData.default == 1"></switch>
 		</view>
 		<scroll-view scroll-y="true" class="tipsScroll" v-show="!addressType">
 			<view class="item" v-for="(item,index) in addressList.tips" :key="index" @tap="addressTisp(item)">

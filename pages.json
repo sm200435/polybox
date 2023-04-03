@@ -476,7 +476,7 @@
 					"path": "group/client",
 					"style": {
 						"navigationBarTitleText": "大客户",
-						"navigationBarBackgroundColor": "#ffffff"
+						"navigationBarBackgroundColor": "#F88BB3"
 					}
 				},
 				{
@@ -603,9 +603,8 @@
 				{
 					"path": "collect",
 					"style": {
-						"navigationBarTitleText": "收藏夹",
+						"navigationBarTitleText": "收藏商品",
 						"navigationBarBackgroundColor": "#ffffff",
-						"navigationStyle": "custom",
 						"disableScroll": true
 					}
 				},

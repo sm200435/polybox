@@ -312,11 +312,6 @@
 	.addcart{
 		width: 40rpx;
 		height: 40rpx;
-		// border-radius: 20rpx;
-		// background-color: #F31064;
-		// color: #ffffff;
-		// font-size: 30rpx;
-		// font-weight: bold;
 		text-align: center;
 		line-height: 40rpx;
 	}

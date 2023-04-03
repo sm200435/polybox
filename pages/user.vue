@@ -131,7 +131,7 @@
 		
 		<view class="wanl-user-order padding-sm margin-bj" v-if="user.isLogin">
 			<view class="myorder">我的订单</view>
-			<view class="project text-sm wanl-gray-dark">
+			<view class="project text-sm wanl-gray-dark" style="padding-bottom: 20rpx;">
 				<view @tap="$wanlshop.auth('/pages/user/order/order')">
 					<text class="wlIcon-31daipingjia wanl-pip"></text>
 					<view style="color: #141414;font-size: 25rpx;">全部</view>

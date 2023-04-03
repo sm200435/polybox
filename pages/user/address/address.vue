@@ -1,11 +1,13 @@
-<!-- 2020年2月15日14:57:57 完成 -->
 <template>
 	<view style="background: #f7f7f7;height: 100vh;">
 		<view class="edgeInsetTop"></view>
 		<wanl-empty v-if="addressList.length === 0 && status !== 'loading'" text="还没添加任何地址"/>
 		<view class="margin-top-bj">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item" style="border-radius: 24rpx;" :class="modalName == 'move-box-' + index ? 'move-cur' : ''" v-if="addressList" v-for="(item, index) in addressList" :key="item.id" @tap="checkAddress(item)" @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd" :data-target="'move-box-' + index" >
+				<view class="cu-item" style="border-radius: 24rpx;" 
+				:class="modalName == 'move-box-' + index ? 'move-cur' : ''" v-if="addressList" v-for="(item, index) in addressList" 
+				:key="item.id" @tap="checkAddress(item)" @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd" 
+				:data-target="'move-box-' + index" >
 					<view style="width: 687rpx;height: 185rpx;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;">
 						<view class="cu-avatar round lg" style="background-color: #F31064;margin: 42rpx 67rpx 0 0;justify-content: center;left: 20rpx;">{{ item.name.substring(0, 1) }}</view>
 						<view class="content" style="margin: 40rpx 32rpx 24rpx 18rpx;left: 120rpx;">
