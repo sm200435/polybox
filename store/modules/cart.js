@@ -16,11 +16,25 @@ export default {
 		operate: false //管理购物车状态
 	},
 	actions: {
+		// 切换管理完成状态
 		async operate({state,dispatch}) {
 			state.operate = !state.operate;
+			let list=[]
+			let flag=false
+			state.list[0].products.forEach(item=>{
+				if(item.sku.stock!=0){
+					list.push(item)
+				}
+			})
+			flag=list.every(i=>i.checked)
 			// console.log("state.list",state.list[0]);
 			if(state.operate){
-				dispatch("shoptrue",state.list[0])
+				if(state.status){
+					dispatch("shoptrue",state.list[0])
+				}	
+			}
+			else{
+					state.status=flag
 			}
 		},
 		async get({state, dispatch, rootState}){

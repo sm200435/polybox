@@ -197,7 +197,7 @@
             "urlCheck" : false,
             "es6" : true,
             "minified" : true,
-            "postcss" : true
+            "postcss" : false
         },
         "sitemapLocation" : "sitemap.json", //重点这句
         "usingComponents" : true,
@@ -206,15 +206,14 @@
                 "desc" : "演示定位能力"
             }
         },
-        "requiredPrivateInfos" : [ "getLocation" ],
+        "requiredPrivateInfos" : [ "getLocation","chooseAddress"],
         "uniStatistics" : {
             "enable" : false
         },
-		"navigateToMiniProgramAppIdList":[
-		
-		  "wx6885acbedba59c14"
-		
-		]
+        "navigateToMiniProgramAppIdList" : [ "wx6885acbedba59c14" ],
+        "unipush" : {
+            "enable" : false
+        }
     },
     "mp-qq" : {
         "appid" : "11*****49",

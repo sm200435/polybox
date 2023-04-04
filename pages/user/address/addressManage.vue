@@ -28,9 +28,12 @@
 			:placeholder-style="addressData.adcode==''?'color: #bbb':''" 
 			:adjust-position="false" 
 			v-model="addressData.address_full"
-			:disabled="addressData.adcode==''?true:false"
 			:placeholder="addressData.adcode==''?'还没有选择地区哦~ 选择地区后完成此项':'支持智能联想，输入小区名试试~'"/>
 		</view>
+	<!-- 	<view class="cu-form-group align-start">
+			<view class="title">详细地址</view>
+			<textarea></textarea>
+		</view> -->
 		<view class="cu-form-group margin-top-bj" v-show="addressType">
 			<view class="title">设为默认</view>
 			<switch color="#F31064" @change="switchChange" :class="addressData.default == 1?'checked':''" :checked="addressData.default == 1"></switch>
@@ -77,12 +80,23 @@
 					adcode: '',
 					tips: {}
 				},
-				addressType: true
+				addressType: true,
 			}
 		},
 		onLoad(option) {
-			// this.addressData.address_full=option.address
-			// console.log(option.address);
+			if(option.type=="wxAddress"){
+				let wxAddress=JSON.parse(option.data)
+				this.addressData.name=wxAddress.userName
+				this.addressData.mobile=wxAddress.telNumber
+				this.addressData.province=wxAddress.provinceName
+				this.addressData.city=wxAddress.cityName
+				this.addressData.district=wxAddress.countyName
+				this.addressData.formatted_address=wxAddress.provinceName+wxAddress.cityName+wxAddress.countyName
+				this.addressData.address_full=wxAddress.detailInfo
+				this.addressData.address=wxAddress.detailInfo
+				this.manageType='add'
+				return
+			}
 			let title = '新增地址 ';
 			if (option.type === 'newadd') {
 				this.addressData.default = 1
@@ -90,8 +104,8 @@
 			if (option.type === 'edit') {
 				title = '编辑地址'
 				this.addressData = JSON.parse(option.data)
+				this.addressData.address_full=this.addressData.address_full
 			}
-			this.addressData.address_full=this.addressData.address
 			this.manageType = option.type;
 			this.$wanlshop.title(title);
 		},

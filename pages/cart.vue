@@ -1,12 +1,12 @@
 <template>
-	<view style="background: #f7f7f7;height: 100vh;">
+	<view style="height: 100%;">
 		<view v-if="show">
 			<!-- 导航条 -->
 			<view class="cu-custom" :style="{ height: $wanlshop.wanlsys().height + 'px' }">
 				<view class="cu-bar fixed bg-bgcolor" :style="{
 						height: $wanlshop.wanlsys().height + 'px',
 						paddingTop: $wanlshop.wanlsys().top + 'px',
-						backgroundColor: common.appStyle.cart_nav_color ? common.appStyle.cart_nav_color : '#f7f7f7',
+						backgroundColor: common.appStyle.cart_nav_color ? common.appStyle.cart_nav_color : '#ffffff',
 						backgroundImage: 'url(' + $wanlshop.oss( common.appStyle.cart_nav_image, 0, 50, 1, 'transparent', 'png' ) + ')',
 						color: common.appStyle.cart_font_color == 'light' ? '#ffffff' : '#333333'
 					}">
@@ -146,7 +146,7 @@
 						<!-- <button v-if="cart.allnum == 0" class="cu-btn round line-gray">移动关注</button>
 						<button v-else class="cu-btn round line-orange" @tap="move()">移动关注</button>
 						<button class="cu-btn round line-orange" @tap="toEmpty()">快速清理</button> -->
-						<button v-if="cart.allnum == 0" class="cu-btn round line-gray" style="width: 195rpx;height: 72rpx;font-size: 28rpx;">删除</button>
+						<button v-if="cart.list[0].products.every(item=>item.checked==false)" class="cu-btn round line-gray" style="width: 195rpx;height: 72rpx;font-size: 28rpx;background: #F31064;color: #ffffff;opacity: 0.4;">删除</button>
 						<button v-else class="cu-btn round bg-gradual-orange" style="width: 195rpx;height: 72rpx;font-size: 28rpx;" @tap="toEmpty()">删除</button>
 					</view>
 				</view>
@@ -162,15 +162,15 @@
 							<text>{{ cart.status ? '取消' : '全选' }}</text>
 						</view>
 					</view>
-					<view class="flex">
-						<view class="text-sm text-right">
-							<view>
-								合计：
-								<text class="text-price wanl-orange text-lg">{{ cart.allsum }}</text>
-							</view>
-							<view>不含运费</view>
+					<view class="text-sm text-right" style="display: flex;align-items: center;">
+						<view>
+							合计：
+							<text class="text-price wanl-orange text-lg">{{ cart.allsum }} </text>
 						</view>
-						<button v-if="cart.allnum == 0" class="cu-btn round line-gray" style="font-size: 28rpx;height: 72rpx;width: 195rpx;">去结算</button>
+						<view style="margin-left: 3rpx;"> (不含运费) </view>
+					</view>
+					<view class="flex">
+						<button v-if="cart.allnum == 0" class="cu-btn round line-gray" style="font-size: 28rpx;height: 72rpx;width: 195rpx;background: #F31064;opacity: 0.4;color: #ffffff;">去结算</button>
 						<button v-else class="cu-btn round bg-gradual-orange" style="font-size: 28rpx;height: 72rpx;width: 195rpx;" @tap="settlement()">
 							去结算 ({{ cart.allnum }})
 						</button>
@@ -231,6 +231,16 @@
 			...mapState(['cart', 'common'])
 		},
 		onShow() {
+			let cart = uni.getStorageSync("wanlshop:cart");
+			this.$api.post({
+							url: '/wanlshop/cart/synchro',
+							data: {
+								cart: cart ? cart: null
+							},
+							success: res => {
+								console.log(res);
+							}
+						});
 			setTimeout(() => {
 				uni.setNavigationBarColor({
 					frontColor: this.$store.state.common.appStyle.cart_font_color == 'light' ?
@@ -332,7 +342,6 @@
 			onTabItemTap(e) {
 				// console.log(this.$store.state.user.isLogin,12321321312);
 				this.show=this.$store.state.user.isLogin
-				console.log(this.show,123221213);
 				if (this.$store.state.user.isLogin == false) {
 					uni.navigateTo({
 						url: '/pages/user/auth/auth'

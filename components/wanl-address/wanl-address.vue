@@ -101,9 +101,7 @@
 			   
 			},
 			address_item_click(swiper_index,index){
-				// console.log(swiper_index,index)
 				this.selectIndexArr.splice(swiper_index, 5,index)
-				
 				//判断当前是否为最下一级
 				if (swiper_index === 0){//第一级
 				
