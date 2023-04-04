@@ -990,10 +990,12 @@ export default {
 				this.$store.commit('statistics/dynamic', {
 					collection: this.$store.state.statistics.dynamic.collection + 1
 				});
+				this.$wanlshop.msg('收藏成功');
 			} else {
 				this.$store.commit('statistics/dynamic', {
 					collection: this.$store.state.statistics.dynamic.collection - 1
 				});
+				this.$wanlshop.msg('取消收藏');
 			}
 			this.$api.post({
 				url: '/wanlshop/product/follow',
@@ -1002,7 +1004,7 @@ export default {
 				},
 				success: res => {
 					this.goodsData.follow = res;
-				}
+				},
 			});
 		},
 		//跳转锚点
