@@ -1,27 +1,6 @@
 <template>
 	<view class="collect-container">
-		<!-- <view class="collect-container__head bg-white" :style="{ height: headHeight + 'px' }">
-			<view :style="{ height: headHeight + 'px', paddingTop: headTop + 'px' }">
-				<view class="navigater flex align-center justify-between">
-					<view class="back" :style="{height: headHeight + 'px', lineHeight: headHeight + 'px'}"
-						@tap="handleBack">
-						<text class="wlIcon-fanhui1"></text>
-					</view>
-					<scroll-view scroll-x class="nav text-center">
-						<view v-for="(item, index) in navList" :key="index" class="cu-item flex-sub"
-							:class="currentItemId === item.type ? '' : ''"
-							@tap="handleSelect(item.type, index)">
-							<text class="text-30">{{item.type_text}}</text>
-						</view>
-					</scroll-view>
-				</view>
-			</view>
-		</view> -->
-		<!-- 主体 -->
-	<!-- 	<swiper class="collect-container__main" :current-item-id="currentItemId"
-			:style="{ height: windowHeight + 'px' }" @change="changeCurrent" @animationfinish="animationFinish"> -->
-			<view class="collect-container__main" :current-item-id="currentItemId"
-			:style="{ height: windowHeight + 'px' }">
+		<view class="collect-container__main" :current-item-id="currentItemId" :style="{ height: windowHeight + 'px' }">
 			<swiper-item v-for="(data, keys) in navList" :key="keys" :item-id="data.type">
 				<wanl-empty text="你还没有任何收藏" src="collect_default3x" v-if="data.dataList.length === 0 && data.loaded" />
 				<view class="action" @click="sho">
@@ -29,48 +8,48 @@
 					<text v-else>多选</text>
 				</view>
 				<scroll-view class="content" scroll-y @scrolltolower="loadData">
-					<view class="item margin-bj padding-sm bg-white radius-bock" v-for="(item, index) in data.dataList"
-						:key="index" >
-							<!-- 商品选择 -->
-						<view class="wanl-cart-goods text-xxl margin-right-sm" v-if="cang">
-							<image src="../../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.checked"></image>
-							<image src="../../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
-						</view>
-						<view class="cu-avatar margin-right-bj radius"
-							:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}"  @click="handleGoods(item.id)"></view>
-						<view class="subject" @click="handleGoods(item.id)">
-							<view class="text-cut-2" style="font-size: 30rpx;color: #353535;">
-								<view v-if="currentItemId === 'groups'" class="cu-tag sm bg-gradual-red radius margin-right-xs">
-									{{item.is_ladder === 1 ?'阶梯': item.people_num + '人'}}拼团
+					<view class="cu-list menu-avatar">
+						<view class="cu-item" :class="modalName == 'move-box-' + index ? 'move-cur' : ''"
+							v-if="data.dataList" v-for="(item, index) in data.dataList" :key="item.id"
+							@touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
+							:data-target="'move-box-' + index">
+							<view class="item padding-sm" style="width: 100%;">
+								<!-- 商品选择 -->
+								<view class="wanl-cart-goods text-xxl margin-right-sm" v-if="cang">
+									<image src="../../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.checked"></image>
+									<image src="../../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
 								</view>
-								{{item.title}}
-							</view>
-							<view class="flex align-center justify-between">
-								<view class="text-red text-bold text-lg" style="margin: 0 14rpx;">
-									<text class="text-price">{{ item.price }}</text>
+								<view class="cu-avatar margin-right-bj radius"
+									:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}"></view>
+								<view class="subject" @click="handleGoods(item.id)">
+									<view class="text-cut-2" style="font-size: 30rpx;color: #353535;font-weight: bold;">
+										{{item.title}}
+									</view>
+									<view class="flex align-center justify-between">
+										<view class="text-red text-bold text-lg">
+											<text class="text-price">{{ item.price }}</text>
+										</view>
+										<view class="text-sm" style="margin-right: 10rpx;">
+											<image class="addcart" src="../../static/images/user/jiahao.png"
+												@tap.stop="addcartclick(item)"></image>
+										</view>
+									</view>
 								</view>
-							<!-- <view class="menu">
-								<view class="wanl-gray-light text-sm">
-									<text class="margin-right-sm">喜欢 {{item.like}}</text>
-									<text v-if="currentItemId === 'goods'">付款 {{item.payment}}</text>
-									<text v-if="currentItemId === 'groups'">已拼团 0 件</text>
-								</view>
-								<view class="button text-bold text-30">
-									<text class="wlIcon-lajitong" @click.stop="loadFollow(item.id, index)"></text>
-									<text class="wlIcon-dianpu1" @click.stop="onShop(item.shop_id)"></text>
-								</view>
-							</view> -->
-								<view class="text-sm" style="margin-right: 20rpx;">
-									<image class="addcart" src="../../static/images/user/jiahao.png" @tap.stop="addcartclick(item)"></image>
+								<view class="move" style="right: -50rpx;width: 170rpx;margin-top: -20rpx;">
+									<view class="bg-red" style="height: 220rpx;"
+										@click.stop="loadFollow(item.id, index)">取消收藏</view>
 								</view>
 							</view>
 						</view>
 					</view>
-					<uni-load-more :status="data.loadingType" :content-text="contentText" />
+					<!-- <uni-load-more :status="data.loadingType" :content-text="contentText" /> -->
 				</scroll-view>
 			</swiper-item>
-		<!-- </swiper> --></view>
+		</view>
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
+		<view class="wanlian cu-bar foot" style="background: white;" v-if="cang">
+			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;">取消收藏</button>
+		</view>
 	</view>
 </template>
 
@@ -83,25 +62,17 @@
 				headTop: 0,
 				currentId: 0,
 				currentItemId: 'goods',
-				cang:false,
-				selegoods:null,
-				showcart:false,
+				modalName: null,
+				cang: false,
+				selegoods: null,
+				showcart: false,
 				navList: [{
-						type: 'goods',
-						type_text: '商品收藏',
-						dataList: [],
-						loadingType: 'more',
-						current_page: 1
-					}
-					// ,
-					// {
-					// 	type: 'groups',
-					// 	type_text: '团购收藏',
-					// 	dataList: [],
-					// 	loadingType: 'more',
-					// 	current_page: 1
-					// }
-				],
+					type: 'goods',
+					type_text: '商品收藏',
+					dataList: [],
+					loadingType: 'more',
+					current_page: 1
+				}],
 				contentText: {
 					contentdown: ' ',
 					contentrefresh: '收藏正在加载...',
@@ -158,74 +129,99 @@
 				});
 			},
 			async loadFollow(id, index) {
-				if(this.currentItemId === 'goods'){
+				if (this.currentItemId === 'goods') {
 					var apiUrl = '/wanlshop/product/follow';
-				}else if(this.currentItemId === 'groups'){
+				} else if (this.currentItemId === 'groups') {
 					var apiUrl = '/wanlshop/groups/product/follow';
 				}
-				this.$api.post({
-					url: apiUrl,
-					loadingTip: '正在删除资源...',
-					data: {
-						id: id
-					},
+				uni.showModal({
+					content: '您确定要取消收藏吗？',
+					confirmColor: '#F31064',
 					success: res => {
-						// 从列表删除
-						this.$delete(this.navList[this.currentId].dataList, index);
-						this.$store.commit('statistics/dynamic', {
-							collection: this.$store.state.statistics.dynamic.collection - 1
-						});
+						if (res.confirm) {
+							this.$api.post({
+								url: apiUrl,
+								loadingTip: '正在删除资源...',
+								data: {
+									id: id
+								},
+								success: res => {
+									// 从列表删除
+									this.$delete(this.navList[this.currentId].dataList, index);
+									this.$store.commit('statistics/dynamic', {
+										collection: this.$store.state.statistics
+											.dynamic.collection - 1
+									});
+								}
+							});
+						}
 					}
 				});
 			},
-			// // 选择Tag
-			// handleSelect(id, index) {
-			// 	this.currentItemId = id;
-			// 	this.currentId = index;
-			// },
-			// // 动画
-			// animationFinish(e) {
-			// 	//#ifdef APP-PLUS
-			// 	this.changeCurrent(e)
-			// 	//#endif
-			// },
-			// // 滚动的tag
-			// changeCurrent(e) {
-			// 	this.currentItemId = e.detail.currentItemId;
-			// 	this.currentId = e.detail.current;
-			// 	this.loadData('tabChange');
-			// },
 			handleBack() {
 				this.$wanlshop.back(1);
 			},
-			handleGoods(id){
-				if(this.currentItemId === 'goods'){
+			handleGoods(id) {
+				if (this.currentItemId === 'goods') {
 					this.$wanlshop.to(`/pages/product/goods?id=${id}`)
-				}else if(this.currentItemId === 'groups'){
+				} else if (this.currentItemId === 'groups') {
 					this.$wanlshop.to(`/pages/apps/groups/goods?id=${id}`)
 				}
 			},
-			addcartclick(good){
-				console.log("good",good);
-				this.selegoods=good
-				this.showcart=true
+			addcartclick(good) {
+				console.log("good", good);
+				this.selegoods = good
+				this.showcart = true
 			},
-			hidecart(){
-				this.showcart=false
+			hidecart() {
+				this.showcart = false
 			},
-			sho(){
-				this.cang=true;
+			sho() {
+				if(this.cang==false){
+					this.cang=true
+				}else{
+					this.cang = false;
+				}
+			},
+			// ListTouch触摸开始
+			ListTouchStart(e) {
+				this.listTouchStart = e.touches[0].pageX;
+			},
+			// ListTouch计算方向
+			ListTouchMove(e) {
+				this.listTouchDirection = e.touches[0].pageX - this.listTouchStart > 0 ? 'right' : 'left';
+			},
+			// ListTouch计算滚动
+			ListTouchEnd(e) {
+				if (this.listTouchDirection == 'left') {
+					this.modalName = e.currentTarget.dataset.target;
+				} else {
+					this.modalName = null;
+				}
+				this.listTouchDirection = null;
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.action{
+	.cu-list.menu-avatar>.cu-item {
+		position: relative;
+		display: flex;
+		height: 227rpx;
+		border-radius: 13rpx;
+		justify-content: flex-end;
+		align-items: center;
+		margin: 30rpx 25rpx;
+	}
+
+	.action {
 		margin: 30rpx 25rpx 0rpx;
 	}
+
 	.collect-container {
 		background: #f7f7f7;
+
 		&__head {
 			.navigater {
 				position: relative;
@@ -254,8 +250,8 @@
 					display: flex;
 
 					.cu-avatar {
-						height: 160rpx;
-						width: 160rpx;
+						height: 178rpx;
+						width: 178rpx;
 						flex-shrink: 0;
 					}
 
@@ -264,6 +260,7 @@
 						flex: 1;
 						flex-wrap: wrap;
 						align-content: space-between;
+
 						&>view {
 							width: 100%;
 						}
@@ -271,8 +268,9 @@
 						.menu {
 							display: flex;
 							justify-content: space-between;
+
 							.button {
-								&>text + text{
+								&>text+text {
 									margin-left: 60rpx;
 									margin-right: 10rpx;
 								}
@@ -282,32 +280,34 @@
 				}
 			}
 		}
-		.addcart{
+
+		.addcart {
 			width: 40rpx;
 			height: 40rpx;
 			text-align: center;
 			line-height: 40rpx;
 		}
+
 		.wanl-cart-goods {
-				display: flex;
-				align-items: center;
-				margin-bottom: 30rpx;
-			}
-		
-			.wanl-cart-goods:last-child {
-				margin-bottom: 18rpx;
-			}
-		
-			.wanl-cart-goods .picture {
-				width: 180rpx;
-				height: 180rpx;
-			}
-		
-			.wanl-cart-goods .picture image {
-				width: 180rpx;
-				height: 180rpx;
-				overflow: hidden;
-				border-radius: 20rpx;
-			}
+			display: flex;
+			align-items: center;
+			margin-bottom: 30rpx;
+		}
+
+		.wanl-cart-goods:last-child {
+			margin-bottom: 18rpx;
+		}
+
+		.wanl-cart-goods .picture {
+			width: 180rpx;
+			height: 180rpx;
+		}
+
+		.wanl-cart-goods .picture image {
+			width: 180rpx;
+			height: 180rpx;
+			overflow: hidden;
+			border-radius: 20rpx;
+		}
 	}
 </style>

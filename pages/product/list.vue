@@ -106,8 +106,8 @@
 				</scroll-view>
 				<view class="footer">
 					<view>
-						<button class="cu-btn bg-gradual-yellow round-left" @tap="onDrawerReset">重置</button>
-						<button class="cu-btn bg-gradual-orange round-right" @tap="onDrawerTo">确定</button>
+						<button class="cu-btn" style="border-radius: 40rpx;width: 233rpx;height: 72rpx;" @tap="onDrawerReset">重置</button>
+						<button class="cu-btn bg-gradual-orange" style="border-radius: 40rpx;width: 233rpx;height: 72rpx;margin-left: 30rpx;" @tap="onDrawerTo">确定</button>
 					</view>
 				</view>
 			</view>
