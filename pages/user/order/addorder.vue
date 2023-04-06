@@ -16,7 +16,7 @@
 					<view class="content" @tap="addAddress('newadd')" v-else>
 						<view class="text-sm wanl-pip text-cut">点击此处填写收货地址</view>
 					</view>
-					<view class="action"><text class="wlIcon-fanhui2 text-lg"></text></view>
+					<view class="action" @tap="userAddress()"><text class="wlIcon-fanhui2 text-lg"></text></view>
 				</view>
 			</view>
 			<view v-for="(shop, index) in orderData.lists" :key="index" class="lists bg-white margin-bj radius-bock">

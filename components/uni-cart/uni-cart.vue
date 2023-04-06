@@ -241,7 +241,6 @@
 				this.$emit('hidecart')
 			},
 			completeSelection() {
-				console.log(123123);
 				// 判断用户当前是否登录
 				if(this.$store.state.user.isLogin==false){
 					uni.navigateTo({url:'/pages/user/auth/auth'});

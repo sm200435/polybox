@@ -24,8 +24,9 @@
 								{{ item.province }} {{ item.city }} {{ item.district }} {{ item.address_full }}
 							</view>
 						</view>
-						<view class="action" style="margin-top: 70rpx;" @tap.stop="addAddress('edit', item)"><text
-								class="wlIcon-xiugaioryijian text-xl"></text></view>
+						<view class="action" style="margin-top: 70rpx;" @tap.stop="addAddress('edit', item)">
+							<text class="wlIcon-xiugaioryijian text-xl"></text>
+						</view>
 						<view class="move" style="height: 185rpx;right: -50rpx;width: 160rpx;">
 							<!-- <view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view> -->
 							<view class="bg-red" @tap.stop="delAddress(item.id, index)">删除</view>
@@ -36,12 +37,12 @@
 			</view>
 		</view>
 		<uni-load-more :status="status" :content-text="contentText" />
-		<view class="wanlian cu-bar tabbar foot" style="display: flex;justify-content: space-around;background-color: #f7f7f7;height: 150rpx;">
-			<view><button @tap="addAddress('add')" class="wanl-bg-orange"
-					style="width: 300rpx;border-radius: 40rpx;font-size: 30rpx;">添加新地址</button>
+		<view class="wanlian cu-bar tabbar foot" style="display: flex;background-color: #f7f7f7;height: 150rpx;">
+			<view>
+				<button @tap="addAddress('add')" class="wanl-bg-orange" style="width: 290rpx;border-radius: 40rpx;font-size: 30rpx;margin-left: 70rpx;">添加新地址</button>
 			</view>
-			<view><button @tap="importAddress"
-					style="width: 300rpx;border-radius: 40rpx;font-size: 30rpx;background-color: #70b603; color: white;">导入微信地址</button>
+			<view>
+				<button @tap="importAddress" style="width: 290rpx;border-radius: 40rpx;font-size: 30rpx;background-color: #75BA77; color: white;margin-right: 70rpx;">导入微信地址</button>
 			</view>
 		</view>
 

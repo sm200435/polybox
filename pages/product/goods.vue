@@ -582,10 +582,10 @@
 				</view>
 				购物车
 			</view>
-			<view class="btn-group" style="flex: 0;"
-				<button class="cu-btn  " style="width:240px;margin-right: 15rpx;border-radius: 40rpx;background-color: #F31064;color: #ffffff;" @tap="SubmitData('addToCart')">加入购物车</button>
-				<!-- <button class="cu-btn bg-gradual-yellow round-left" @tap="SubmitData('addToCart')">加入购物车</button> -->
-				<!-- <button class="cu-btn bg-gradual-orange round-right" @tap="SubmitData('placeOrder')">立即购买</button> -->
+			<view class="btn-group" style="flex: 0;">
+				<!-- <button class="cu-btn" style="width:240px;margin-right: 15rpx;border-radius: 40rpx;background-color: #F31064;color: #ffffff;" @tap="SubmitData('addToCart')">加入购物车</button> -->
+				<view class="cu-btn round-left" style="width: 224rpx;height: 72rpx;background: #FC4C8D;color: white;" @tap="SubmitData('addToCart')">加入购物车</view>
+				<view class="cu-btn bg-gradual-orange round-right" style="width: 200rpx;height: 72rpx;padding-right: 20rpx;" @tap="SubmitData('placeOrder')">立即购买</view>
 			</view>
 		</view>
 	</view>

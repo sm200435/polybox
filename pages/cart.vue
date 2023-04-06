@@ -86,13 +86,13 @@
 					<view v-if="goods.sku.stock==0" class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys" style="position: relative;">
 						<!-- 商品选择 -->
 						<view class="text-xxl margin-right-sm" @tap="choose({ index: index, keys: keys })" v-if="cart.operate">
-							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="goods.checked"></image>
-							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
+							<image src="../static/images/user/shi.png" style="width: 36rpx;height: 36rpx;" v-if="goods.checked"></image>
+							<image src="../static/images/user/shi.png" style="width: 36rpx;height: 36rpx;" v-else></image>
 							<!-- <text v-if="goods.checked" class="wlIcon-xuanze-danxuan wanl-orange"></text>
 							<text v-else class="wlIcon-xuanze wanl-gray-light"></text> -->
 						</view>
 						<view class="text-xxl margin-right-sm" v-else>
-							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;"></image>
+							<image src="../static/images/user/shi.png" style="width: 36rpx;height: 36rpx;"></image>
 						</view>
 						<view class="picture" @tap="onGoods(goods.goods_id)" style="position: relative;">
 							<view class="replenishment">
