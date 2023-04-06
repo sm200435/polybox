@@ -2135,8 +2135,11 @@ image{will-change: transform}
 	display: flex;
 	justify-content: flex-end;
 	align-items: baseline;
-	padding: 28rpx;
-	padding-top: 50rpx;
+	/* padding: 28rpx 28rpx 0rpx 0rpx; */
+	padding-top: 28rpx;
+	padding-bottom: 28rpx;
+	padding-right: 25rpx;
+	/* padding-top: 50rpx; */
 }
 
 .wanl-order-list .order-item .action-box {

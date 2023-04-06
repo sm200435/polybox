@@ -1,6 +1,6 @@
 <!-- 2020年2月17日18:18:53 完成 -->
 <template>
-	<view>
+	<view style="padding-top: 38rpx;background: #f7f7f7;">
 		<view class="edgeInsetTop"></view>
 		<view class="cu-form-group" v-show="addressType">
 			<view class="title">联系人</view>
@@ -34,7 +34,7 @@
 			<view class="title">详细地址</view>
 			<textarea></textarea>
 		</view> -->
-		<view class="cu-form-group margin-top-bj" v-show="addressType">
+		<view class="cu-form-group" v-show="addressType">
 			<view class="title">设为默认</view>
 			<switch color="#F31064" @change="switchChange" :class="addressData.default == 1?'checked':''" :checked="addressData.default == 1"></switch>
 		</view>
@@ -46,7 +46,7 @@
 		</scroll-view>
 		<!-- 1.0.5升级 -->
 		<!-- 1.0.6升级 -->
-		<view class="padding-bj flex flex-direction margin-top" v-show="addressType">
+		<view class="padding-bj flex flex-direction" v-show="addressType" style="margin-top: 200rpx;">
 			<button @tap="confirm" class="cu-btn wanl-bg-orange lg" style="width: 584rpx;margin-bottom: 90rpx;border-radius: 40rpx;font-size: 30rpx;margin: 0 auto;">完成</button>
 		</view>
 		<wanl-address ref='wanlAddress' @selectAddress="successSelectAddress"></wanl-address>
