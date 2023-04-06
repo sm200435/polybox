@@ -600,10 +600,10 @@
 			},
 			//支付失败
 			payErr() {
+				let id=uni.getStorageSync('order_id')
 				uni.redirectTo({
-					url: `/pages/page/err?data=${JSON.stringify(this.optionData)}`
+					url:`/pages/user/order/details?id=${id}`
 				})
-				// this.$wanlshop.to(`/pages/page/err`);
 			},
 			//添加或修改成功之后回调
 			async refreshList(data, type) {

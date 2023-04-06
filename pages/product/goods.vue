@@ -87,15 +87,11 @@
 					</view>
 				</view>
 				<view>
-					<view class="follow wanl-black" style="margin-right: 27rpx;" v-if="goodsData.follow" @tap="follow" >
+					<view class="follow wanl-black" style="margin-right: 27rpx;" v-if="goodsData.follow" @tap="follow">
 						<image src="../../static/images/user/collection.png" style="height: 36rpx;width: 36rpx;"></image>
-						<!-- <text class="wlIcon-yiguanzhu1 text-red"></text>
-						<text class="text-xs">取关</text> -->
 					</view>
 					<view class="follow wanl-black" style="margin-right: 27rpx;" v-else @tap="follow">
 						<image src="../../static/images/user/collect.png" style="height: 36rpx;width: 36rpx;"></image>
-						<!-- <text class="wlIcon-gerenguanzhu"></text>
-						<text class="text-xs">关注</text> -->
 					</view>
 				</view>
 			</view>
@@ -642,7 +638,7 @@ export default {
 				views: 0,
 				status: '',
 				category: {},
-				follow: true,
+				follow: false,
 				sku: [],
 				spu: [],
 				promotion: [],
@@ -682,6 +678,7 @@ export default {
 		};
 	},
 	onLoad(option) {
+		// console.log(this.);
 		this.wanlsys = this.$wanlshop.wanlsys();
 		this.loadData(option);
 		this.loadlikeData();
@@ -984,6 +981,13 @@ export default {
 		moveHandle() {},
 		// 关注 & 取消
 		follow() {
+			if(!this.$store.state.user.isLogin){
+				console.log(121212);
+				uni.redirectTo({
+					url:'/pages/user/auth/auth'
+				})
+				return 
+			}
 			this.goodsData.follow = !this.goodsData.follow;
 			// 全局控制中心
 			if (this.goodsData.follow) {

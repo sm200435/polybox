@@ -7,6 +7,9 @@
 			<view style="margin-right: 20rpx;padding-top: 6rpx;box-sizing: border-box;">
 				领券中心
 			</view>
+			<view>
+				
+			</view>
 		</view>
 		<!-- <image class="mytest" src="../../../static/images/bg.png" mode="scaleToFill"></image> -->
 		<!-- <view class="navbar">

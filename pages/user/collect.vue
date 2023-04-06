@@ -1,8 +1,7 @@
 <template>
-	<view class="collect-container">
-		<view class="collect-container__main" :current-item-id="currentItemId" :style="{ height: windowHeight + 'px' }">
-			<swiper-item v-for="(data, keys) in navList" :key="keys" :item-id="data.type">
-				<wanl-empty text="你还没有任何收藏" src="collect_default3x" v-if="data.dataList.length === 0 && data.loaded" />
+	<view class="collect-container" style="width: 100%;height: 100%;">
+		<view class="collect-container__main" :current-item-id="currentItemId" style="height: 100%;">
+			<swiper-item v-for="(data, keys) in navList" :key="keys" :item-id="data.type" v-if="data.dataList.length != 0">
 				<view class="action" @click="sho">
 					<text v-if="cang">取消</text>
 					<text v-else>多选</text>
@@ -15,7 +14,7 @@
 							:data-target="'move-box-' + index">
 							<view class="item padding-sm" style="width: 100%;">
 								<!-- 商品选择 -->
-								<view class="wanl-cart-goods text-xxl margin-right-sm" v-if="cang">
+								<view class="wanl-cart-goods text-xxl margin-right-sm" v-if="cang" @click="checkTag(item)">
 									<image src="../../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.checked"></image>
 									<image src="../../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
 								</view>
@@ -45,10 +44,17 @@
 					<!-- <uni-load-more :status="data.loadingType" :content-text="contentText" /> -->
 				</scroll-view>
 			</swiper-item>
+			<wanl-empty text="你还没有任何收藏" src="/static/images/user/wucollect.png"  v-else>
+				<template>
+				<view @click="goCategory" style="width: 471.01rpx;height: 78.5rpx;border-radius: 39.25rpx;background-color: #F60F60;color: white;line-height: 78.5rpx;">
+					去逛逛
+				</view>
+				</template>
+			</wanl-empty>
 		</view>
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
-		<view class="wanlian cu-bar foot" style="background: white;" v-if="cang">
-			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;">取消收藏</button>
+		<view class="wanlian cu-bar foot" v-if="navList[0].dataList.length != 0 && cang">
+			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
 		</view>
 	</view>
 </template>
@@ -89,7 +95,48 @@
 			this.loadData();
 		},
 		methods: {
-			async loadData(source) {
+			goCategory(){
+				uni.switchTab({
+					url:'/pages/category'
+				})
+			},
+			// 批量取消收藏
+			allCancel(){
+				let ids=[]
+				this.navList[0].dataList.forEach(item=>{
+					if(item.checked==true){
+						ids.push(item.id)
+					}
+				})
+				this.$api.post({
+					url: '/wanlshop/product/del_folw',
+					data: {
+						ids:ids.toString()
+					},
+					success: res => {
+						// 获取列表
+						this.$api.get({
+							url: '/wanlshop/product/collect',
+							data: {
+								type: "goods",
+								page: 1
+							},
+							success: res => {
+								this.navList[0].dataList=[]
+								res.data.forEach(item => {
+									this.navList[0].dataList.push(item.goods);
+								});
+							}
+						});
+					}
+				});
+			},
+			// 点击选中取消
+			checkTag(item){
+				console.log(item);
+				item.checked=!item.checked
+			},
+			loadData(source) {
 				//这里是将订单挂载到tab列表下
 				let navItem = this.navList[this.currentId];
 				//判断是否最后一页
@@ -205,6 +252,10 @@
 </script>
 
 <style lang="scss">
+	page{
+		width: 100%;
+		height: 100%;
+	}
 	.cu-list.menu-avatar>.cu-item {
 		position: relative;
 		display: flex;

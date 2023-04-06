@@ -36,12 +36,12 @@
 			</view>
 		</view>
 		<uni-load-more :status="status" :content-text="contentText" />
-		<view class="wanlian cu-bar tabbar foot" style="display: flex;justify-content: space-around;">
+		<view class="wanlian cu-bar tabbar foot" style="display: flex;justify-content: space-around;background-color: #f7f7f7;height: 150rpx;">
 			<view><button @tap="addAddress('add')" class="wanl-bg-orange"
-					style="width: 300rpx;margin-bottom: 90rpx;border-radius: 40rpx;font-size: 30rpx;">新增地址</button>
+					style="width: 300rpx;border-radius: 40rpx;font-size: 30rpx;">添加新地址</button>
 			</view>
 			<view><button @tap="importAddress"
-					style="width: 300rpx;margin-bottom: 90rpx;border-radius: 40rpx;font-size: 30rpx;background-color: #70b603; color: white;">导入微信地址</button>
+					style="width: 300rpx;border-radius: 40rpx;font-size: 30rpx;background-color: #70b603; color: white;">导入微信地址</button>
 			</view>
 		</view>
 

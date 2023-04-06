@@ -12,7 +12,7 @@
 				<view class="bar-bg" v-if="headerOpacity > 0" :style="{ 
 					height: $wanlshop.wanlsys().height + 'px', 
 					opacity: headerOpacity,
-					backgroundColor: common.appStyle.user_nav_color?common.appStyle.user_nav_color:'#f7f7f7',
+					backgroundColor: common.appStyle.user_nav_color?'#ff6e98':'#f7f7f7',
 					backgroundImage: 'url(' + $wanlshop.oss(common.appStyle.user_nav_image, 414, 0, 1, 'transparent', 'png') + ')'
 				}"></view>
 			</view>
@@ -48,14 +48,13 @@
 			</view>
 		</view>
 		<!-- #endif -->
-		<view class="wanl-user" style="background-image: url(https://www.duomeihe.shop/uploads/20230327/test3.png);background-size: 100% 100%;height: 350rpx;">
-			
-			<view class="user" :style="{ paddingTop: $wanlshop.wanlsys().height + 'px' }">
-				<view v-if="user.isLogin" class="avatar margin-right-bj" @tap="portrai"><image class="round" :src="$wanlshop.oss(user.avatar, 62, 62, 2, 'avatar')" mode="widthFix"></image></view>
-				<view v-else class="avatar margin-right-bj" @tap="$wanlshop.auth('/pages/user')"><image class="round" :src="$wanlshop.oss(user.avatar, 62, 62, 2, 'avatar')" mode="widthFix"></image></view>
+		<view class="wanl-user" style="background-image: url(https://www.duomeihe.shop/uploads/20230327/test3.png);background-size: 100% 100%;height: 557.97rpx;">
+			<view class="user">
+				<view style="width: 144.93rpx;height: 144.93rpx;" v-if="user.isLogin" class="avatar margin-right-bj" @tap="portrai"><image class="round" :src="$wanlshop.oss(user.avatar, 62, 62, 2, 'avatar')" mode="widthFix"></image></view>
+				<view style="width: 144.93rpx;height: 144.93rpx;" v-else class="avatar margin-right-bj" @tap="$wanlshop.auth('/pages/user')"><image class="round" :src="$wanlshop.oss(user.avatar, 62, 62, 2, 'avatar')" mode="widthFix"></image></view>
 				<view class="content" v-if="user.isLogin">
-					<view class="text-xxl" style="color: white;" @tap="$wanlshop.auth('/pages/user/setting/user')">{{ user.nickname }}</view>
-					<view style="font-size: 28rpx;margin-top: 12rpx;color: white;">账号: {{ user.mobile }}</view>
+					<view class="text-xxl" style="color: white;font-size: 40rpx;font-size: 500;" @tap="$wanlshop.auth('/pages/user/setting/user')">{{ user.nickname }}</view>
+					<view style="font-size: 29rpx;margin-top: 12rpx;color: white;font-size: 400;">账号: {{ user.mobile }}</view>
 					<!-- <view class="text-sm" @tap="$wanlshop.auth('/pages/user/signin/signin')">
 						<view class="cu-tag sm radius bg-orange">
 							Lv {{ user.level }}
@@ -71,7 +70,7 @@
 					<view class="cu-tag wanl-bg-pink sm radius">Hi，欢迎登录</view>
 				</view>
 			</view>
-			<view class="operate">
+	<!-- 		<view class="operate">
 				<view class="text-sm" @tap="$wanlshop.auth('/pages/user/collect')">
 					<text class="text-bold">{{ statistics.dynamic.collection }}</text>
 					收藏夹
@@ -88,8 +87,7 @@
 					<text class="text-bold">{{ $wanlshop.toFormat(statistics.order.whole, 'hundred') }}</text>
 					全部订单
 				</view>
-				
-			</view>
+			</view> -->
 		</view>
 		<!-- <view class="wanl-user-order-s margin-bj padding-sm" v-if="user.isLogin"> -->
 			<!-- <view class="my-coup" v-if="user.isLogin"> -->
@@ -119,190 +117,192 @@
 													</view> -->
 												<!-- </view> -->
 			<!-- </view> -->
-			
-			<view class="my-coupons wanl-user-order-s margin-bj padding-sm" @tap="$wanlshop.auth('/pages/user/coupon/mycard')" v-if="user.isLogin">
-				<view class="coupons">我的优惠券</view>
-				<view class="coupons-right">
-					<image class="clickview-img" src="../static/images/user/right.png"></image>
-				</view>
-			</view>
-		<!-- </view> -->
-		
-		
-		<view class="wanl-user-order padding-sm margin-bj" v-if="user.isLogin">
-			<view class="myorder">我的订单</view>
-			<view class="project text-sm wanl-gray-dark" style="padding-bottom: 20rpx;">
-				<view @tap="$wanlshop.auth('/pages/user/order/order')">
-					<text class="wlIcon-31daipingjia wanl-pip"></text>
-					<view style="color: #141414;font-size: 25rpx;">全部</view>
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.evaluate > 0">{{ $wanlshop.toFormat(statistics.order.evaluate, 'hundred') }}</view>
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/order/order?state=1')">
-					<text class="wlIcon-31daifukuan wanl-pip"></text>
-					<view style="color: #141414;font-size: 25rpx;">待支付</view>
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.pay > 0">{{ $wanlshop.toFormat(statistics.order.pay, 'hundred') }}</view>
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/order/order?state=2')">
-					<text class="wlIcon-31daifahuo wanl-pip"></text>
-					<view style="color: #141414;font-size: 25rpx;">待发货</view>
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.delive > 0">{{ $wanlshop.toFormat(statistics.order.delive, 'hundred') }}</view>
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/order/order?state=3')">
-					<text class="wlIcon-31daishouhuo wanl-pip"></text>
-					<view style="color: #141414;font-size: 25rpx;">待收货</view>
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.receiving > 0">{{ $wanlshop.toFormat(statistics.order.receiving, 'hundred') }}</view>
-				</view>
-				<!-- <view @tap="$wanlshop.auth('/pages/user/order/order?state=4')">
-					<text class="wlIcon-31daipingjia wanl-pip"></text>
-					待评价
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.evaluate > 0">{{ $wanlshop.toFormat(statistics.order.evaluate, 'hundred') }}</view>
-				</view> -->
-				<view class="solid-left" @tap="$wanlshop.auth('/pages/user/refund/lists')">
-					<text class="wlIcon-31youhuiquan wanl-orange"></text>
-					<view style="color: #141414;font-size: 25rpx;">退货/售后</view>	
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.customer > 0">{{ $wanlshop.toFormat(statistics.order.customer, 'hundred') }}</view>
-				</view>
-			</view>
-			<!-- <view class="logistics margin-top-bj padding-sm" v-if="statistics.logistics.length > 0">
-				<swiper vertical autoplay circular disable-touch interval="4000" class="swiper">
-					<swiper-item @tap="$wanlshop.auth('/pages/notice/logistics/details')">
-						<view class="title">
-							<view class="text-sm">最新物流</view>
-							<view class="text-sm">18:00</view>
+			<view class="user-box" style="position: absolute;width: 100%;top:420rpx;background-color: #f9f9f9;border-radius: 24.15rpx  24.15rpx  0rpx  0rpx ;">
+				<view class="my-coupons wanl-user-order-s margin-bj padding-sm" @tap="$wanlshop.auth('/pages/user/coupon/mycard')" v-if="user.isLogin">
+						<view class="coupons">我的优惠券</view>
+						<view class="coupons-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
 						</view>
-						<view class="flex align-center">
-							<view class="cu-avatar" :style="{ backgroundImage: 'url(' + $wanlshop.oss(user.avatar, 40, 40) + ')' }"></view>
-							<view class="content">
-								<view class="text-df">
-									<text class="wlIcon-paisongtixing"></text>
-									派送中
+					</view>
+				<!-- </view> -->
+				
+				
+				<view class="wanl-user-order padding-sm margin-bj" v-if="user.isLogin">
+					<view class="myorder">我的订单</view>
+					<view class="project text-sm wanl-gray-dark" style="padding-bottom: 20rpx;">
+						<view @tap="$wanlshop.auth('/pages/user/order/order')">
+							<text class="wlIcon-31daipingjia wanl-pip"></text>
+							<view style="color: #141414;font-size: 25rpx;">全部</view>
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.evaluate > 0">{{ $wanlshop.toFormat(statistics.order.evaluate, 'hundred') }}</view>
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/order/order?state=1')">
+							<text class="wlIcon-31daifukuan wanl-pip"></text>
+							<view style="color: #141414;font-size: 25rpx;">待支付</view>
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.pay > 0">{{ $wanlshop.toFormat(statistics.order.pay, 'hundred') }}</view>
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/order/order?state=2')">
+							<text class="wlIcon-31daifahuo wanl-pip"></text>
+							<view style="color: #141414;font-size: 25rpx;">待发货</view>
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.delive > 0">{{ $wanlshop.toFormat(statistics.order.delive, 'hundred') }}</view>
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/order/order?state=3')">
+							<text class="wlIcon-31daishouhuo wanl-pip"></text>
+							<view style="color: #141414;font-size: 25rpx;">待收货</view>
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.receiving > 0">{{ $wanlshop.toFormat(statistics.order.receiving, 'hundred') }}</view>
+						</view>
+						<!-- <view @tap="$wanlshop.auth('/pages/user/order/order?state=4')">
+							<text class="wlIcon-31daipingjia wanl-pip"></text>
+							待评价
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.evaluate > 0">{{ $wanlshop.toFormat(statistics.order.evaluate, 'hundred') }}</view>
+						</view> -->
+						<view class="solid-left" @tap="$wanlshop.auth('/pages/user/refund/lists')">
+							<text class="wlIcon-31youhuiquan wanl-orange"></text>
+							<view style="color: #141414;font-size: 25rpx;">退货/售后</view>	
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.customer > 0">{{ $wanlshop.toFormat(statistics.order.customer, 'hundred') }}</view>
+						</view>
+					</view>
+					<!-- <view class="logistics margin-top-bj padding-sm" v-if="statistics.logistics.length > 0">
+						<swiper vertical autoplay circular disable-touch interval="4000" class="swiper">
+							<swiper-item @tap="$wanlshop.auth('/pages/notice/logistics/details')">
+								<view class="title">
+									<view class="text-sm">最新物流</view>
+									<view class="text-sm">18:00</view>
 								</view>
-								<view class="text-sm">【自提柜】已签收，签收人凭取件码 已取件。</view>
-							</view>
+								<view class="flex align-center">
+									<view class="cu-avatar" :style="{ backgroundImage: 'url(' + $wanlshop.oss(user.avatar, 40, 40) + ')' }"></view>
+									<view class="content">
+										<view class="text-df">
+											<text class="wlIcon-paisongtixing"></text>
+											派送中
+										</view>
+										<view class="text-sm">【自提柜】已签收，签收人凭取件码 已取件。</view>
+									</view>
+								</view>
+							</swiper-item>
+						</swiper>
+					</view> -->
+				</view>
+				
+				<!-- <view class="wanl-user-order padding-sm margin-bj" style="margin-top: 25rpx;">
+					<view class="project text-sm wanl-gray-dark">
+						<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/coupon/mycard')">
+							<view class="wanl-pip text-lg text-bold6">{{ statistics.dynamic.coupon }}</view>
+							我的卡券
 						</view>
-					</swiper-item>
-				</swiper>
-			</view> -->
-		</view>
-		
-		<!-- <view class="wanl-user-order padding-sm margin-bj" style="margin-top: 25rpx;">
-			<view class="project text-sm wanl-gray-dark">
-				<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/coupon/mycard')">
-					<view class="wanl-pip text-lg text-bold6">{{ statistics.dynamic.coupon }}</view>
-					我的卡券
-				</view>
-				<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/money/money')">
-					<view class="wanl-pip text-lg text-bold6">{{ user.money?user.money:'0.00' }}</view>
-					余额
-				</view>
-				<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/bank/bank')">
-					<view class="wanl-pip text-lg text-bold6">{{ statistics.dynamic.accountbank }}</view>
-					银行卡
-				</view>
-				<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/signin/log')">
-					<view class="wanl-pip text-lg text-bold6">{{ user.score?user.score:0 }}</view>
-					积分
-				</view>
-				<view class="solid-left" @tap="$wanlshop.auth('/pages/user/money/list')">
-					<text class="wlIcon-hongbao wanl-orange"></text>
-					账单明细
-				</view>
-			</view>
-		</view> -->
-		
-		<!-- <view class="wanl-user-tool padding-top-bj margin-lr-bj">
-			<view class="list text-sm grid col-5 wanl-gray-dark"> -->
-				<!-- <view @tap="$wanlshop.auth('/pages/user/money/money')">
-					<text class="wlIcon-youhuiquantuangou wanl-orange"></text>
-					钱包
-				</view>
-				<view @tap="$wanlshop.auth('/pages/apps/groups/order/order')">
-					<text class="wlIcon-pintuan2 wanl-text-yellow"></text>
-					拼团订单
-					<view class="cu-tag badge bg-orange" v-if="statistics.order.groups > 0">{{ $wanlshop.toFormat(statistics.order.groups, 'hundred') }}</view>
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/comment/comment')">
-					<text class="wlIcon-icon_pinglun wanl-text-red"></text>
-					评论
+						<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/money/money')">
+							<view class="wanl-pip text-lg text-bold6">{{ user.money?user.money:'0.00' }}</view>
+							余额
+						</view>
+						<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/bank/bank')">
+							<view class="wanl-pip text-lg text-bold6">{{ statistics.dynamic.accountbank }}</view>
+							银行卡
+						</view>
+						<view style="line-height: 1.8;" @tap="$wanlshop.auth('/pages/user/signin/log')">
+							<view class="wanl-pip text-lg text-bold6">{{ user.score?user.score:0 }}</view>
+							积分
+						</view>
+						<view class="solid-left" @tap="$wanlshop.auth('/pages/user/money/list')">
+							<text class="wlIcon-hongbao wanl-orange"></text>
+							账单明细
+						</view>
+					</view>
 				</view> -->
-				<!-- <view @tap="$wanlshop.auth('/pages/user/distribution/distribution')">
-					<text class="wlIcon-fenxiao wanl-text-yellow"></text>
-					分销
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/order/bargain')">
-					<text class="wlIcon-jiage wanl-text-light-blue"></text>
-					我的砍价
+				
+				<!-- <view class="wanl-user-tool padding-top-bj margin-lr-bj">
+					<view class="list text-sm grid col-5 wanl-gray-dark"> -->
+						<!-- <view @tap="$wanlshop.auth('/pages/user/money/money')">
+							<text class="wlIcon-youhuiquantuangou wanl-orange"></text>
+							钱包
+						</view>
+						<view @tap="$wanlshop.auth('/pages/apps/groups/order/order')">
+							<text class="wlIcon-pintuan2 wanl-text-yellow"></text>
+							拼团订单
+							<view class="cu-tag badge bg-orange" v-if="statistics.order.groups > 0">{{ $wanlshop.toFormat(statistics.order.groups, 'hundred') }}</view>
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/comment/comment')">
+							<text class="wlIcon-icon_pinglun wanl-text-red"></text>
+							评论
+						</view> -->
+						<!-- <view @tap="$wanlshop.auth('/pages/user/distribution/distribution')">
+							<text class="wlIcon-fenxiao wanl-text-yellow"></text>
+							分销
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/order/bargain')">
+							<text class="wlIcon-jiage wanl-text-light-blue"></text>
+							我的砍价
+						</view> -->
+						<!-- <view @tap="$wanlshop.auth('/pages/user/address/address')">
+							<text class="wlIcon-dizhi wanl-text-yellow"></text>
+							收货地址
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/signin/signin')">
+							<text class="wlIcon-mianxing-rili wanl-orange"></text>
+							签到
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/complaint/lists')">
+							<text class="wlIcon-31guanzhuxuanzhong wanl-text-light-blue"></text>
+							我的举报
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/feedback/lists')">
+							<text class="wlIcon-pingjiazongjie wanl-text-blue"></text>
+							反馈
+						</view>
+						<view @tap="help">
+							<text class="wlIcon-bangzhu3 wanl-text-green"></text>
+							帮助中心
+						</view>
+						<view @tap="$wanlshop.auth('/pages/user/service')">
+							<text class="wlIcon-icon-service wanl-text-purple"></text>
+							智能小蜜
+						</view>
+						<view @tap="$wanlshop.auth('/pages/apps/find/user')">
+							<text class="wlIcon-pengyouquan wanl-text-red"></text>
+							创作中心
+						</view> -->
+						<!-- <view @tap="setting">
+							<text class="wlIcon-shezhi1 wanl-text-green"></text>
+							设置
+						</view>
+					</view>
 				</view> -->
-				<!-- <view @tap="$wanlshop.auth('/pages/user/address/address')">
-					<text class="wlIcon-dizhi wanl-text-yellow"></text>
-					收货地址
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/signin/signin')">
-					<text class="wlIcon-mianxing-rili wanl-orange"></text>
-					签到
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/complaint/lists')">
-					<text class="wlIcon-31guanzhuxuanzhong wanl-text-light-blue"></text>
-					我的举报
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/feedback/lists')">
-					<text class="wlIcon-pingjiazongjie wanl-text-blue"></text>
-					反馈
-				</view>
-				<view @tap="help">
-					<text class="wlIcon-bangzhu3 wanl-text-green"></text>
-					帮助中心
-				</view>
-				<view @tap="$wanlshop.auth('/pages/user/service')">
-					<text class="wlIcon-icon-service wanl-text-purple"></text>
-					智能小蜜
-				</view>
-				<view @tap="$wanlshop.auth('/pages/apps/find/user')">
-					<text class="wlIcon-pengyouquan wanl-text-red"></text>
-					创作中心
-				</view> -->
-				<!-- <view @tap="setting">
-					<text class="wlIcon-shezhi1 wanl-text-green"></text>
-					设置
-				</view>
-			</view>
-		</view> -->
-		<!-- <view class="wanl-you-like" :style="{ backgroundImage: 'url(' + $wanlshop.appstc('/common/guess_you_like_it.png') + ')' }"></view> -->
-		<!-- <wanl-product :dataList="likeData"/>
-		<uni-load-more :status="status" :content-text="contentText" /> -->
-		<view class="wanl-user-order-s padding-sm margin-bj">
-			<view class="myorder" v-if="user.isLogin">设置</view>
-			<view class="clickview" @click="addressclick()" v-if="user.isLogin">
-				<view class="clickview-left">
-					<image class="clickview-img" src="../static/images/user/addres.png"></image>
-					<view class="clickview-text">收货地址</view>	
-				</view>
-				<view class="clickview-right">
-					<image class="clickview-img" src="../static/images/user/right.png"></image>
+				<!-- <view class="wanl-you-like" :style="{ backgroundImage: 'url(' + $wanlshop.appstc('/common/guess_you_like_it.png') + ')' }"></view> -->
+				<!-- <wanl-product :dataList="likeData"/>
+				<uni-load-more :status="status" :content-text="contentText" /> -->
+				<view class="wanl-user-order-s padding-sm margin-bj">
+					<view class="myorder" v-if="user.isLogin">设置</view>
+					<view class="clickview" @click="addressclick()" v-if="user.isLogin">
+						<view class="clickview-left">
+							<image class="clickview-img" src="../static/images/user/addres.png"></image>
+							<view class="clickview-text">收货地址</view>	
+						</view>
+						<view class="clickview-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
+						</view>
+					</view>
+					<view class="clickview" @click="aboutclick()">
+						<view class="clickview-left">
+							<image class="clickview-img" src="../static/images/user/concerning.png"></image>
+							<view class="clickview-text">关于我们</view>	
+						</view>
+						<view class="clickview-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
+						</view>
+					</view>
+					<view class="clickview" @tap="onDetails($store.state.common.appConfig.user_agreement, '用户协议')">
+						<view class="clickview-left">
+							<image class="clickview-img" src="../static/images/user/agreement.png"></image>
+							<view class="clickview-text">用户协议</view>	
+						</view>
+						<view class="clickview-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
+						</view>
+					</view>
+				</view>		
+				<view class="out" v-if="user.isLogin">
+					<view class="out-btn" @click="outclick()">退出登录</view>
 				</view>
 			</view>
-			<view class="clickview" @click="aboutclick()">
-				<view class="clickview-left">
-					<image class="clickview-img" src="../static/images/user/concerning.png"></image>
-					<view class="clickview-text">关于我们</view>	
-				</view>
-				<view class="clickview-right">
-					<image class="clickview-img" src="../static/images/user/right.png"></image>
-				</view>
-			</view>
-			<view class="clickview" @tap="onDetails($store.state.common.appConfig.user_agreement, '用户协议')">
-				<view class="clickview-left">
-					<image class="clickview-img" src="../static/images/user/agreement.png"></image>
-					<view class="clickview-text">用户协议</view>	
-				</view>
-				<view class="clickview-right">
-					<image class="clickview-img" src="../static/images/user/right.png"></image>
-				</view>
-			</view>
-		</view>		
-		<view class="out" v-if="user.isLogin">
-			<view class="out-btn" @click="outclick()">退出登录</view>
-		</view>
+			
 		<view class="edgeInsetBottom"></view>
 	</view>
 </template>
@@ -433,14 +433,15 @@ export default {
 	background-repeat: no-repeat;
 	background-size: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
 .wanl-user .user {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 30rpx;
-	padding-bottom: 30rpx;
+    padding: 0rpx 0 0rpx 42rpx;
+	margin-top: 220rpx;
 }
 
 .wanl-user .user .avatar {
@@ -686,7 +687,6 @@ export default {
 }
 .out{
 	padding: 60rpx;
-	margin-top: 109.3rpx;
 }
 .out-btn{
 	background-color: #F31064;

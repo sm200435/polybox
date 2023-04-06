@@ -117,10 +117,13 @@
 				</view>
 			</block>
 			<block class="margin-bj padding-bj" v-else>
-				<wanl-empty src="cart_default3x" text="哎呀，购物车空空如也！" />
-				<view class="cart_btt">
-					<view class="cart_btn" @tap="toAround()">去购买</view>
-				</view>
+				<wanl-empty src="/static/images/cart/wuCart.png" text="哎呀，购物车空空如也！">
+					<template>
+					<view @click="toAround" style="width: 471.01rpx;height: 78.5rpx;border-radius: 39.25rpx;background-color: #F60F60;color: white;line-height: 78.5rpx;">
+						去购买
+					</view>
+					</template>
+				</wanl-empty>
 				<wanl-product :dataList="likeData" />
 			</block>
 			<uni-load-more :status="status" :content-text="contentText" />

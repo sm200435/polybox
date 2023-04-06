@@ -4,13 +4,11 @@
 		<view class="wanl-order"> 
 			<!-- 头部 -->
 			<view class="header">
-				<image :src="$wanlshop.appstc('/order/img_detail_bg.png')" class="img-bg"></image>
 				<view class="content">
 					<view>
 						<view class="status-text">{{getStatusText(orderData.state)}}</view>
 						<view class="reason"><text class="reason-text">{{orderData.statetime}}</text></view>
 					</view>
-					<image :src="$wanlshop.appstc('/order/'+getImg(orderData.state))" class="status-img" mode="widthFix"></image>
 				</view>
 			</view>
 			<!-- 详情 -->
@@ -33,33 +31,32 @@
 					</view>
 				</navigator>
 				<!-- 地址 -->
-				<view class="cu-item">
-					<view class="cu-avatar round wanl-bg-orange"><text class="wlIcon-weizhi1"></text></view>
-					<view class="content">
-						<view>
+				<view class="cu-item" style="padding: 0;">
+					<view class="content" style="left: 0 !important;width: 100%;height: 100%;">
+						<view style="overflow: hidden;right: 20rpx;position: absolute;right: 20rpx;top: 90rpx;font-size: 25rpx;">
 							<text class="wanl-pip margin-right-sm">{{orderData.address.name}}</text>
 							<text class="wanl-gray text-sm">{{orderData.address.mobile}}</text>
 						</view>
-						<view class="wanl-pip text-cut-2 text-sm">
-							{{orderData.address.address.replace(/\//g,' ')}}
-							<text class="margin-left-xs" v-if="orderData.address.address_name">（{{orderData.address.address_name}}）附近</text>
+						<view style="width: 100%;display: flex;justify-content: space-between;position: absolute;right: 0;top: 20rpx;">
+							<view style="font-size: 25rpx;font-weight: 400;color: #999999;line-height: 36rpx;padding-left: 20rpx;">
+								详细地址
+							</view>
+							<view class="wanl-pip text-cut-2 text-sm" style="width: 50%;font-size: 25rpx;">
+								{{orderData.address.address.replace(/\//g,' ')}}
+								<text class="margin-left-xs" v-if="orderData.address.address_name">（{{orderData.address.address_name}}）附近</text>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="lists bg-white"  v-if="orderData.order_no">
-				<view class="shopname text-sm padding-top-bj" @tap="toSho()">
-					<text class="wlIcon-dianpu1 margin-right-sm"></text>
-					<text class="padding-right-xs wanl-black">{{orderData.shop.shopname}}</text>
-					<text class="wlIcon-fanhuigengduo"></text>
-				</view>
-				<view class="cu-list menu-avatar">
+			<view class="lists bg-white"  v-if="orderData.order_no" style="border-bottom: 2rpx #C5C6C8 solid;margin-top: 30rpx;border-radius: 13rpx 13rpx 0 0;">
+				<view class="cu-list menu-avatar" style="padding: 30rpx 0 0;">
 					<block v-for="(item, index) in orderData.goods" :key="item.id">
 						<view class="cu-item">
 							<view class="cu-avatar radius" :style="{ backgroundImage: 'url(' + $wanlshop.oss(item.image, 77, 77) + ')' }" @tap="onGoods(item.goods_id)"></view>
 							<view class="content" @tap="onGoods(item.goods_id)">
 								<view class="text-cut-2">{{item.title}}</view>
-								<view class="wanl_sku text-sm">
+								<view class="wanl_sku text-sm" style="margin-top: 15rpx;">
 									<text class="wanl-gray-dark">{{item.difference}}</text>
 								</view>
 							</view>
@@ -69,7 +66,7 @@
 								<view class="text-orange">实付 <text class="text-price">{{item.actual_payment}}</text></view>
 							</view>
 						</view>
-						<view style="text-align: right;margin-right: 15px;margin-bottom: 10px;">
+						<view style="text-align: right;margin-right: 30rpx;margin-bottom: 20rpx;">
 							<!-- 1.0.2升级 取消订单后去掉退款按钮 -->
 							<view class="tui" @tap="onRefund(orderData.id, item.refund_status, item.refund_id, index)" v-if="orderData.state == 2 || orderData.state == 3 || orderData.state == 4 || orderData.state == 6 "> {{getRefund(item.refund_status)}}</view>
 						</view>
@@ -85,50 +82,46 @@
 				</view> -->
 			</view>
 			
-			<view class="lists bg-white"  v-if="orderData.order_no">
+			<view class="lists bg-white"  v-if="orderData.order_no" style="border-radius: 0rpx 0rpx 13rpx 13rpx;padding-top: 30rpx;">
 				<view class="price padding-lr-bj padding-bottom-bj text-sm">
-					<view style="padding: 15rpx 0;"> <text> 商品总价 </text> <text class="text-price"> {{orderData.pay.order_price}} </text> </view>
-					<view style="margin: 15rpx 0;"> <text> 运费 </text> <text class="text-price"> {{orderData.pay.freight_price}} </text> </view>
-					<view style="margin: 15rpx 0;"> <text> 优惠</text> <text class="text-price"> {{orderData.pay.discount_price}} </text> </view>
-					<view style="margin: 15rpx 0;"> <text> 总价 </text> <text class="text-price"> {{orderData.pay.price}} </text> </view>
+					<view style="padding: 15rpx 0;"> <text class="grayTitle"> 商品总价 </text> <text class="text-price"> {{orderData.pay.order_price}} </text> </view>
+					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 运费 </text> <text class="text-price"> {{orderData.pay.freight_price}} </text> </view>
+					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 优惠</text> <text class="text-price"> {{orderData.pay.discount_price}} </text> </view>
+					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 实付款 </text> <text class="text-price"> {{orderData.pay.price}} </text> </view>
 					<view style="margin: 15rpx 0;" class="text-sm" v-if="orderData.pay.actual_payment != 0"> <text> 实付款 </text> <text class="text-price wanl-orange"> {{orderData.pay.actual_payment}} </text> </view>
 				</view>
 			</view>
 			
 			
-			<view class="order bg-white margin-top-bj padding-bj" v-if="orderData.order_no">
+			<view class="order bg-white margin-top-bj padding-bj" v-if="orderData.order_no" style="width: 687rpx;height: 286rpx;background: #FFFFFF;border-radius: 13rpx;margin: 30rpx auto 30rpx;">
 				<view class="title" @tap="toMore">
 					<view class="text-sm">订单详情</view>
-					<view>
-						<text class="wlIcon-fanhui3" v-if="infoMore"></text>
-						<text class="wlIcon-fanhui4" v-else></text>
-					</view>
 				</view>
 				<view class="text-sm">
 					<view class="item">
-						<text class="wanl-gray" style="width: 160rpx">订单编号：</text>
-						<text> {{orderData.order_no}} </text>
+						<view class="wanl-gray" style="width: 160rpx">订单编号：</view>
+						<view> {{orderData.order_no}} </view>
 					</view>
 					<view class="item">
-						<text class="wanl-gray" style="width: 160rpx">支付交易号：</text>
-						<text> {{orderData.pay.pay_no}} </text>
+						<view class="wanl-gray" style="width: 160rpx">支付交易号：</view>
+						<view> {{orderData.pay.pay_no}} </view>
 					</view>
 					<view class="item">
-						<text class="wanl-gray" style="width: 160rpx">创建时间：</text>
-						<text> {{orderData.createtime_text}} </text>
+						<view class="wanl-gray" style="width: 160rpx">创建时间：</view>
+						<view> {{orderData.createtime_text}} </view>
 					</view>
 					<block v-if="infoMore">
 						<view class="item" v-if="orderData.paymenttime">
-							<text class="wanl-gray-dark" style="width: 160rpx">付款时间：</text>
-							<text> {{orderData.paymenttime_text}} </text>
+							<view class="wanl-gray-dark" style="width: 160rpx">付款时间：</view>
+							<view> {{orderData.paymenttime_text}} </view>
 						</view>
 						<view class="item" v-if="orderData.delivertime">
-							<text class="wanl-gray-dark" style="width: 160rpx">发货时间：</text>
-							<text> {{orderData.delivertime_text}} </text>
+							<view class="wanl-gray-dark" style="width: 160rpx">发货时间：</view>
+							<view> {{orderData.delivertime_text}} </view>
 						</view>
 						<view class="item" v-if="orderData.taketime">
-							<text class="wanl-gray-dark" style="width: 160rpx">收货时间：</text>
-							<text> {{orderData.taketime_text}} </text>
+							<view class="wanl-gray-dark" style="width: 160rpx">收货时间：</view>
+							<view> {{orderData.taketime_text}} </view>
 						</view>
 					</block>
 				</view>
@@ -138,7 +131,23 @@
 					</view>
 				</view> -->
 			</view>
-			
+			<view class="wanl-cart-foot fixedView solid-top account">
+				<view class="text-sm text-right" style="display: flex;align-items: center;flex-direction: column;">
+					<view style="margin-bottom: 8rpx;">
+						<text style="font-size: 28rpx;font-weight: 500;">合计</text>
+						<text class="text-price wanl-orange">{{orderData.pay.price}}</text>
+					</view>
+					<view style="font-size: 22rpx;">
+						共优惠：
+						<text class="text-price wanl-orange">{{orderData.pay.discount_price}}</text>
+					</view>
+				</view>
+				<view class="flex">
+					<button class="cu-btn round bg-gradual-orange" style="font-size: 28rpx;height: 72rpx;width: 195rpx;" @tap="paymentOrder()">
+						立即支付
+					</button>
+				</view>
+			</view>
 			<!-- <view class="order bg-white padding-bj" @tap="toChat(orderData.shop_id)">
 				<view class="wlIcon-kefu" style="text-align: center;font-size: 33rpx;">联系卖家</view>
 			</view> -->
@@ -169,14 +178,76 @@ export default {
 				state:1
 			},
 			logisticsType: false,
-			infoMore: false
+			infoMore: false,
+			order_id:-1
 		};
 	},
 	onLoad(option) {
-		// console.log(option,8888888888888888);
+		this.order_id=option.id
 		this.loadData({id:option.id});
 	},
 	methods: {
+		// 立即支付
+		paymentOrder(){
+			let token=""
+			let code=""
+			// 获取token
+			this.$api.post({
+				url: '/wanlshop/pay/getPay',
+				data: {
+					order_id: this.order_id,
+					order_type: "goods"
+				},
+				success: res => {
+					console.log("res",res);
+					token = res.token;
+					// 获取code
+					uni.login({
+						success: (e) => {
+							code=e.code
+							this.$api.post({
+								url: '/wanlshop/pay/payment',
+								data: {
+									order_type: "goods",
+									type: 'wechat',
+									method: 'miniapp',
+									code: code,
+									order_id: this.order_id,
+									token: token
+								},
+								success: res => {
+									// 微信小程序支付
+									uni.requestPayment({
+										appId: res.appId,
+										nonceStr: res.nonceStr,
+										package: res.package,
+										paySign: res.paySign,
+										signType: res.signType,
+										timeStamp: res.timeStamp,
+										success: (e) => {
+											this.paySuccess(data[0].type);
+										},
+										fail: (e) => {
+											// uni.showModal({
+											//     content: "支付失败,原因为: " + e.errMsg,
+											//     showCancel: false,
+											// })
+											this.payErr(data, token, code);
+										}
+									})
+								}
+							});
+						},
+						fail: (e) => {
+							uni.showModal({
+								content: "无法获取微信code,原因为: " + e.errMsg,
+								showCancel: false
+							})
+						}
+					})
+				}
+			});	
+		},
 		// 获取订单
 		async loadData(data) {
 			this.$api.get({
@@ -288,19 +359,13 @@ export default {
 <style>
 	.wanl-order .header {
 		width: 100%;
-		height: 180rpx;
+		height: 150rpx;
 		position: relative;
-		background-color: #f72b36;
-	}
 	
-	.wanl-order .header .img-bg {
-		width: 100%;
-		height: 180rpx;
 	}
 	
 	.wanl-order .header .content {
 		width: 100%;
-		height: 180rpx;
 		position: absolute;
 		z-index: 10;
 		left: 0;
@@ -308,27 +373,36 @@ export default {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 60rpx;
+		padding: 13rpx 30rpx 30rpx;
 		box-sizing: border-box;
 	}
 	
 	.wanl-order .header .status-text {
-		font-size: 34rpx;
-		line-height: 34rpx;
-		color: #FEFEFE;
+		font-size: 42rpx;
+		font-weight: 500;
+		color: #141414;
+		line-height: 59rpx;
 	}
 	
 	.wanl-order .header .reason {
 		font-size: 24rpx;
 		line-height: 24rpx;
-		color: rgba(254, 254, 254, 0.75);
-		padding-top: 15rpx;
+		padding-top: 6rpx;
 		display: flex;
 		align-items: center;
 	}
 	
 	.wanl-order .header .reason-text {
 		padding-right: 12rpx;
+		font-size: 30rpx;
+		font-family: PingFangSC-Regular, PingFang SC;
+		font-weight: 400;
+		color: #141414;
+		line-height: 42rpx;
+	}
+	
+	.cu-list.menu-avatar>.cu-item .action view+view{
+		margin-top: 15rpx;
 	}
 	
 	.wanl-order .header .status-img {
@@ -359,7 +433,11 @@ export default {
 		/* transform: translate(0rpx, 0rpx); */
 	}
 	
-	
+	.lists{
+		width: 687rpx;
+		background: #FFFFFF;
+		margin: auto;
+	}
 	.wanl-order .lists .shopname {
 	    margin: 25rpx 25rpx 30rpx 25rpx;
 	}
@@ -379,7 +457,11 @@ export default {
 	
 	
 	.cu-list.menu-avatar>.cu-item{
-		height: 160rpx;
+		width: 687rpx;
+		height: 145rpx;
+		background: #FFFFFF;
+		border-radius: 13rpx;
+		margin: auto;
 	}
 	.cu-list.menu-avatar>.cu-item .content{
 		line-height: 1.4;
@@ -393,6 +475,7 @@ export default {
 	}
 	.wanl-order .order .item{
 		display: flex;
+		justify-content: space-between;
 		padding-top: 30rpx;
 	}
 	.wanl-order .order .foot{
@@ -409,5 +492,32 @@ export default {
 		font-size: 32rpx;
 	}
 	
+	.grayTitle{
+		font-weight: 400;
+		color: #848689;
+	}
 	
+	.wanl-cart-foot.account button {
+		margin-left: 25rpx;
+	}
+	
+	.wanl-cart-foot.account .cu-btn {
+		padding: 0 25rpx;
+		font-size: 32rpx;
+		height: 72rpx;
+		margin-top: 6rpx;
+		/* border-radius: 20rpx; */
+	}
+	
+	.wanl-cart-foot {
+		width: 100%;
+		height: 120rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		z-index: 997;
+		min-height: 52px;
+		background-color: #ffffff;
+		padding: 0 25rpx;
+	}
 </style>
