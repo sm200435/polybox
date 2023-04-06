@@ -34,7 +34,7 @@
 										</view>
 									</view>
 								</view>
-								<view class="move" style="right: -50rpx;width: 170rpx;margin-top: -20rpx;">
+								<view class="move" style="left: 100%;width: 170rpx;margin-top: -20rpx;">
 									<view class="bg-red" style="height: 220rpx;"
 										@click.stop="loadFollow(item.id, index)">取消收藏</view>
 								</view>
@@ -55,6 +55,7 @@
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
 		<view class="wanlian cu-bar foot" v-if="navList[0].dataList.length != 0 && cang">
 			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
+			<!-- <button v-else style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;background: #F31064;color: #ffffff;opacity: 0.4;">取消收藏</button> -->
 		</view>
 	</view>
 </template>

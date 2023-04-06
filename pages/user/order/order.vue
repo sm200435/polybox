@@ -69,7 +69,7 @@
 						</view>
 						<!-- 底部 -->
 						<view class="price-box text-sm flex" style="justify-content: space-between;">
-							<view v-if="order.pay.discount_price > 0" class="margin-right-sm wanl-gray">优惠：<text class="text-price">{{ order.pay.discount_price }}</text></view>
+							<!-- <view v-if="order.pay.discount_price > 0" class="margin-right-sm wanl-gray">优惠：<text class="text-price">{{ order.pay.discount_price }}</text></view> -->
 							<view v-if="order.pay.freight_price > 0" class="margin-right-sm wanl-gray">快递：<text class="text-price">{{ order.pay.freight_price }}</text></view>
 							<view style="font-size: 30rpx;color: #6D6D6D;">
 								<text class="state" :style="{ color: order.stateTipColor }">{{ order.stateTip }}</text>
