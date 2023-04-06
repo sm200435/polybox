@@ -1,11 +1,13 @@
 <template>
 	<view class="uni-numbox">
-		<view @tap="_calcValue('minus')" class="uni-numbox__minus">
-			<text class="uni-numbox--text wlIcon-jian" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }"></text>
+		<view @tap="_calcValue('minus')">
+			<!-- <text class="uni-numbox--text wlIcon-jian" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }"></text> -->
+			<image src="../../static/images/user/jian.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 		</view>
 		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
-		<view @tap="_calcValue('plus')" class="uni-numbox__plus">
-			<text class="uni-numbox--text wlIcon-tianjia" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }"></text>
+		<view @tap="_calcValue('plus')">
+			<!-- <text class="uni-numbox--text wlIcon-tianjia" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }"></text> -->
+			<image src="../../static/images/user/jia.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 		</view>
 	</view>
 </template>
@@ -129,9 +131,8 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		border-radius: 1000rpx;
 		padding: 4rpx;
-		border: 1px solid #f2f2f2; 
+		/* border: 1px solid #f2f2f2; */
 	}
 
 	.uni-numbox__value {

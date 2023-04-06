@@ -9,11 +9,11 @@
 					v-for="(item, index) in addressList" :key="item.id" @tap="checkAddress(item)"
 					@touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
 					:data-target="'move-box-' + index">
-					<view
-						style="width: 687rpx;height: 185rpx;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;">
+					<view style="width: 687rpx;height: 185rpx;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;">
 						<view class="cu-avatar round lg"
 							style="background-color: #F31064;margin: 42rpx 67rpx 0 0;justify-content: center;left: 20rpx;">
-							{{ item.name.substring(0, 1) }}</view>
+							{{ item.name.substring(0, 1) }}
+						</view>
 						<view class="content" style="margin: 40rpx 32rpx 24rpx 18rpx;left: 120rpx;">
 							<view>
 								<text class="wanl-pip margin-right-sm text-lg">{{ item.name }}</text>
@@ -26,8 +26,8 @@
 						</view>
 						<view class="action" style="margin-top: 70rpx;" @tap.stop="addAddress('edit', item)"><text
 								class="wlIcon-xiugaioryijian text-xl"></text></view>
-						<view class="move" style="height: 185rpx;right: -50rpx;">
-							<view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view>
+						<view class="move" style="height: 185rpx;right: -50rpx;width: 160rpx;">
+							<!-- <view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view> -->
 							<view class="bg-red" @tap.stop="delAddress(item.id, index)">删除</view>
 						</view>
 					</view>
