@@ -1,7 +1,7 @@
 <template>
-	<view style="background: #f7f7f7;height: 100vh;">
+	<view style="background: #f7f7f7;height: 100%;">
 		<view class="edgeInsetTop"></view>
-		<view class="wanl-order"> 
+		<view class="wanl-order" style="padding-bottom: 120rpx;background-color: #f7f7f7;"> 
 			<!-- 头部 -->
 			<view class="header">
 				<view class="content">
@@ -14,7 +14,7 @@
 			<!-- 详情 -->
 			<view class="address cu-list menu-avatar">
 				<!-- 物流状态 -->
-				<navigator open-type="navigate" app-id="wx6885acbedba59c14" target="miniProgram" :path="'pages/result/result?nu='+orderData.express_no+'&com='+orderData.express_name+'&querysource=third_xcx'">
+				<navigator style="width: 699.28rpx;margin: auto;border-radius: 13rpx;" open-type="navigate" app-id="wx6885acbedba59c14" target="miniProgram" :path="'pages/result/result?nu='+orderData.express_no+'&com='+orderData.express_name+'&querysource=third_xcx'">
 					<view style="width: 100%;display: inline-flex; align-items: center; padding: 20rpx 20rpx;background-color: #fff;" class="cu-item"  v-if="orderData.state != 7 && orderData.state != 1 && orderData.state != 2 && logisticsType">
 						<view class="cu-avatar round wanl-bg-blue"><text class="wlIcon-yunshuzhong"></text></view>
 						<view class="content" style="flex: 1;margin-left: 20rpx;">
@@ -31,7 +31,7 @@
 					</view>
 				</navigator>
 				<!-- 地址 -->
-				<view class="cu-item" style="padding: 0;">
+				<view class="cu-item" style="padding: 0;" v-if="orderData.state!=3">
 					<view class="content" style="left: 0 !important;width: 100%;height: 100%;">
 						<view style="overflow: hidden;right: 20rpx;position: absolute;right: 20rpx;top: 90rpx;font-size: 25rpx;">
 							<text class="wanl-pip margin-right-sm">{{orderData.address.name}}</text>
@@ -131,7 +131,7 @@
 					</view>
 				</view> -->
 			</view>
-			<view class="wanl-cart-foot fixedView solid-top account">
+			<view class="wanl-cart-foot fixedView solid-top account" v-if="orderData.state==1">
 				<view class="text-sm text-right" style="display: flex;align-items: center;flex-direction: column;">
 					<view style="margin-bottom: 8rpx;">
 						<text style="font-size: 28rpx;font-weight: 500;">合计</text>
@@ -357,6 +357,9 @@ export default {
 </script>
 
 <style>
+	.page{
+		height: 100%;
+	}
 	.wanl-order .header {
 		width: 100%;
 		height: 150rpx;

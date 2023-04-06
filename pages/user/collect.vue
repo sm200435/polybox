@@ -54,7 +54,8 @@
 		</view>
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
 		<view class="wanlian cu-bar foot" v-if="navList[0].dataList.length != 0 && cang">
-			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
+			<button class="wanl-bg-orange" v-if="navList[0].dataList.every(i=>i.checked==false)" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;opacity: 0.4;">取消收藏</button>
+			<button v-else class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
 		</view>
 	</view>
 </template>

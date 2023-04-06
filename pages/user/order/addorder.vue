@@ -452,7 +452,7 @@
 						address_id: address_id
 					},
 					success: res => {
-						console.log("res.orderData", res.orderData);
+						console.log("res", res);
 						this.token = res.token;
 						this.orderData = res.orderData;
 						if (res.addressData) {
@@ -578,10 +578,10 @@
 								this.paySuccess(data[0].type);
 							},
 							fail: (e) => {
-								// uni.showModal({
-								//     content: "支付失败,原因为: " + e.errMsg,
-								//     showCancel: false,
-								// })
+								uni.showModal({
+								    content: "支付失败,原因为: " + e.errMsg,
+								    showCancel: false,
+								})
 								this.payErr(data, token, code);
 							}
 						})
@@ -590,12 +590,6 @@
 			},
 			// 支付成功
 			paySuccess(type) {
-				if (type === 'goods') {
-					this.$store.commit('statistics/order', {
-						pay: this.$wanlshop.bcsub(this.$store.state.statistics.order.pay, this.payNum),
-						delive: this.$wanlshop.bcadd(this.$store.state.statistics.order.delive, this.payNum)
-					});
-				}
 				this.$wanlshop.to(`/pages/page/success?type=pay&order_type=${type}`);
 			},
 			//支付失败

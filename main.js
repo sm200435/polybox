@@ -74,8 +74,19 @@ api.interceptor.request = (config => {
 api.interceptor.response = ((res, config) => {
 	if (res.code === 1) {
 		res.success = true;
-	} else if (res.code === 401) { // token失效，需要重新登录
+	} 
+	else if (res.code === 401) { // token失效，需要重新登录
 		to('/pages/user/auth/auth');
+	}
+	else if(res.msg=='商品库存不足, 请稍后抢购！'){
+		uni.navigateBack({
+			delta:1,
+		})
+	}
+	else if(res.msg=='页面安全令牌已过期！请重返此页'){
+		uni.navigateBack({
+			delta:1,
+		})
 	}
 	wanlshop_config.debug?console.log(res):'';
 	return res;
