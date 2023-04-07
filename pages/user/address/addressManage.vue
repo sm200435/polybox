@@ -1,6 +1,6 @@
 <!-- 2020年2月17日18:18:53 完成 -->
 <template>
-	<view style="padding-top: 38rpx;background: #f7f7f7;">
+	<view style="padding-top: 38rpx;background: #f7f7f7;height: 100%;">
 		<view class="edgeInsetTop"></view>
 		<view class="cu-form-group" v-show="addressType">
 			<view class="title">联系人</view>

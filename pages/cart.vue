@@ -1,6 +1,6 @@
 <template>
-	<view style="background: #f7f7f7;">
-		<view v-if="show">
+	<view style="background: #f7f7f7;height: 100%;">
+		<view v-if="show" style="height: 100%;">
 			<!-- 导航条 -->
 			<view class="cu-custom" :style="{ height: $wanlshop.wanlsys().height + 'px' }">
 				<view class="cu-bar fixed bg-bgcolor" :style="{
@@ -22,29 +22,12 @@
 			</view>
 			<block v-if="cart.list.length > 0">
 				<view class="wanl-cart-shop radius-bock margin-bj padding-bj" v-for="(item, index) in cart.list"
-					:key="index">
-					<!-- <view class="shop margin-bottom" @tap="onShop(item.shop_id)"> -->
-				<!-- 	<view class="shop margin-bottom">
-						店铺选择
-						<view class="text-xxl margin-right-sm" @tap.stop="shopchoose(item)">
-							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="item.check"></image>
-							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
-							<text v-if="item.check" class="wlIcon-xuanze-danxuan wanl-orange"></text>
-							<text v-else class="wlIcon-xuanze wanl-gray-light"></text>
-						</view>
-						<view class="shopname">
-							<text class="wlIcon-dianpu1 margin-right-xs"></text>
-							<text class="text-30">{{ item.shop_name }}</text>
-						</view>
-						<view class="info"><text class="wlIcon-fanhui2 margin-left-xs"></text></view>
-					</view> -->
+					:key="index" style="height: 100%;">
 					<view class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys" v-if="goods.sku.stock!=0">
 						<!-- 商品选择 -->
 						<view class="text-xxl margin-right-sm" @tap="choose({ index: index, keys: keys })">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="goods.checked"></image>
 							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
-							<!-- <text v-if="goods.checked" class="wlIcon-xuanze-danxuan wanl-orange"></text>
-							<text v-else class="wlIcon-xuanze wanl-gray-light"></text> -->
 						</view>
 						<view class="picture" @tap="onGoods(goods.goods_id)">
 							<image :src="$wanlshop.oss(goods.image, 100, 100, 1)" mode="aspectFill"></image>
@@ -126,7 +109,7 @@
 				</wanl-empty>
 				<wanl-product :dataList="likeData" />
 			</block>
-			<uni-load-more :status="status" :content-text="contentText" />
+			<!-- <uni-load-more :status="status" :content-text="contentText" /> -->
 			<!-- #ifdef APP-PLUS -->
 			<view style="height: 100rpx;"></view>
 			<!-- #endif -->
@@ -158,8 +141,6 @@
 						<view class="text-xxl">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="cart.status"></image>
 							<image src="../static/images/user/danxuan.png" style="width: 36rpx;height: 36rpx;" v-else></image>
-							<!-- <text v-if="cart.status" class="wlIcon-xuanze-danxuan wanl-orange"></text>
-							<text v-else class="wlIcon-xuanze wanl-gray-light"></text> -->
 						</view>
 						<view class="margin-left-sm" style="font-size: 25rpx;">
 							<text>{{ cart.status ? '取消' : '全选' }}</text>

@@ -1,5 +1,5 @@
 <template>
-	<view class="wanl-list">
+	<view class="wanl-list" style="height: 100%;">
 		<!-- 导航条 -->
 		<view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
 			<view class="cu-bar bg-bgcolor fixed" style="background: white;" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
@@ -53,7 +53,7 @@
 			<wanl-divider width="60%">猜你喜欢</wanl-divider>
 			<wanl-product :dataList="likeData" />
 		</block>
-		<uni-load-more :status="status" :content-text="contentText" />
+		<!-- <uni-load-more v-if="goodsData.length==0" :status="status" :content-text="contentText" /> -->
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer">
 			<view class="drawer">
 				<scroll-view scroll-y="true" class="scroll" :style="{ height: $wanlshop.wanlsys().windowHeight + 'px' }">
