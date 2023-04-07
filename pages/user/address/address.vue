@@ -27,10 +27,11 @@
 						<view class="action" style="left: 85%;position: absolute" @tap.stop="addAddress('edit', item)">
 							<text class="wlIcon-xiugaioryijian text-xl"></text>
 						</view>
-						<view class="move" style="height: 185rpx;right: -50rpx;width: 160rpx;">
+						<view class="move" style="height: 185rpx;right: -2rpx;width: 160rpx;">
 							<!-- <view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view> -->
-							<view class="bg-red" @tap.stop="delAddress(item.id, index)">删除</view>
+							<view class="bg-gradual-orange" style="border-radius: 13rpx;" @tap.stop="delAddress(item.id, index)">删除</view>
 						</view>
+					
 					<!-- </view> -->
 				</view>
 				<wanl-empty text="没有找到任何地址" src="address_default3x" v-else />
