@@ -2,7 +2,7 @@
 	<view class="wanl-list">
 		<!-- 导航条 -->
 		<view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
-			<view class="cu-bar bg-bgcolor fixed" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
+			<view class="cu-bar bg-bgcolor fixed" style="background: white;" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
 				<view class="action" @tap="$wanlshop.back(1)">
 					<text class="wlIcon-fanhui1"></text>
 				</view>
@@ -26,7 +26,7 @@
 		</view>
 		<view class="head" :class="{ headtop: scrollStype }">
 			<view class="cue">
-				<view class="bar">
+				<view class="bar" style="background: white;">
 					<view class="item" :class="{ current: filterIndex === 0 }" @tap="tabClick(0)">综合</view>
 					<view class="item" :class="{ current: filterIndex === 1 }" @tap="tabClick(1)">销量</view>
 					<view class="item" :class="{ current: filterIndex === 2 }" @tap="tabClick(2)">新上架</view>
@@ -79,13 +79,13 @@
 							<text :class="[drawerType.city ? 'wlIcon-fanhui3' : 'wlIcon-fanhui4']"></text>
 						</view>
 						<view class="list">
-							<text class="wlIcon-weizhi" data-key="sameCity" :class="{ active: drawerData.sameCity.choice }" :data-data="drawerData.sameCity.name" @tap="onDraver">
+							<text class="wlIcon-weizhi" style="border-radius: 30rpx;" data-key="sameCity" :class="{ active: drawerData.sameCity.choice }" :data-data="drawerData.sameCity.name" @tap="onDraver">
 								{{ drawerData.sameCity.name }}
 							</text>
 						</view>
 						<view class="title" v-if="drawerType.city"><text>城市</text></view>
 						<view class="list" v-if="drawerType.city">
-							<text v-for="(cy, index) in drawerData.city" :key="cy.name" :class="{ active: cy.choice }" data-key="city" :data-attribute="index" @tap="onDraver">
+							<text v-for="(cy, index) in drawerData.city" :key="cy.name" :class="{ active: cy.choice }" style="border-radius: 30rpx;" data-key="city" :data-attribute="index" @tap="onDraver">
 								{{ cy.name }}
 							</text>
 						</view>
@@ -106,7 +106,7 @@
 				</scroll-view>
 				<view class="footer">
 					<view>
-						<button class="cu-btn" style="border-radius: 40rpx;width: 233rpx;height: 72rpx;" @tap="onDrawerReset">重置</button>
+						<button class="cu-btn" style="border-radius: 40rpx;width: 233rpx;height: 72rpx;color: #141414;background: white;border: 2rpx solid #999999;" @tap="onDrawerReset">重置</button>
 						<button class="cu-btn bg-gradual-orange" style="border-radius: 40rpx;width: 233rpx;height: 72rpx;margin-left: 30rpx;" @tap="onDrawerTo">确定</button>
 					</view>
 				</view>
