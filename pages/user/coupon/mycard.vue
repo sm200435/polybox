@@ -9,7 +9,7 @@
 			<swiper-item class="tab-content" v-for="(tag, key) in navList" :key="tag.state">
 				<scroll-view class="list-scroll-content" scroll-y @scrolltolower="loadData">
 					<!-- 空白页 -->
-					<wanl-empty text="没有找到任何优惠券" src="ticket_default3x" v-if="tag.loaded === true && tag.cardList.length === 0"/>
+					<wanl-empty text="还没有优惠券" src="/static/images/user/wucollect.png" v-if="tag.loaded === true && tag.cardList.length === 0"/>
 					<!-- 订单列表 -->
 					<view class="wanl-coupon">
 						<view v-for="(coupon, seat) in tag.cardList" :key="coupon.id" :class="[coupon.state == 1 ? coupon.type : 'wanl-gray']" class="item margin-bj radius-bock" @tap="onDetails(coupon)">

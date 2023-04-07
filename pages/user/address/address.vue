@@ -3,35 +3,35 @@
 		<view class="edgeInsetTop"></view>
 		<wanl-empty v-if="addressList.length === 0 && status !== 'loading'" text="还没添加任何地址" />
 		<view class="margin-top-bj">
-			<view class="cu-list menu-avatar">
+			<view class="cu-list menu-avatar" style="width: 687rpx;margin:31rpx;">
 				<view class="cu-item" style="border-radius: 24rpx;"
 					:class="modalName == 'move-box-' + index ? 'move-cur' : ''" v-if="addressList"
 					v-for="(item, index) in addressList" :key="item.id" @tap="checkAddress(item)"
 					@touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
 					:data-target="'move-box-' + index">
-					<view style="width: 687rpx;height: 185rpx;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;">
+					<!-- <view style="width: 100%;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;"> -->
 						<view class="cu-avatar round lg"
-							style="background-color: #F31064;margin: 42rpx 67rpx 0 0;justify-content: center;left: 20rpx;">
+							style="background-color: #F31064;justify-content: center;left: 20rpx;">
 							{{ item.name.substring(0, 1) }}
 						</view>
-						<view class="content" style="margin: 40rpx 32rpx 24rpx 18rpx;left: 120rpx;">
+						<view class="content" style="margin: 30rpx 30rpx 24rpx 18rpx;left: 120rpx;">
 							<view>
 								<text class="wanl-pip margin-right-sm text-lg">{{ item.name }}</text>
 								<text class="wanl-gray-light text-sm">{{ item.mobile }}</text>
 							</view>
-							<view class="text-sm wanl-pip text-cut-2" style="line-height: 1.3;padding-top: 7rpx;">
+							<view class="text-sm wanl-pip text-cut-2" style="line-height: 1.3;padding-top: 6rpx;">
 								<text class="wlIcon-dizhi text-red margin-right-xs" v-if="item.default == 1"></text>
 								{{ item.province }} {{ item.city }} {{ item.district }} {{ item.address_full }}
 							</view>
 						</view>
-						<view class="action" style="margin-top: 70rpx;" @tap.stop="addAddress('edit', item)">
+						<view class="action" style="left: 85%;position: absolute" @tap.stop="addAddress('edit', item)">
 							<text class="wlIcon-xiugaioryijian text-xl"></text>
 						</view>
 						<view class="move" style="height: 185rpx;right: -50rpx;width: 160rpx;">
 							<!-- <view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view> -->
 							<view class="bg-red" @tap.stop="delAddress(item.id, index)">删除</view>
 						</view>
-					</view>
+					<!-- </view> -->
 				</view>
 				<wanl-empty text="没有找到任何地址" src="address_default3x" v-else />
 			</view>
@@ -215,9 +215,13 @@
 		display: flex;
 		padding-right: 10rpx;
 		height: 185rpx;
-		justify-content: flex-end;
+		/* justify-content: flex-end; */
 		align-items: center;
-		margin: 30rpx 31rpx;
+		margin-top: 30rpx;
+		background: white;
+		justify-content: space-between;
+		border-radius: 24rpx;
+		/* margin: 30rpx 31rpx; */
 	}
 
 	.wanlian.cu-bar.tabbar {

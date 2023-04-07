@@ -1,5 +1,5 @@
 <template>
-	<view style="height: 100%;">
+	<view style="background: #f7f7f7;">
 		<view v-if="show">
 			<!-- 导航条 -->
 			<view class="cu-custom" :style="{ height: $wanlshop.wanlsys().height + 'px' }">

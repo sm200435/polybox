@@ -133,22 +133,22 @@
 					<view class="project text-sm wanl-gray-dark" style="padding-bottom: 20rpx;">
 						<view @tap="$wanlshop.auth('/pages/user/order/order')">
 							<text class="wlIcon-31daipingjia wanl-pip"></text>
-							<view style="color: #141414;font-size: 26rpx;">全部</view>
+							<view style="color: #141414;font-size: 27rpx;">全部</view>
 							<view class="cu-tag badge bg-orange" v-if="statistics.order.evaluate > 0">{{ $wanlshop.toFormat(statistics.order.evaluate, 'hundred') }}</view>
 						</view>
 						<view @tap="$wanlshop.auth('/pages/user/order/order?state=1')">
 							<text class="wlIcon-31daifukuan wanl-pip"></text>
-							<view style="color: #141414;font-size: 26rpx;">待支付</view>
+							<view style="color: #141414;font-size: 27rpx;">待支付</view>
 							<view class="cu-tag badge bg-orange" v-if="statistics.order.pay > 0">{{ $wanlshop.toFormat(statistics.order.pay, 'hundred') }}</view>
 						</view>
 						<view @tap="$wanlshop.auth('/pages/user/order/order?state=2')">
 							<text class="wlIcon-31daifahuo wanl-pip"></text>
-							<view style="color: #141414;font-size: 26rpx;">待发货</view>
+							<view style="color: #141414;font-size: 27rpx;">待发货</view>
 							<view class="cu-tag badge bg-orange" v-if="statistics.order.delive > 0">{{ $wanlshop.toFormat(statistics.order.delive, 'hundred') }}</view>
 						</view>
 						<view @tap="$wanlshop.auth('/pages/user/order/order?state=3')">
 							<text class="wlIcon-31daishouhuo wanl-pip"></text>
-							<view style="color: #141414;font-size: 26rpx;">待收货</view>
+							<view style="color: #141414;font-size: 27rpx;">待收货</view>
 							<view class="cu-tag badge bg-orange" v-if="statistics.order.receiving > 0">{{ $wanlshop.toFormat(statistics.order.receiving, 'hundred') }}</view>
 						</view>
 						<!-- <view @tap="$wanlshop.auth('/pages/user/order/order?state=4')">
@@ -158,7 +158,7 @@
 						</view> -->
 						<view class="solid-left" @tap="$wanlshop.auth('/pages/user/refund/lists')">
 							<text class="wlIcon-31youhuiquan wanl-orange"></text>
-							<view style="color: #141414;font-size: 25rpx;">退货/售后</view>	
+							<view style="color: #141414;font-size: 27rpx;">退货/售后</view>	
 							<view class="cu-tag badge bg-orange" v-if="statistics.order.customer > 0">{{ $wanlshop.toFormat(statistics.order.customer, 'hundred') }}</view>
 						</view>
 					</view>
@@ -683,7 +683,7 @@ export default {
 .clickview-text{
 	margin-left: 20rpx;
 	color: #141414;
-	font-size: 26rpx;
+	font-size: 27rpx;
 }
 .out{
 	padding: 60rpx;
