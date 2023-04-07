@@ -191,7 +191,6 @@
 						登录后才能查看购物车哦
 					</view>
 				</view>
-				
 				<view class="cart_btn" @click="goLogin">立即登录</view>
 			</view>
 		</view>
