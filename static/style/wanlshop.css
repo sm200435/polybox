@@ -3,7 +3,7 @@ body,
 page {
 	height: 100%;
 }
-image{will-change: transform}
+/* image{will-change: transform} */
 
 /* 全局图片加速
 /* image{will-change: transform;} */

@@ -386,7 +386,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="wanlian cu-bar tabbar solid-top foot text-df" style="position: fixed;left: 0;border: 0;justify-content: space-between;height: 140rpx;">
+			<view class="wanlian cu-bar tabbar solid-top foot text-df" style="position: fixed;left: 0;border: 0;justify-content: space-between;">
 				<view style="padding-left: 25rpx;font-weight: 500;">
 					合计：
 					<text class="text-price text-orange">{{ orderData.statis.allsub }}</text>
@@ -443,7 +443,7 @@
 		// 	console.log(this.loading,8888888888888888888);
 		// },
 		methods: {
-			async loadData(address_id) {
+			loadData(address_id) {
 				this.$api.post({
 					url: '/wanlshop/order/getOrderGoodsList',
 					loadingTip: '加载中',
@@ -578,10 +578,10 @@
 								this.paySuccess(data[0].type);
 							},
 							fail: (e) => {
-								uni.showModal({
-								    content: "支付失败,原因为: " + e.errMsg,
-								    showCancel: false,
-								})
+								// uni.showModal({
+								//     content: "支付失败,原因为: " + e.errMsg,
+								//     showCancel: false,
+								// })
 								this.payErr(data, token, code);
 							}
 						})
@@ -590,7 +590,9 @@
 			},
 			// 支付成功
 			paySuccess(type) {
-				this.$wanlshop.to(`/pages/page/success?type=pay&order_type=${type}`);
+				uni.redirectTo({
+					url:`/pages/page/success?type=pay&order_type=${type}`
+				})
 			},
 			//支付失败
 			payErr() {

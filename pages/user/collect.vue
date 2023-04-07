@@ -6,8 +6,8 @@
 					<text v-if="cang">取消</text>
 					<text v-else>多选</text>
 				</view>
-				<scroll-view class="content" scroll-y @scrolltolower="loadData">
-					<view class="cu-list menu-avatar">
+				<scroll-view class="content" scroll-y @scrolltolower="loadData" style="height: 87%;">
+					<view class="cu-list menu-avatar" style="width:699.28rpx;margin: 20rpx auto;" >
 						<view class="cu-item" :class="modalName == 'move-box-' + index ? 'move-cur' : ''"
 							v-if="data.dataList" v-for="(item, index) in data.dataList" :key="item.id"
 							@touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
@@ -34,7 +34,7 @@
 										</view>
 									</view>
 								</view>
-								<view class="move" style="left: 100%;width: 170rpx;margin-top: -20rpx;">
+								<view class="move" style="left: 77%;width: 170rpx;margin-top: -20rpx;">
 									<view class="bg-red" style="height: 220rpx;"
 										@click.stop="loadFollow(item.id, index)">取消收藏</view>
 								</view>
@@ -43,6 +43,10 @@
 					</view>
 					<!-- <uni-load-more :status="data.loadingType" :content-text="contentText" /> -->
 				</scroll-view>
+				<view class="wanlian cu-bar" v-if="navList[0].dataList.length != 0 && cang">
+					<button class="wanl-bg-orange" v-if="navList[0].dataList.every(i=>i.checked==false)" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;opacity: 0.4;">取消收藏</button>
+					<button v-else class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
+				</view>
 			</swiper-item>
 			<wanl-empty text="你还没有任何收藏" src="/static/images/user/wucollect.png"  v-else>
 				<template>
@@ -52,16 +56,9 @@
 				</template>
 			</wanl-empty>
 		</view>
+	
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
-		<view class="wanlian cu-bar foot" v-if="navList[0].dataList.length != 0 && cang">
-<<<<<<< HEAD
-			<button class="wanl-bg-orange" v-if="navList[0].dataList.every(i=>i.checked==false)" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;opacity: 0.4;">取消收藏</button>
-			<button v-else class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
-=======
-			<button class="wanl-bg-orange" style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;" @click="allCancel">取消收藏</button>
-			<!-- <button v-else style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;background: #F31064;color: #ffffff;opacity: 0.4;">取消收藏</button> -->
->>>>>>> 71a9c2f7bca168e6dc54609aecea5b595ae0622f
-		</view>
+		
 	</view>
 </template>
 
@@ -269,7 +266,7 @@
 		border-radius: 13rpx;
 		justify-content: flex-end;
 		align-items: center;
-		margin: 30rpx 25rpx;
+		margin: 30rpx 0rpx;
 	}
 
 	.action {
