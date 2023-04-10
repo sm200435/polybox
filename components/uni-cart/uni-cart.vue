@@ -50,7 +50,6 @@
 							@change="changeNum"></uni-number-box>
 					</view>
 				</scroll-view>
-
 				<view class="foot padding-lr-bj">
 					<button class="cu-btn bg-gradual-orange round text-bold complete"
 						@tap="completeSelection">完成</button>

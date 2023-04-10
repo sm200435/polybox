@@ -1,7 +1,7 @@
 <template>
 	<view class="wanl-goods">
 		<!-- 导航条 -->
-		<view class="cu-custom" :style="{ height: wanlsys.height + 'px' }">
+	<!-- 	<view class="cu-custom" :style="{ height: wanlsys.height + 'px' }">
 			<view class="cu-bar fixed" :style="{ height: wanlsys.height + 'px', paddingTop: wanlsys.top + 'px' }">
 				<view class="action" @tap="$wanlshop.back(1)"><text class="wlIcon-fanhui1"></text></view>
 				<view class="search-form round">
@@ -10,555 +10,531 @@
 						<swiper-item @tap="productSearch('')">搜索商品、类目</swiper-item>
 					</swiper>
 				</view>
-				<!-- <view class="action"> -->
-					<!-- #ifndef MP -->
-					<!-- <text class="wlIcon-fenxiangcopy" @tap="showModal('share')"></text>
-					<text class="wlIcon-liebiaomoshi" @tap="showModal('menu')"></text>
-					<text class="wlIcon-31gouwuche" @tap="toCart"></text> -->
-					<!-- #endif -->
-				<!-- </view> -->
-				
-				<!-- <view class="bar-bg solid-bottom" :style="{ top: wanlsys.height + 'px', opacity: headerOpacity }">
-					<scroll-view scroll-x class="nav">
-						<view class="flex justify-around text-center">
-							<view class="cu-item " :class="selectAnchor==index?'text-orange cur':''" v-for="(anchor, index) in anchorlist" :key="anchor.name" @tap="toAnchor(index)">
-								{{ anchor.name }}
-							</view>
-						</view>
-					</scroll-view>
-				</view> -->
-				<!-- 直播 -->
-				<!-- <view class="wan-live" v-if="goodsData.isLive" @tap="onLive(goodsData.isLive.id)">
-					<view class="tag shadow-blur" :style="{top:wanlsys.height + 47 + 'px' }">
-						<view class="text-center">
-							<view class="live">
-								<view class="wanLive-icon"> </view>
-							</view>
-							<text class="text-white margin-lr-xs"> 在直播 </text>
-						</view>
-					</view>
-				</view> -->
 			</view>
-		</view>
+		</view> -->
 		
 		<!-- 商品主图轮播 -->
-		<view class="swiper-box" id="swiper">
-			<swiper circular="true" autoplay="true" @change="swiperChange">
+		<view class="swiper-box" id="swiper" style="position: relative;">
+			<view style="position: fixed;left: 0px;z-index: 999;width: 100%;top: 0;padding-left: 30rpx;" :style="{paddingTop: wanlsys.top + 'px',height:wanlsys.height + 'px',backgroundColor:backgroundFlag?'#fff':''}">
+				<view class="action yuan" @tap="$wanlshop.back(1)"><text class="wlIcon-fanhui1"></text></view>
+			</view>
+			<swiper class="screen-swiper square-dot" circular="true" autoplay="true" @change="swiperChange">
 				<swiper-item v-for="(swiper, index) in goodsData.images" :key="index">
 					<image :src="$wanlshop.oss(swiper, 400, 0)" mode="aspectFill"/>
 				</swiper-item>
 			</swiper>
-			<view class="indicator">{{ currentSwiper + 1 }}/{{ goodsData.images.length }}</view>
+			<!-- <view class="indicator">{{ currentSwiper + 1 }}/{{ goodsData.images.length }}</view> -->
 		</view>
-		<!-- 产品 -->
-		<view class="bg-white">
-			<!-- 秒杀 -->
-			<!-- <view v-if="goodsData.activity_type === 'seckill'" class="price-rush bg-gradual-red margin-bottom-sm">
-				<view class="price align-center  padding-lr-bj">
-					<view>
-						<view class="text-price text-white text-xxl text-bold margin-right-xs">0<text class="text-lg">.00</text>
-							<text class="margin-left-sm text-sm">已抢<text class="amount">0</text>件</text>
+		<view style="position: absolute;top:98vw;left: 0;border-radius: 20rpx 20rpx 13rpx 13rpx;background-color: #ffffff;">
+			<!-- 产品 -->
+			<view style="background-color: #f9f9f9;margin: 30rpx 25rpx 35rpx;padding: 20rpx 0 30rpx 20rpx;">	
+				<!-- 普通 -->
+				<view class="margin-bottom-sm" style="display: flex;justify-content: space-between;">
+					<view style="display: flex;">
+						<view class="text-price wanl-orange margin-right-xs" style="font-size: 48rpx;font-weight: bold;color: #F31064;line-height: 59rpx;">{{ goodsData.interval_price || '0.00' }}</view>
+						<view class="wanl-gray text-dec" style="font-size: 24rpx;margin-top: 16rpx;">
+							<!-- 市场价 -->
+							<text class="text-price" style="margin-left: 15rpx;font-size: 24rpx;font-weight: 400;color: #848689;line-height: 29rpx;">{{ goodsData.market_price || 0.0 }}</text>
 						</view>
-						<view class="text-sm text-white text-price"><text class="text-dec">0.00</text></view>
 					</view>
 					<view>
-						<view class="text-xs margin-bottom-xs">距结束还剩：</view>
-						<wanl-countdown 
-							:time="1" 
-							:height="40" 
-							:width="40" 
-							:size="28" 
-							:colonsize="32" 
-							color="#ec008c" 
-							bcolor="#ffffff" 
-							bgcolor="#ffffff" 
-							coloncolor="#ffffff"
-						></wanl-countdown>
+						<view class="follow wanl-black" style="margin-right: 25rpx;" v-if="goodsData.follow" @tap="follow">
+							<image src="../../static/images/user/collection.png" style="height: 36rpx;width: 36rpx;"></image>
+						</view>
+						<view class="follow wanl-black" style="margin-right: 25rpx;" v-else @tap="follow">
+							<image src="../../static/images/user/collect.png" style="height: 36rpx;width: 36rpx;"></image>
+						</view>
 					</view>
 				</view>
-			</view> -->
-			<!-- 普通 -->
-			<view  class="margin-bottom-sm align-start" style="margin-top: 30rpx;margin-left: 20rpx;display: flex;justify-content: space-between;">
-				<view style="display: flex;">
-					<view class="text-price wanl-orange margin-right-xs" style="font-size: 38rpx;font-weight: bold;">{{ goodsData.interval_price || '0.00' }}</view>
-					<view class="wanl-gray text-dec" style="font-size: 24rpx;margin-top: 16rpx;">
-						<!-- 市场价 -->
-						<text class="text-price" style="margin-left: 15rpx;">{{ goodsData.market_price || 0.0 }}</text>
+				<!-- 标题，分享 -->
+				<view class="title padding-lr-bj" style="padding-left: 0;">
+					<view class="name wanl-blac text-cut-2" style="font-size: 34rpx;font-weight: 500;color: #2D2D2D;line-height: 47rpx;" >
+						<!-- <view v-if="goodsData.shop.isself == 1" class="cu-tag radius margin-right-xs sm bg-red">自营</view> -->
+						{{ goodsData.title || '加载中...' }}
+					</view>
+					<!-- <view class="share" @tap="showModal('share')">
+						<view class="button wanl-gray-light margin-bottom">
+							<text class="wlIcon-fenxiangcopy margin-right-xs"></text>
+							<text class="text-sm">分享</text>
+						</view>
+					</view> -->
+				</view>
+				<view style="margin: 10rpx 0 30rpx 0;font-size: 25rpx;font-weight: 400;color: #848689;line-height: 36rpx;">
+					农家散养土鸡蛋，蛋白嫩滑，蛋黄绵密
+				</view>
+				<view style="display: flex;width: 658rpx;height: 114rpx;background: #FFFFFF;border-radius: 13rpx;padding: 22rpx 0rpx;">
+					<view style="flex:1;border-right: 2rpx solid #EBEBEB;text-align: center;">
+						<view style="font-size: 25rpx;font-weight: 500;color: #2D2D2D;line-height: 36rpx;">
+							夏小美
+						</view>
+						<view style="margin-top:5rpx;font-size: 22rpx;font-weight: 400;color: #848689;line-height: 30rpx;">
+							品牌
+						</view>
+					</view>
+					<view style="flex:1;border-right: 2rpx solid #EBEBEB;text-align: center;">
+						<view style="font-size: 25rpx;font-weight: 500;color: #2D2D2D;line-height: 36rpx;">
+							常温
+						</view>
+						<view style="margin-top:5rpx;font-size: 22rpx;font-weight: 400;color: #848689;line-height: 30rpx;">
+							储存条件
+						</view>
+					</view>
+					<view style="flex:1;border-right: 2rpx solid #EBEBEB;text-align: center;">
+						<view style="font-size: 25rpx;font-weight: 500;color: #2D2D2D;line-height: 36rpx;">
+							草鸡蛋
+						</view>
+						<view style="margin-top:5rpx;font-size: 22rpx;font-weight: 400;color: #848689;line-height: 30rpx;">
+							品种
+						</view>
+					</view>
+					<view style="flex:1;text-align: center;">
+						<view style="font-size: 25rpx;font-weight: 500;color: #2D2D2D;line-height: 36rpx;">
+							农家散养
+						</view>
+						<view style="margin-top:5rpx;font-size: 22rpx;font-weight: 400;color: #848689;line-height: 30rpx;">
+							推荐理由
+						</view>
 					</view>
 				</view>
-				<view>
-					<view class="follow wanl-black" style="margin-right: 27rpx;" v-if="goodsData.follow" @tap="follow">
-						<image src="../../static/images/user/collection.png" style="height: 36rpx;width: 36rpx;"></image>
+<!-- 				<view class="block text-min padding-lr padding-bottom-bj" style="padding: 0 25rpx 25rpx 0;">
+					<view class="wanl-gray">
+						<text class="wlIcon-weizhi margin-right-xs"></text>
+						{{ goodsData.shop.city ? goodsData.shop.city.split('/')[1] : '中国' }}
 					</view>
-					<view class="follow wanl-black" style="margin-right: 27rpx;" v-else @tap="follow">
-						<image src="../../static/images/user/collect.png" style="height: 36rpx;width: 36rpx;"></image>
+					<view class="wanl-gray">
+						快递费：
+						<text class="text-price">{{ goodsData.freight.price }}</text>
 					</view>
-				</view>
-			</view>
-			<!-- 标题，分享 -->
-			<view class="title padding-lr-bj padding-bottom-bj">
-				<view class="name wanl-blac text-cut-2" style="font-size: 30rpx;">
-					<view v-if="goodsData.shop.isself == 1" class="cu-tag radius margin-right-xs sm bg-red">自营</view>
-					{{ goodsData.title || '加载中...' }}
-				</view>
-				<!-- <view class="share" @tap="showModal('share')">
-					<view class="button wanl-gray-light margin-bottom">
-						<text class="wlIcon-fenxiangcopy margin-right-xs"></text>
-						<text class="text-sm">分享</text>
+					<view class="wanl-gray">
+						月销
+						<text class="margin-left-xs">{{ goodsData.sales }}</text>
 					</view>
 				</view> -->
 			</view>
-
-			<view class="block text-min padding-lr padding-bottom-bj">
-				<view class="wanl-gray">
-					<text class="wlIcon-weizhi margin-right-xs"></text>
-					{{ goodsData.shop.city ? goodsData.shop.city.split('/')[1] : '中国' }}
-				</view>
-				<view class="wanl-gray">
-					快递费：
-					<text class="text-price">{{ goodsData.freight.price }}</text>
-				</view>
-				<view class="wanl-gray">
-					月销
-					<text class="margin-left-xs">{{ goodsData.sales }}</text>
-				</view>
-			</view>
-		</view>
-		<!-- 营销 -->
-		<view class="promotion text-sm">
-			<!-- <view class="item" @tap="showModal('promotion')">
-				<view class="label wanl-gray">促销</view>
-				<view class="conten">
-					<view class="promotion-header">
-						<text class="wlIcon-31daifahuo wanl-red margin-right-xs"></text>
-						参加一下活动，预计可省 <text class="wanl-red text-price margin-lr-xs">10.00</text> 元
-					</view>
-					<view class="promotion-header">
-						<view class="cu-tag sm line-orange round margin-right-xs">
-							满80包邮
-						</view>
-						购物满80元包邮
-					</view>
-					<view class="promotion-header">
-						<view class="cu-tag sm line-orange round margin-right-xs">
-							满二送一
-						</view>买满二个送一，买满五送三
-					</view>
-				</view>
-				<view class="bnt-quan wanl-gray">
-					更多<text class="wlIcon-fanhui2 margin-left-xs"></text>
-				</view>
-			</view> -->
-			<view class="item" @tap="showModal('coupon')" v-if="goodsData.coupon.length != 0">
-				<view class="label wanl-gray">领券</view>
-				<scroll-view scroll-x="true" class="conten flex " style="white-space: nowrap;width: 70%;height: 48rpx;line-height: 48rpx;">
-					<view class="wanl-ticket text-sm" style="display: inline-flex;background-color: #F31064;border-radius: 8rpx;padding: 0 18rpx;flex: 1;" v-for="(item, index) in goodsData.coupon" :key="index">
-						<block v-if="item.type == 'reduction' || (item.type == 'vip' && item.usertype == 'reduction')">
-							<!-- <view class="ticket-price"> ￥{{Number(item.price)}} </view> -->
-							<view class="ticket-title" style="color: #ffffff;background-color: #F31064;border: 0;height: 33rpx;"> <text>满{{Number(item.limit)}}减{{Number(item.price)}}</text> </view>
-						</block>
-						<block v-if="item.type == 'discount' || (item.type == 'vip' && item.usertype == 'discount')">
-							<!-- <view class="ticket-price"> {{Number(item.discount)}}折 </view> -->
-							<view class="ticket-title" style="color: #ffffff;background-color: #F31064;border: 0;"> <text>满{{Number(item.limit)}}打{{Number(item.discount)}}折</text> </view>
-						</block>
-						<!-- <block v-if="item.type == 'shipping'">
-							<view class="ticket-price"> 包邮 </view>
-							<view class="ticket-title"> <text>满{{Number(item.limit)}}元包邮</text> </view>
-						</block> -->
-					</view>
-				</scroll-view>
-				<view class="bnt-quan wanl-gray" style="height: 100%;top: 0;display: inline-flex;align-items: center;">
-					更多<text class="wlIcon-fanhui2 margin-left-xs"></text>
-				</view>
-			</view>
-		</view>
-		<!-- 选择商品 -->
-		<view class="choice margin-bottom-bj padding-bj text-sm bg-white">
-			<view class="commodity  margin-bottom-bj" @tap="showModal('option')">
-				<view class="opt">
-					<view class="title wanl-gray">选择</view>
-					<view class="option">
-						<view class="selected">
-							<view v-if="canCount">
-								选择
-								<text class="margin-lr-xs" v-for="(item, index) in goodsData.spu" :key="item.id">{{ item.name }}</text>
+			<!-- 营销 -->
+			<view style="width: 699rpx;background: #F9F9F9;border-radius: 13rpx; margin: 0 auto;padding: 30rpx 0 30rpx 20rpx;">
+				<!-- 领卷 -->
+				<view class="promotion text-sm">
+					<view class="item" @tap="showModal('coupon')" v-if="goodsData.coupon.length != 0" style="padding: 0;">
+						<view class="label" style="font-size: 25rpx;font-weight: 400;color: #848689;">领券</view>
+						<scroll-view scroll-x="true" class="conten flex " style="white-space: nowrap;width: 70%;height: 48rpx;line-height: 48rpx;">
+							<view class="wanl-ticket text-sm" style="display: inline-flex;background-color: #F31064;border-radius: 8rpx;padding: 0 18rpx;flex: 1;" v-for="(item, index) in goodsData.coupon" :key="index">
+								<block v-if="item.type == 'reduction' || (item.type == 'vip' && item.usertype == 'reduction')">
+									<!-- <view class="ticket-price"> ￥{{Number(item.price)}} </view> -->
+									<view class="ticket-title" style="color: #ffffff;background-color: #F31064;border: 0;height: 33rpx;"> <text>满{{Number(item.limit)}}减{{Number(item.price)}}</text> </view>
+								</block>
+								<block v-if="item.type == 'discount' || (item.type == 'vip' && item.usertype == 'discount')">
+									<!-- <view class="ticket-price"> {{Number(item.discount)}}折 </view> -->
+									<view class="ticket-title" style="color: #ffffff;background-color: #F31064;border: 0;"> <text>满{{Number(item.limit)}}打{{Number(item.discount)}}折</text> </view>
+								</block>
+								<!-- <block v-if="item.type == 'shipping'">
+									<view class="ticket-price"> 包邮 </view>
+									<view class="ticket-title"> <text>满{{Number(item.limit)}}元包邮</text> </view>
+								</block> -->
 							</view>
-							<view v-else>
-								<text class="margin-right-bj">已选</text>
-								<text class="margin-right-xs" v-for="(name, key) in selectArr">{{ $base64.decode(name) }}</text>
-							</view>
-						</view>
-						<view class="option-list">
-							<view v-for="(item, index) in goodsData.spu" :key="item.id">
-								<text class="cu-tag" v-if="index == 0" v-for="tag in item.item" :key="tag.name">
-								{{ $base64.decode(tag.name) }}
-								</text>
-								<text class="cu-tag" v-if="index == 0">更多规格可选</text>
-							</view>
+						</scroll-view>
+						<view class="bnt-quan wanl-gray" style="height: 100%;top: 0;display: inline-flex;align-items: center;">
+							<text class="wlIcon-fanhui2 margin-left-xs"></text>
 						</view>
 					</view>
 				</view>
-				<view class="text-sm wanl-gray"><text class="wlIcon-fanhui2"></text></view>
-			</view>
-			<view class="commodity" @tap="showModal('service')">
-				<view class="opt">
-					<view class="title wanl-gray text-sm">服务</view>
-					<view class="option">
-						<view class="selected">
-							<block v-for="(item, index) in goodsData.shop.service_ids" :key="item.id" v-if="index <= 2">
-								<text class="margin-lr-xs" v-if="index != 0">·</text>
-								{{ item.name }}
-							</block>
-						</view>
+				<!-- 配送 -->
+				<view style="display: flex;margin-top: 30rpx;">
+					<view class="label" style="font-size: 25rpx;font-weight: 400;color: #848689;line-height: 36rpx;">配送</view>
+					<view style="margin-left: 30rpx;font-size: 25rpx;font-weight: 400;color: #2D2D2D;line-height: 36rpx;">
+						3h内发货
 					</view>
 				</view>
-				<view class="text-min wanl-gray"><text class="wlIcon-fanhui2"></text></view>
 			</view>
-		</view>
-		<!-- 产品参数 -->
-		<view class="choice margin-bottom-bj padding-bj text-sm bg-white">
-			<view class="commodity" @tap="showModal('attribute')">
-				<view class="opt">
-					<view class="title wanl-gray text-sm">参数</view>
-					<view class="option">
-						<view class="selected"><text>品牌、规格等...</text></view>
-					</view>
-				</view>
-				<view class="text-min wanl-gray"><text class="wlIcon-fanhui2"></text></view>
-			</view>
-		</view>
-		<!-- 评论 -->
-		<!-- <view class="comment margin-bottom-bj padding-bj bg-white" id="evaluate">
-			<view class="head" @tap="onTag('')">
-				<view>宝贝评论({{ goodsData.comment }})</view>
-				<view class="wanl-gray wanl-orange">
-					{{ goodsData.comment > 0 ? parseInt((goodsData.praise / goodsData.comment) * 100) : 0 }}%好评率
-					<text class="wlIcon-fanhui2 margin-left-xs"></text>
-				</view>
-			</view> -->
-			<!-- 标签 -->
-			<!-- <view class="label margin-bottom padding-bottom solid-bottom">
-				<view @tap="onTag('good')" class="cu-tag round">好评 ({{ goodsData.praise }})</view>
-				<view @tap="onTag('pertinent')" class="cu-tag round">中评 ({{ goodsData.moderate }})</view>
-				<view @tap="onTag('poor')" class="cu-tag round">差评 ({{ goodsData.negative }})</view>
-				<view @tap="onTag('figure')" class="cu-tag round">有图 ({{ goodsData.comment_list.figure }})</view>
-				<view @tap="onTag(index)" v-for="(item, index) in goodsData.comment_list.tag" :key="index" class="cu-tag round">{{ index }} ({{ item }})</view>
-			</view> -->
-			<!-- 获取一个评论 -->
-			<!-- <view class="user" v-for="(item, index) in goodsData.comment_list.data" :key="item.id"  @tap="onTag('')">
-				<view class="userinfo">
-					<view class="avatar">
-						<view class="cu-avatar sm round margin-right-xs" :style="{ backgroundImage: 'url(' + $wanlshop.oss(item.user.avatar, 26, 26, 2, 'avatar') + ')' }"></view>
-						<view class="text-sm wanl-gray">{{ item.user.nickname }}</view>
-					</view>
-					<wanl-rate :current="item.score" :disabled="true"></wanl-rate>
-				</view>
 			
-				<view class="details text-min">
-					<view class="margin-bottom-sm">{{ item.content }}</view>
-					<view class="wanl-gray">规格：{{ item.suk }}</view>
+			<!-- 选择商品 -->
+		<!-- 	<view class="choice margin-bottom-bj padding-bj text-sm bg-white">
+				<view class="commodity  margin-bottom-bj" @tap="showModal('option')">
+					<view class="opt">
+						<view class="title wanl-gray">选择</view>
+						<view class="option">
+							<view class="selected">
+								<view v-if="canCount">
+									选择
+									<text class="margin-lr-xs" v-for="(item, index) in goodsData.spu" :key="item.id">{{ item.name }}</text>
+								</view>
+								<view v-else>
+									<text class="margin-right-bj">已选</text>
+									<text class="margin-right-xs" v-for="(name, key) in selectArr">{{ $base64.decode(name) }}</text>
+								</view>
+							</view>
+							<view class="option-list">
+								<view v-for="(item, index) in goodsData.spu" :key="item.id">
+									<text class="cu-tag" v-if="index == 0" v-for="tag in item.item" :key="tag.name">
+									{{ $base64.decode(tag.name) }}
+									</text>
+									<text class="cu-tag" v-if="index == 0">更多规格可选</text>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view class="text-sm wanl-gray"><text class="wlIcon-fanhui2"></text></view>
 				</view>
-				<view class="grid flex-sub grid-square" :class="[item.images.length > 3 ? 'col-3' : 'col-' + item.images.length]" v-if="item.images.length != 0">
-					<view
-						class="bg-img"
-						v-for="(image, index) in item.images"
-						:key="index"
-						v-if="index <= 3"
-						:style="{ backgroundImage: 'url(' + $wanlshop.oss(image, 88, 88) + ')' }"
-					></view>
+				<view class="commodity" @tap="showModal('service')">
+					<view class="opt">
+						<view class="title wanl-gray text-sm">服务</view>
+						<view class="option">
+							<view class="selected">
+								<block v-for="(item, index) in goodsData.shop.service_ids" :key="item.id" v-if="index <= 2">
+									<text class="margin-lr-xs" v-if="index != 0">·</text>
+									{{ item.name }}
+								</block>
+							</view>
+						</view>
+					</view>
+					<view class="text-min wanl-gray"><text class="wlIcon-fanhui2"></text></view>
+				</view>
+			</view> -->
+			<!-- 产品参数 -->
+		<!-- 	<view class="choice margin-bottom-bj padding-bj text-sm bg-white">
+				<view class="commodity" @tap="showModal('attribute')">
+					<view class="opt">
+						<view class="title wanl-gray text-sm">参数</view>
+						<view class="option">
+							<view class="selected"><text>品牌、规格等...</text></view>
+						</view>
+					</view>
+					<view class="text-min wanl-gray"><text class="wlIcon-fanhui2"></text></view>
+				</view>
+			</view> -->
+			<!-- 评论 -->
+			<!-- <view class="comment margin-bottom-bj padding-bj bg-white" id="evaluate">
+				<view class="head" @tap="onTag('')">
+					<view>宝贝评论({{ goodsData.comment }})</view>
+					<view class="wanl-gray wanl-orange">
+						{{ goodsData.comment > 0 ? parseInt((goodsData.praise / goodsData.comment) * 100) : 0 }}%好评率
+						<text class="wlIcon-fanhui2 margin-left-xs"></text>
+					</view>
+				</view> -->
+				<!-- 标签 -->
+				<!-- <view class="label margin-bottom padding-bottom solid-bottom">
+					<view @tap="onTag('good')" class="cu-tag round">好评 ({{ goodsData.praise }})</view>
+					<view @tap="onTag('pertinent')" class="cu-tag round">中评 ({{ goodsData.moderate }})</view>
+					<view @tap="onTag('poor')" class="cu-tag round">差评 ({{ goodsData.negative }})</view>
+					<view @tap="onTag('figure')" class="cu-tag round">有图 ({{ goodsData.comment_list.figure }})</view>
+					<view @tap="onTag(index)" v-for="(item, index) in goodsData.comment_list.tag" :key="index" class="cu-tag round">{{ index }} ({{ item }})</view>
+				</view> -->
+				<!-- 获取一个评论 -->
+				<!-- <view class="user" v-for="(item, index) in goodsData.comment_list.data" :key="item.id"  @tap="onTag('')">
+					<view class="userinfo">
+						<view class="avatar">
+							<view class="cu-avatar sm round margin-right-xs" :style="{ backgroundImage: 'url(' + $wanlshop.oss(item.user.avatar, 26, 26, 2, 'avatar') + ')' }"></view>
+							<view class="text-sm wanl-gray">{{ item.user.nickname }}</view>
+						</view>
+						<wanl-rate :current="item.score" :disabled="true"></wanl-rate>
+					</view>
+				
+					<view class="details text-min">
+						<view class="margin-bottom-sm">{{ item.content }}</view>
+						<view class="wanl-gray">规格：{{ item.suk }}</view>
+					</view>
+					<view class="grid flex-sub grid-square" :class="[item.images.length > 3 ? 'col-3' : 'col-' + item.images.length]" v-if="item.images.length != 0">
+						<view
+							class="bg-img"
+							v-for="(image, index) in item.images"
+							:key="index"
+							v-if="index <= 3"
+							:style="{ backgroundImage: 'url(' + $wanlshop.oss(image, 88, 88) + ')' }"
+						></view>
+					</view> -->
+				<!-- </view> -->
+				<!-- 查看更多 -->
+				<!-- <view class="more" @tap="onTag('')"><text class="wanl-gray text-sm">查看全部</text><text class="wlIcon-fanhui4 margin-left-xs"></text></view>
+			</view> -->
+			<!-- 店铺 -->
+			<!-- <view class="shop padding-bj solid-bottom bg-white"> -->
+				<!-- <view class="shopinfo margin-bottom">
+					<view class="cu-avatar lg radius-bock" :style="{ backgroundImage: 'url(' + $wanlshop.oss(goodsData.shop.avatar, 52, 52, 2, 'avatar') + ')' }"></view>
+					<view class="shopname">
+						<view class="text-df text-cut" style="width: 300rpx;">{{ goodsData.shop.shopname }}</view>
+						<view class="wanl-gray text-min">{{ $wanlshop.toFormat(goodsData.shop.find_user.fans, 'thousand') }} 人关注店铺</view>
+					</view>
+					<view class="bnt"> -->
+						<!-- 1.0.9升级 -->
+						<!-- <button class="cu-btn round line-orange margin-right-sm" @tap="onShopGoods(goodsData.shop_id)">全部宝贝</button> -->
+						<!-- <button class="cu-btn round bg-gradual-orange" @tap="onShop(goodsData.shop_id)">进店逛逛</button> -->
+					<!-- </view>
+				</view> -->
+			
+				<!-- <view class="quality wanl-gray text-min">
+					<view>
+						宝贝描述
+						<text class="">{{ goodsData.shop.score_describe }}</text>
+						<view v-if="goodsData.shop.score_describe < 4.7" class="cu-tag round di">低</view>
+						<view v-else class="cu-tag round gao">高</view>
+					</view>
+					<view>
+						卖家服务
+						<text class="wanl-orange">{{ goodsData.shop.score_service }}</text>
+						<view v-if="goodsData.shop.score_service < 4.7" class="cu-tag round di">低</view>
+						<view v-else class="cu-tag round gao">高</view>
+					</view>
+					<view>
+						物流服务
+						<text class="wanl-orange">{{ goodsData.shop.score_logistics }}</text>
+						<view v-if="goodsData.shop.score_logistics < 4.7" class="cu-tag round di">低</view>
+						<view v-else class="cu-tag round gao">高</view>
+					</view>
 				</view> -->
 			<!-- </view> -->
-			<!-- 查看更多 -->
-			<!-- <view class="more" @tap="onTag('')"><text class="wanl-gray text-sm">查看全部</text><text class="wlIcon-fanhui4 margin-left-xs"></text></view>
-		</view> -->
-		<!-- 店铺 -->
-		<!-- <view class="shop padding-bj solid-bottom bg-white"> -->
-			<!-- <view class="shopinfo margin-bottom">
-				<view class="cu-avatar lg radius-bock" :style="{ backgroundImage: 'url(' + $wanlshop.oss(goodsData.shop.avatar, 52, 52, 2, 'avatar') + ')' }"></view>
-				<view class="shopname">
-					<view class="text-df text-cut" style="width: 300rpx;">{{ goodsData.shop.shopname }}</view>
-					<view class="wanl-gray text-min">{{ $wanlshop.toFormat(goodsData.shop.find_user.fans, 'thousand') }} 人关注店铺</view>
-				</view>
-				<view class="bnt"> -->
+			<!-- 店铺推荐 -->
+			<!-- <view class="shop-recom padding-bj bg-white">
+				<view class="head">
+					<view class="">店铺推荐</view> -->
 					<!-- 1.0.9升级 -->
-					<!-- <button class="cu-btn round line-orange margin-right-sm" @tap="onShopGoods(goodsData.shop_id)">全部宝贝</button> -->
-					<!-- <button class="cu-btn round bg-gradual-orange" @tap="onShop(goodsData.shop_id)">进店逛逛</button> -->
-				<!-- </view>
-			</view> -->
-
-			<!-- <view class="quality wanl-gray text-min">
-				<view>
-					宝贝描述
-					<text class="">{{ goodsData.shop.score_describe }}</text>
-					<view v-if="goodsData.shop.score_describe < 4.7" class="cu-tag round di">低</view>
-					<view v-else class="cu-tag round gao">高</view>
+					<!-- <view class="text-sm wanl-orange" @tap="onShop(goodsData.shop_id)">
+						查看全部
+						<text class="wlIcon-fanhui2 margin-left-xs"></text>
+					</view>
 				</view>
-				<view>
-					卖家服务
-					<text class="wanl-orange">{{ goodsData.shop.score_service }}</text>
-					<view v-if="goodsData.shop.score_service < 4.7" class="cu-tag round di">低</view>
-					<view v-else class="cu-tag round gao">高</view>
-				</view>
-				<view>
-					物流服务
-					<text class="wanl-orange">{{ goodsData.shop.score_logistics }}</text>
-					<view v-if="goodsData.shop.score_logistics < 4.7" class="cu-tag round di">低</view>
-					<view v-else class="cu-tag round gao">高</view>
+				<view class="recommend margin-bottom-xs">
+					<view class="item" v-for="(item, index) in goodsData.shop_recommend" :key="item.id" @tap="onGoods(item.id)">
+						<image :src="$wanlshop.oss(item.image, 125, 120)" mode="aspectFill"></image>
+						<view class="text-sm margin-tb-xs text-cut">{{ item.title }}</view>
+						<view class="text-price wanl-orange text-df">{{ item.price }}</view>
+					</view>
 				</view>
 			</view> -->
-		<!-- </view> -->
-		<!-- 店铺推荐 -->
-		<!-- <view class="shop-recom padding-bj bg-white">
-			<view class="head">
-				<view class="">店铺推荐</view> -->
-				<!-- 1.0.9升级 -->
-				<!-- <view class="text-sm wanl-orange" @tap="onShop(goodsData.shop_id)">
-					查看全部
-					<text class="wlIcon-fanhui2 margin-left-xs"></text>
+			<!-- 分隔符 -->
+			<wanl-divider width="60%">商品详情</wanl-divider>
+			<!-- 产品详情 -->
+			<view class="wanl-goods-content bg-white" id="details"><rich-text :nodes="goodsData.content"></rich-text></view>
+			<!-- 分隔符 -->
+			<wanl-divider width="60%">推荐商品</wanl-divider>
+			<!-- 猜你喜欢 -->
+			<view id="recommend">
+				<wanl-product :dataList="likeData"/>
+			</view>
+			<uni-load-more :status="status" :content-text="contentText" />
+			<view class="safeAreaBottom"></view>
+			<view class="WANL-MODAL text-sm" @touchmove.stop.prevent="moveHandle">
+				<!-- 顶部 -->
+				<view class="cu-modal top-modal" :class="modalName == 'menu' ? 'show' : ''" @tap="hideModal">
+					<view class="wanl-modal-menu cu-dialog" @tap.stop=""><wanl-direct @change="hideModal" /></view>
 				</view>
-			</view>
-			<view class="recommend margin-bottom-xs">
-				<view class="item" v-for="(item, index) in goodsData.shop_recommend" :key="item.id" @tap="onGoods(item.id)">
-					<image :src="$wanlshop.oss(item.image, 125, 120)" mode="aspectFill"></image>
-					<view class="text-sm margin-tb-xs text-cut">{{ item.title }}</view>
-					<view class="text-price wanl-orange text-df">{{ item.price }}</view>
-				</view>
-			</view>
-		</view> -->
-		<!-- 分隔符 -->
-		<wanl-divider width="60%">产品详情</wanl-divider>
-		<!-- 产品详情 -->
-		<view class="wanl-goods-content bg-white" id="details"><rich-text :nodes="goodsData.content"></rich-text></view>
-		<!-- 分隔符 -->
-		<wanl-divider width="60%">推荐商品</wanl-divider>
-		<!-- 猜你喜欢 -->
-		<view id="recommend">
-			<wanl-product :dataList="likeData"/>
-		</view>
-		<uni-load-more :status="status" :content-text="contentText" />
-		<view class="safeAreaBottom"></view>
-		<view class="WANL-MODAL text-sm" @touchmove.stop.prevent="moveHandle">
-			<!-- 顶部 -->
-			<view class="cu-modal top-modal" :class="modalName == 'menu' ? 'show' : ''" @tap="hideModal">
-				<view class="wanl-modal-menu cu-dialog" @tap.stop=""><wanl-direct @change="hideModal" /></view>
-			</view>
-			<!-- 促销 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'promotion' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<view class="wanl-modal">
-						<view class="head padding-bj">
-							<view class="content"><view class="text-lg">促销</view></view>
-							<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
+				<!-- 促销 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'promotion' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog" @tap.stop="">
+						<view class="wanl-modal">
+							<view class="head padding-bj">
+								<view class="content"><view class="text-lg">促销</view></view>
+								<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<!-- 优惠券 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'coupon' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog bg-bgcolor" @tap.stop="">
-					<view class="wanl-modal">
-						<view class="head padding-bj">
-							<view class="content"><view class="text-lg">优惠券</view></view>
-							<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
-						</view>
-						<scroll-view class="wanl-coupon scroll-y" scroll-y="true">
-							<view v-for="(coupon, index) in goodsData.coupon" :key="index" :class="coupon.type" class="item margin-bottom-bj radius-bock">
-								<!-- <image :src="$wanlshop.appstc('/coupon/bg_coupon_3x.png')" class="coupon-bg"></image> -->
-								<image :src="$wanlshop.appstc('/coupon/img_couponcentre_received_3x.png')" class="coupon-sign" v-if="coupon.state"></image>
-								<view class="item-left">
-									<block v-if="coupon.type == 'reduction' || (coupon.type == 'vip' && coupon.usertype == 'reduction')">
-										<view class="colour" style="color: #F31064;">
-											<text class="text-price"></text>
-											<text class="prices">{{Number(coupon.price)}}</text>
-										</view>
-										<view class="wanl-orange radius text-sm">
-											满{{Number(coupon.limit)}}减{{Number(coupon.price)}}
-										</view>
-									</block>
-									<block v-if="coupon.type == 'discount' || (coupon.type == 'vip' && coupon.usertype == 'discount')">
-										<view class="colour" style="color: #F31064;">
-											<text class="prices">{{Number(coupon.discount)}}</text>
-											<text class="discount">折</text>
-										</view>
-										<view class="wanl-orange radius text-sm">
-											满{{Number(coupon.limit)}}打{{Number(coupon.discount)}}折
-										</view>
-									</block>
-									<!-- <block v-if="coupon.type == 'shipping'">
-										<view class="colour">
-											<text class="prices">包邮</text>
-										</view>
-										<view class="wanl-orange radius text-sm">
-											满{{Number(coupon.limit)}}元包邮
-										</view>
-									</block> -->
-								</view>
-								<view class="item-right padding-bj" style="background: white;">
-									<view class="title">
-										<!-- <view class="cu-tag sm radius margin-right-xs tagstyle">
-											{{coupon.type_text}}
-										</view> -->
-										<text class="text-cut wanl-gray text-min" style="color: #000000;font-size: 32rpx;">{{coupon.name}}</text>
-									</view>
-									<view class="content text-min">
-										<view class="wanl-gray">
-											<view style="color: #F31064;font-size: 30rpx;">
-												{{coupon.type_text}}
+				<!-- 优惠券 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'coupon' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog bg-bgcolor" @tap.stop="">
+						<view class="wanl-modal">
+							<view class="head padding-bj">
+								<view class="content"><view class="text-lg">优惠券</view></view>
+								<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
+							</view>
+							<scroll-view class="wanl-coupon scroll-y" scroll-y="true">
+								<view v-for="(coupon, index) in goodsData.coupon" :key="index" :class="coupon.type" class="item margin-bottom-bj radius-bock">
+									<!-- <image :src="$wanlshop.appstc('/coupon/bg_coupon_3x.png')" class="coupon-bg"></image> -->
+									<image :src="$wanlshop.appstc('/coupon/img_couponcentre_received_3x.png')" class="coupon-sign" v-if="coupon.state"></image>
+									<view class="item-left">
+										<block v-if="coupon.type == 'reduction' || (coupon.type == 'vip' && coupon.usertype == 'reduction')">
+											<view class="colour" style="color: #F31064;">
+												<text class="text-price"></text>
+												<text class="prices">{{Number(coupon.price)}}</text>
 											</view>
-											<!-- <view v-if="coupon.grant != '-1'">
-												<text class="wlIcon-dot"></text>目前仅剩余 {{coupon.surplus}} 张
+											<view class="wanl-orange radius text-sm">
+												满{{Number(coupon.limit)}}减{{Number(coupon.price)}}
+											</view>
+										</block>
+										<block v-if="coupon.type == 'discount' || (coupon.type == 'vip' && coupon.usertype == 'discount')">
+											<view class="colour" style="color: #F31064;">
+												<text class="prices">{{Number(coupon.discount)}}</text>
+												<text class="discount">折</text>
+											</view>
+											<view class="wanl-orange radius text-sm">
+												满{{Number(coupon.limit)}}打{{Number(coupon.discount)}}折
+											</view>
+										</block>
+										<!-- <block v-if="coupon.type == 'shipping'">
+											<view class="colour">
+												<text class="prices">包邮</text>
+											</view>
+											<view class="wanl-orange radius text-sm">
+												满{{Number(coupon.limit)}}元包邮
+											</view>
+										</block> -->
+									</view>
+									<view class="item-right padding-bj" style="background: white;">
+										<view class="title">
+											<!-- <view class="cu-tag sm radius margin-right-xs tagstyle">
+												{{coupon.type_text}}
 											</view> -->
-											
-											<!-- <view v-if="coupon.drawlimit != 0">
-												<text class="wlIcon-dot"></text>每人仅限领取 {{coupon.drawlimit}} 张
+											<text class="text-cut wanl-gray text-min" style="color: #000000;font-size: 32rpx;">{{coupon.name}}</text>
+										</view>
+										<view class="content text-min">
+											<view class="wanl-gray">
+												<view style="color: #F31064;font-size: 30rpx;">
+													{{coupon.type_text}}
+												</view>
+												<!-- <view v-if="coupon.grant != '-1'">
+													<text class="wlIcon-dot"></text>目前仅剩余 {{coupon.surplus}} 张
+												</view> -->
+												
+												<!-- <view v-if="coupon.drawlimit != 0">
+													<text class="wlIcon-dot"></text>每人仅限领取 {{coupon.drawlimit}} 张
+												</view> -->
+												<block v-if="coupon.pretype == 'fixed'">
+													<view>
+														<text class="wlIcon-dot"></text>生效 {{coupon.startdate}}
+													</view>
+													<view>
+														<text class="wlIcon-dot"></text>结束 {{coupon.enddate}}
+													</view>
+												</block>
+												<block v-if="coupon.pretype == 'appoint'">
+													<view v-if="coupon.validity == 0">
+														<text class="wlIcon-dot"></text>未使用前 永久 有效
+													</view>
+													<view v-else>
+														<text class="wlIcon-dot"></text>领取后 {{coupon.validity}} 天有效
+													</view>
+												</block>
+											</view>
+											<!-- <view class="cu-btn sm round" style="background-color: #F31064;" @tap="onReceive(index)"  v-if="!coupon.state">
+												<text>立即领取</text>
 											</view> -->
-											<block v-if="coupon.pretype == 'fixed'">
-												<view>
-													<text class="wlIcon-dot"></text>生效 {{coupon.startdate}}
-												</view>
-												<view>
-													<text class="wlIcon-dot"></text>结束 {{coupon.enddate}}
-												</view>
-											</block>
-											<block v-if="coupon.pretype == 'appoint'">
-												<view v-if="coupon.validity == 0">
-													<text class="wlIcon-dot"></text>未使用前 永久 有效
-												</view>
-												<view v-else>
-													<text class="wlIcon-dot"></text>领取后 {{coupon.validity}} 天有效
-												</view>
-											</block>
-										</view>
-										<!-- <view class="cu-btn sm round" style="background-color: #F31064;" @tap="onReceive(index)"  v-if="!coupon.state">
-											<text>立即领取</text>
-										</view> -->
-										<view class="cu-btn sm round " style="background-color: #F31064;" @tap="onReceive(index)"  v-if="!coupon.state">
-											立即领取
-										</view>
-										<view class="cu-btn sm round line-colour" style="background: rgba(243, 16, 100, 0.14);color: #F31064;" @tap="goCategory()" v-else>
-											立即使用
+											<view class="cu-btn sm round " style="background-color: #F31064;" @tap="onReceive(index)"  v-if="!coupon.state">
+												立即领取
+											</view>
+											<view class="cu-btn sm round line-colour" style="background: rgba(243, 16, 100, 0.14);color: #F31064;" @tap="goCategory()" v-else>
+												立即使用
+											</view>
 										</view>
 									</view>
 								</view>
-							</view>
-						</scroll-view>
-						<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
+							</scroll-view>
+							<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
+						</view>
 					</view>
 				</view>
-			</view>
-			<!-- 产品参数 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'attribute' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<view class="wanl-modal">
-						<view class="head padding-bj">
-							<view class="content"><view class="text-lg">产品参数</view></view>
-						</view>
-						<scroll-view class="scroll-y" scroll-y="true">
-							<view class="table solid-bottom">
-								<view class="name wanl-gray">品牌</view>
-								<view class="value">{{ goodsData.brand.name }}</view>
+				<!-- 产品参数 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'attribute' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog" @tap.stop="">
+						<view class="wanl-modal">
+							<view class="head padding-bj">
+								<view class="content"><view class="text-lg">产品参数</view></view>
 							</view>
-							<view class="table solid-bottom" v-for="(item, index) in goodsData.category_attribute" :key="index">
-								<view class="name wanl-gray">{{ index }}</view>
-								<view class="value">{{ item }}</view>
-							</view>
-						</scroll-view>
-						<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
-					</view>
-				</view>
-			</view>
-			<!-- 分享 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'share' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<wanl-share 
-						:scrollAnimation="scrollAnimation" 
-						:shareTitle="goodsData.title" 
-						:shareText="goodsData.description" 
-						:image="$wanlshop.oss(goodsData.image,50, 50)" 
-						:href="common.appConfig.domain + '/pages/product/goods?id='+ goodsData.id +'&QRtype=goods'"
-					isReport @change="wanlShare"/>
-				</view>
-			</view>
-			<!-- 服务 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'service' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<view class="wanl-modal">
-						<view class="head padding-bj">
-							<view class="content"><view class="text-lg">基础服务保障</view></view>
-						</view>
-						<view class="listbox padding-bj">
-							<view v-for="(item, index) in goodsData.shop.service_ids" :key="item.id">
-								<view class="name">
-									{{ item.name }}
-									<text class="wlIcon-fuwuxing"></text>
+							<scroll-view class="scroll-y" scroll-y="true">
+								<view class="table solid-bottom">
+									<view class="name wanl-gray">品牌</view>
+									<view class="value">{{ goodsData.brand.name }}</view>
 								</view>
-								<view class="description wanl-gray text-min">{{ item.description }}</view>
-							</view>
+								<view class="table solid-bottom" v-for="(item, index) in goodsData.category_attribute" :key="index">
+									<view class="name wanl-gray">{{ index }}</view>
+									<view class="value">{{ item }}</view>
+								</view>
+							</scroll-view>
+							<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
 						</view>
-						<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
 					</view>
 				</view>
-			</view>
-			<!-- 规格 -->
-			<view class="cu-modal bottom-modal" :class="modalName == 'option' ? 'show' : ''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<view class="option wanl-modal">
-						<view class="head text-left padding-bj solid-bottom">
-							<view
-								class="cu-avatar radius-bock margin-right"
-								:style="{ backgroundImage: 'url(' + $wanlshop.oss(selectshop.thumbnail || goodsData.image, 100, 100) + ')' }"
-							></view>
-							
-							<view>
-								<view class="text-price wanl-orange text-xl margin-bottom-xs">{{ selectshop.price || goodsData.interval_price }}</view>
-								<view v-if="selectArr.join('')" class="wanl-gray margin-bottom-xs">
-									库存 <text class="margin-lr-xs">{{ selectshop.stock || 0 }}</text> 件
-								</view>
-								<view class="text-sm">
-									<view v-if="selectArr.join('')">
-										<text class="margin-right-bj">已选择</text>
-										<text class="margin-right-xs" v-for="(name, key) in selectArr">{{ $base64.decode(name) }}</text>
+				<!-- 分享 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'share' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog" @tap.stop="">
+						<wanl-share 
+							:scrollAnimation="scrollAnimation" 
+							:shareTitle="goodsData.title" 
+							:shareText="goodsData.description" 
+							:image="$wanlshop.oss(goodsData.image,50, 50)" 
+							:href="common.appConfig.domain + '/pages/product/goods?id='+ goodsData.id +'&QRtype=goods'"
+						isReport @change="wanlShare"/>
+					</view>
+				</view>
+				<!-- 服务 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'service' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog" @tap.stop="">
+						<view class="wanl-modal">
+							<view class="head padding-bj">
+								<view class="content"><view class="text-lg">基础服务保障</view></view>
+							</view>
+							<view class="listbox padding-bj">
+								<view v-for="(item, index) in goodsData.shop.service_ids" :key="item.id">
+									<view class="name">
+										{{ item.name }}
+										<text class="wlIcon-fuwuxing"></text>
 									</view>
-									<view v-else>
-										请选择：
-										<text class="wanl-gray-light" v-for="(item, index) in goodsData.spu" :key="item.id">
-											<block v-if="index != 0">-</block>
+									<view class="description wanl-gray text-min">{{ item.description }}</view>
+								</view>
+							</view>
+							<view class="foot padding-lr-bj"><button class="cu-btn bg-gradual-orange round text-bold complete" @tap="hideModal">完成</button></view>
+						</view>
+					</view>
+				</view>
+				<!-- 规格 -->
+				<view class="cu-modal bottom-modal" :class="modalName == 'option' ? 'show' : ''" @tap="hideModal">
+					<view class="cu-dialog" @tap.stop="">
+						<view class="option wanl-modal">
+							<view class="head text-left padding-bj solid-bottom">
+								<view
+									class="cu-avatar radius-bock margin-right"
+									:style="{ backgroundImage: 'url(' + $wanlshop.oss(selectshop.thumbnail || goodsData.image, 100, 100) + ')' }"
+								></view>
+								
+								<view>
+									<view class="text-price wanl-orange text-xl margin-bottom-xs">{{ selectshop.price || goodsData.interval_price }}</view>
+									<view v-if="selectArr.join('')" class="wanl-gray margin-bottom-xs">
+										库存 <text class="margin-lr-xs">{{ selectshop.stock || 0 }}</text> 件
+									</view>
+									<view class="text-sm">
+										<view v-if="selectArr.join('')">
+											<text class="margin-right-bj">已选择</text>
+											<text class="margin-right-xs" v-for="(name, key) in selectArr">{{ $base64.decode(name) }}</text>
+										</view>
+										<view v-else>
+											请选择：
+											<text class="wanl-gray-light" v-for="(item, index) in goodsData.spu" :key="item.id">
+												<block v-if="index != 0">-</block>
+												{{ $base64.decode(item.name) }}
+											</text>
+										</view>
+									</view>
+								</view>
+								
+								<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
+							</view>
+							<!-- 1.0.8升级 -->
+							<scroll-view scroll-y="true" :style="{maxHeight: wanlsys.screenHeight / 2 + 'px'}">
+								<view class="opt text-left padding-bj solid-bottom" v-for="(value, spukey) in goodsData.spu" :key="value.id">
+									<view class="text-df">{{ value.name }}</view>
+									<view class="tag">
+										<view
+											class="cu-tag text-sm"
+											v-for="(item, index) in value.item"
+											:key="index"
+											:class="[item.ishow ? '' : 'noactive', subIndex[spukey] == index ? 'active' : '']"
+											@tap="skuClick(item, spukey, $event, index)"
+										>
 											{{ $base64.decode(item.name) }}
-										</text>
+										</view>
 									</view>
 								</view>
-							</view>
-							
-							<view class="close wlIcon-31guanbi" @tap="hideModal"></view>
-						</view>
-						<!-- 1.0.8升级 -->
-						<scroll-view scroll-y="true" :style="{maxHeight: wanlsys.screenHeight / 2 + 'px'}">
-							<view class="opt text-left padding-bj solid-bottom" v-for="(value, spukey) in goodsData.spu" :key="value.id">
-								<view class="text-df">{{ value.name }}</view>
-								<view class="tag">
-									<view
-										class="cu-tag text-sm"
-										v-for="(item, index) in value.item"
-										:key="index"
-										:class="[item.ishow ? '' : 'noactive', subIndex[spukey] == index ? 'active' : '']"
-										@tap="skuClick(item, spukey, $event, index)"
-									>
-										{{ $base64.decode(item.name) }}
-									</view>
+								<view class="number padding-bj">
+									<view class="text-df">购买数量</view>
+									<uni-number-box :min="1" :max="selectshop.stock" :value="selectNum" :disabled="canCount" @change="changeNum"></uni-number-box>
 								</view>
+							</scroll-view>
+			
+							<view class="foot padding-lr-bj">
+								<button v-if="isChoice" class="cu-btn bg-gradual-orange round text-bold complete" @tap="completeSelection">完成</button>
+								<block v-else>
+									<button class="cu-btn"style="width:260px;margin-right: 15rpx;border-radius: 40rpx;background-color: #F31064;color: #ffffff;" @tap="SubmitData('addToCart', 1)">加入购物车</button>
+									<!-- <button class="cu-btn bg-gradual-orange round-right text-bold" @tap="SubmitData('placeOrder', 1)">立即订购</button> -->
+								</block>
 							</view>
-							<view class="number padding-bj">
-								<view class="text-df">购买数量</view>
-								<uni-number-box :min="1" :max="selectshop.stock" :value="selectNum" :disabled="canCount" @change="changeNum"></uni-number-box>
-							</view>
-						</scroll-view>
-
-						<view class="foot padding-lr-bj">
-							<button v-if="isChoice" class="cu-btn bg-gradual-orange round text-bold complete" @tap="completeSelection">完成</button>
-							<block v-else>
-								<button class="cu-btn"style="width:260px;margin-right: 15rpx;border-radius: 40rpx;background-color: #F31064;color: #ffffff;" @tap="SubmitData('addToCart', 1)">加入购物车</button>
-								<!-- <button class="cu-btn bg-gradual-orange round-right text-bold" @tap="SubmitData('placeOrder', 1)">立即订购</button> -->
-							</block>
 						</view>
 					</view>
 				</view>
@@ -596,6 +572,7 @@ import { mapState } from 'vuex';
 export default {
 	data() {
 		return {
+			backgroundFlag:false,
 			TabCur: 0,
 			wanlsys: {},
 			modalName: null, // 弹出层
@@ -702,6 +679,10 @@ export default {
 		let tmpY = 150;
 		e.scrollTop = e.scrollTop > tmpY ? 150 : e.scrollTop; //如果当前高度大于250则250否则当前高度
 		this.headerOpacity = e.scrollTop * (1 / tmpY); //$headerOpacity 赋值当前高度x（1÷250）
+	},
+	// 监听页面滚动
+	onPageScroll(e){
+		this.backgroundFlag=e.scrollTop>=375?true:false
 	},
 	onReachBottom() {
 		//判断是否最后一页
@@ -1175,5 +1156,16 @@ uni-toast {
 	right: 20upx;
 	color: #fff;
 	background-color: rgba(0, 0, 0, 0.2);
+}
+.yuan{
+	    z-index: 999;
+	    width: 65rpx;
+	    height: 65rpx;
+	    background-color: #000;
+	    border-radius: 50%;
+	    color: #fff;
+		text-align: center;
+		line-height: 65rpx;
+		opacity: 0.3;
 }
 </style>

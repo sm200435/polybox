@@ -1,37 +1,40 @@
 <template>
-	<view>
+	<view style="background-color: #F7F7F7; min-height: 100vh;padding-bottom: 10rpx;">
 		<view class="edgeInsetTop"></view>
 		<view class="wanl-refund"> 
 			<!-- 头部 -->
 			<view class="header">
-				<image :src="$wanlshop.appstc('/order/img_detail_bg.png')" class="img-bg"></image>
-				<view class="content">
+				<!-- <image :src="$wanlshop.appstc('/order/img_detail_bg.png')" class="img-bg"></image> -->
+				<view class="content" style="padding: 0 30rpx;"	>
 					<view>
-						<view class="status-text">{{getStateText(refundData.state)}}</view>
+						<view class="status-text" style="font-size: 42rpx;font-weight: 500;color: #141414;line-height: 59rpx;">{{getStateText(refundData.state)}}</view>
 						<view class="reason">
-							<text class="reason-text">{{refundData.statetime}}</text>
+							<text class="reason-text"  style="font-size: 30rpx;font-weight: 400;color: #141414;line-height: 42rpx;">{{refundData.statetime}}</text>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="bg-white padding-bj" v-if="refundData.state != 4">
-				{{getStateInfo(refundData.state)}}
-			</view>
-			<!-- 退款状态:0=申请退款,1=卖家同意,2=卖家拒绝,3=申请平台介入,4=成功退款,5=退款已关闭,6=已提交退货,7=第三方退款中 -->
-			<view class="bg-white solid-top padding-bj current" v-if="refundData.state == 0">
-				<view class="wanl-gray text-sm">
-					<view>
-						<text class="wlIcon-dot margin-right-sm"></text>卖家同意或超时未处理，系统将自动确认
+			<view style="margin: 0 25rpx 25rpx; border-radius: 13rpx;">
+				<view class="bg-white padding-bj" v-if="refundData.state != 4">
+					{{getStateInfo(refundData.state)}}
+				</view>
+				<!-- 退款状态:0=申请退款,1=卖家同意,2=卖家拒绝,3=申请平台介入,4=成功退款,5=退款已关闭,6=已提交退货,7=第三方退款中 -->
+				<view class="bg-white solid-top padding-bj current" v-if="refundData.state == 0" style="">
+					<view class="wanl-gray text-sm">
+						<view>
+							<text class="wlIcon-dot margin-right-sm"></text>卖家同意或超时未处理，系统将自动确认
+						</view>
+						<view class="margin-top-xs">
+							<text class="wlIcon-dot margin-right-sm"></text>如果退款被拒绝，您可以修改申请重新发起
+						</view>
 					</view>
-					<view class="margin-top-xs">
-						<text class="wlIcon-dot margin-right-sm"></text>如果退款被拒绝，您可以修改申请重新发起
+					<view class="flex justify-end margin-top">
+						<button class="cu-btn line-black margin-lr-xs" @tap="closeRefund(refundData.id)">关闭退款</button>
+						<button class="cu-btn line-orange" @tap="editRefund(refundData.id)">修改申请</button>
 					</view>
 				</view>
-				<view class="flex justify-end margin-top">
-					<button class="cu-btn line-black margin-lr-xs" @tap="closeRefund(refundData.id)">关闭退款</button>
-					<button class="cu-btn line-orange" @tap="editRefund(refundData.id)">修改申请</button>
-				</view>
 			</view>
+			
 			
 			<view v-if="refundData.state == 1">
 				<view class="bg-white solid-top padding-bj receipt">
@@ -111,49 +114,54 @@
 					</view>
 				</view>
 			</view>
-			<view class="bg-white padding-bj flex justify-between align-center text-lg" v-if="refundData.state == 4">
-				<text>退款总金额</text><text class="text-price wanl-orange">{{refundData.price}}</text>
+			<view style="padding: 30rpx 20rpx;background-color: #fff;margin: 0 25rpx;border-radius: 13rpx;">
+				<view class="bg-white padding-bj flex justify-between align-center text-lg" style="padding: 0;margin-bottom: 30rpx;" v-if="refundData.state == 4">
+					<text style="font-size: 29rpx;font-weight: 400;color: #141414;line-height: 40rpx;">退款总金额</text><text class="text-price wanl-orange">{{refundData.price}}</text>
+				</view>
+				<view class="bg-white padding-bj margin-top-bj flex justify-between align-center text-lg" style="padding: 0;margin: 0;" @tap="refundLog(refundData.id)">
+					<text style="font-size: 29rpx;font-weight: 400;color: #141414;line-height: 40rpx;">退款历史</text><text class="wlIcon-fanhui2"></text>
+				</view>
 			</view>
-			<view class="bg-white padding-bj margin-top-bj flex justify-between align-center text-lg" @tap="refundLog(refundData.id)">
-				<text>退款历史</text><text class="wlIcon-fanhui2"></text>
-			</view>
-			<view class="bg-white padding-bj margin-top-bj text-lg">
-				退款详情
-			</view>
-			<view class="padding-bj flex">
-				<view class="cu-avatar xl margin-right-bj" :style="{backgroundImage: 'url('+$wanlshop.oss(refundData.goods.image, 70, 70)+')'}"> </view>
-				<view class="text-sm" style="width: calc(100% - 128rpx);">
-					<view class="margin-bottom-xs">
-						
-						<view class="text-cut-2 text-lg">
-							<view v-if="refundData.order_type === 'groups'" class="cu-tag sm margin-right-xs bg-gradual-orange radius">
-								<text>拼团订单</text>
+			<view style="background-color: #fff;padding: 30rpx 0rpx 30rpx;margin: 25rpx;border-radius: 13rpx;">
+				<view class="bg-white padding-bj margin-top-bj text-lg" style="padding: 0 20rpx;margin: 0;">
+					退款详情
+				</view>
+				<view class="padding-bj flex" style="padding: 30rpx 20rpx;margin: 0;border-bottom: 2rpx solid #C5C6C8;">
+					<view class="cu-avatar xl margin-right-bj" :style="{backgroundImage: 'url('+$wanlshop.oss(refundData.goods.image, 70, 70)+')'}"> </view>
+					<view class="text-sm" style="width: calc(100% - 128rpx);">
+						<view class="margin-bottom-xs">
+							
+							<view class="text-cut-2 text-lg">
+								<view v-if="refundData.order_type === 'groups'" class="cu-tag sm margin-right-xs bg-gradual-orange radius">
+									<text>拼团订单</text>
+								</view>
+								{{refundData.goods.title}}
 							</view>
-							{{refundData.goods.title}}
+						</view>
+						<view class="wanl-gray">
+							规格：{{refundData.goods.difference}}
 						</view>
 					</view>
-					<view class="wanl-gray">
-						规格：{{refundData.goods.difference}}
+				</view>
+				<view class="bg-white padding-bj text-sm" style="padding: 0 20rpx;margin: 30rpx 0 0;">
+					<view class="item flex" style="justify-content: space-between;">
+						<view style="font-size: 27rpx;font-weight: 400;color: #141414;line-height: 37rpx;"> 退款类型： </view> <view class="tk-title-right"> {{refundData.type_text}} </view>
+					</view>
+					<view class="item flex margin-top-bj" style="justify-content: space-between;">
+						<view class="tk-title"> 退款原因： </view> <view class="tk-title-right"> {{refundData.reason_text}} </view>
+					</view>
+					<view class="item flex margin-top-bj" style="justify-content: space-between;">
+						<view class="tk-title"> 退款金额： </view> <view class="tk-title-right"> {{refundData.price}} </view>
+					</view>
+					<view class="item flex margin-top-bj" style="justify-content: space-between;">
+						<view class="tk-title"> 物流状态： </view> <view class="tk-title-right"> {{refundData.expressType_text}} </view>
+					</view>
+					<view class="item flex margin-top-bj" style="justify-content: space-between;">
+						<view class="tk-title"> 退款时间： </view> <view class="tk-title-right"> {{refundData.createtime_text}} </view>
 					</view>
 				</view>
 			</view>
-			<view class="bg-white padding-bj text-sm">
-				<view class="item flex">
-					<text class="wanl-gray"> 退款类型： </text> <text> {{refundData.type_text}} </text>
-				</view>
-				<view class="item flex margin-top-bj">
-					<text class="wanl-gray"> 退款原因： </text> <text> {{refundData.reason_text}} </text>
-				</view>
-				<view class="item flex margin-top-bj">
-					<text class="wanl-gray"> 退款金额： </text> <text class="text-price"> {{refundData.price}} </text>
-				</view>
-				<view class="item flex margin-top-bj">
-					<text class="wanl-gray"> 物流状态： </text> <text> {{refundData.expressType_text}} </text>
-				</view>
-				<view class="item flex margin-top-bj">
-					<text class="wanl-gray"> 退款时间： </text> <text> {{refundData.createtime_text}} </text>
-				</view>
-			</view>
+		
 			<view class="edgeInsetBottom"> </view>
 		</view>
 	</view>
@@ -317,11 +325,23 @@ export default {
 </script>
 
 <style>
+	.tk-title-right{
+		font-size: 27rpx;
+		font-weight: 400;
+		color: #999999;
+		line-height: 37rpx;
+	}
+	.tk-title{
+		font-size: 27rpx;
+		font-weight: 400;
+		color: #141414;
+		line-height: 37rpx;
+	},
 	.wanl-refund .header {
 		width: 100%;
 		height: 180rpx;
 		position: relative;
-		background-color: #f72b36;
+		/* background-color: #f72b36; */
 	}
 	
 	.wanl-refund .header .img-bg {

@@ -11,11 +11,17 @@
 			}"
 		>	
 			<view :style="{ height: headHeight + 'px', paddingTop: headTop + 'px' }" >
-				<image class="home-logo" style="margin-top: 30rpx;" src="/static/images/home/logo.png"></image><br/>
-				<view>
-					<!-- <view style="width: 400rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 30rpx 0 10rpx 28rpx;">
+				<!-- <image class="home-logo" style="margin-top: 30rpx;" src="/static/images/home/logo.png"></image><br/> -->
+				<view @click="reposition" style="display: flex;margin: 30rpx 0 10rpx 28rpx;">
+					<view style="margin-right: 8rpx;">
+						<image style="width: 33.82rpx;height: 35.02rpx;" src="../static/images/home/address.png" mode=""></image>
+					</view>
+					<view style="max-width: 400rpx;min-width: 60rpx;;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 						{{address}}
-					</view> -->
+					</view>
+					<view style="margin-top: 4rpx;">
+						<image style="width: 35.02rpx;height: 35.02rpx;" src="../static/images/home/right.png" mode=""></image>
+					</view>
 				</view>
 				<view class="navigater flex align-center justify-between">
 					<!-- <view class="flex" @tap="scanCode"> -->
@@ -228,7 +234,8 @@ export default {
 	},
 	data() {
 		return {
-			address:"",
+			// 定位
+			address:"北京",
 			headHeight: 75,
 			windowHeight: 0,
 			headTop: 0,
@@ -240,7 +247,11 @@ export default {
 				contentdown: '下拉加载更多',
 				contentrefresh: '加载中',
 				contentnomore: '我是有底线的'
-			}
+			},
+			// 经度
+			longitude:0,
+			// 纬度
+			latitude:0
 		};
 	},
 	onLoad() {
@@ -250,36 +261,41 @@ export default {
 		      key: 'FFCBZ-PGFKT-LPGXQ-VETEY-FQPUS-CEFBD'
 		    });
 		 qqmapsdk.reverseGeocoder({
-		    success: function(res) {
-		      console.log("地理位置777777",res);
+		    success: (res)=>{
+				console.log("地理位置",res);
+				this.address = res.result.address;
+				this.longitude=res.result.location.lng
+				this.latitude=res.result.location.lat
 		    }
 		   })
 	},
 	onShow() {
 		// 加载位置，后续版本开启加载写入全局
-		uni.getLocation({
-			type: 'wgs84',
-			geocode: true,
-			success: mres=> {
-				console.log('当前位置的经度：' + mres.longitude);
-				console.log('当前位置的纬度：' + mres.latitude);
-				uni.request({
-				    url: 'https://restapi.amap.com/v3/geocode/regeo',
-				    data: {
-						key: this.$wanlshop.config('amapkey'),
-						location: mres.longitude+','+mres.latitude
-				    },
-				    success: res=> {
-						if(res.statusCode == 200){
-							this.address = res.data.regeocode.formatted_address;
-						}
-				    }
-				});
-			},
-			fail(res) {
-				console.log(res)
-			}
-		});
+		// uni.getLocation({
+		// 	type: 'wgs84',
+		// 	geocode: true,
+		// 	success: mres=> {
+		// 		console.log('当前位置的经度：' + mres.longitude);
+		// 		console.log('当前位置的纬度：' + mres.latitude);
+		// 		this.latitude=mres.latitude,
+		// 		this.longitude=mres.longitude,
+		// 		uni.request({
+		// 		    url: 'https://restapi.amap.com/v3/geocode/regeo',
+		// 		    data: {
+		// 				key: this.$wanlshop.config('amapkey'),
+		// 				location: mres.longitude+','+mres.latitude
+		// 		    },
+		// 		    success: res=> {
+		// 				if(res.statusCode == 200){
+		// 					this.address= res.data.regeocode.formatted_address;
+		// 				}
+		// 		    }
+		// 		});
+		// 	},
+		// 	fail(res) {
+		// 		console.log(res)
+		// 	}
+		// });
 		// #ifdef APP-PLUS
 		plus.navigator.setFullscreen(false);
 		// #endif
@@ -318,6 +334,22 @@ export default {
 			download: 'update/download', // 立即下载
 			ignore: 'update/ignore' // 忽略更新
 		}),
+		// 重新定位
+		reposition(){
+			uni.chooseLocation({
+				latitude:this.latitude,
+				longitude:this.longitude,
+				success: (res)=>{
+					console.log('位置名称：' + res.name);
+					console.log('详细地址：' + res.address);
+					console.log('纬度：' + res.latitude);
+					console.log('经度：' + res.longitude);
+					this.address=res.address+res.name
+					this.latitude=res.latitude
+					this.longitude=res.longitude
+				}
+			});
+		},
 		// 选择Tag
 		handleSelect(id, index) {
 			this.currentItemId = id;
