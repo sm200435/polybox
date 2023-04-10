@@ -6,19 +6,20 @@
 				<view class="action" @tap="$wanlshop.back(1)">
 					<text class="wlIcon-fanhui1"></text>
 				</view>
-				<view class="search-form round">
-					<text class="wlIcon-sousuo1 text-bold"></text>
+				<view class="search-form round" style="background: #F7F7F7;">
+					<!-- <text class="wlIcon-sousuo1 text-bold"></text> -->
+					<image src="../../static/images/user/sousuo.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
 					<input type="text" maxlength="12" confirm-type="search" placeholder-style="color: #ccc" :placeholder="searchKeywords ? searchKeywords : `搜索 ${searchTypeText[searchType]}`" @confirm="onSearchInputConfirmed" @input="onSearchInputChanged" focus />
 				</view>
 			</view>
 		</view>
 		<view class="history padding-lr" v-if="isHistory">
 			<view v-if="historyList.length > 0">
-				<view class="title text-lg">
-					<text>历史搜索</text>
+				<view class="title">
+					<text style="font-size: 26rpx;color: #353535;">历史搜索</text>
 					<text class="wlIcon-lajitong" @tap="removeHistory"></text>
 				</view>
-				<view class="list" style="font-size: 28rpx;">
+				<view class="list" style="font-size: 24rpx;">
 					<block v-for="(item, index) in historyList" :key="item.keywords" >
 						<view v-if="index<15" @tap="keywordsToList(item.keywords)">{{ item.keywords }}</view>
 					</block>
@@ -205,7 +206,6 @@ page {
 	background: #ffffff;
 }
 .cu-custom .search-form{
-	border: 3rpx solid #F31064;
 	background-color: #fff;
 }
 </style>

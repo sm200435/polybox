@@ -124,9 +124,15 @@
 							<view style="font-size: 29rpx;color: #999999;">{{ statistics.dynamic.coupon}}张</view>
 							<image class="clickview-img" src="../static/images/user/right.png"></image>
 						</view>
-					</view>
+				</view>
 				<!-- </view> -->
 				
+				<view class="my-coupons wanl-user-order-s margin-bj padding-sm" @tap="$wanlshop.auth('/pages/user/invoice/invoice')" v-if="user.isLogin">
+						<view class="coupons">发票中心</view>
+						<view class="coupons-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
+						</view>
+				</view>
 				
 				<view class="wanl-user-order padding-sm margin-bj" v-if="user.isLogin">
 					<view class="myorder">我的订单</view>
