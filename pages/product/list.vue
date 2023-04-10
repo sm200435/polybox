@@ -6,15 +6,18 @@
 				<view class="action" @tap="$wanlshop.back(1)">
 					<text class="wlIcon-fanhui1"></text>
 				</view>
-				<view class="search-form round" @tap="search()">
-					<text class="wlIcon-sousuo1 text-bold"></text> 
-					<view class="searchinfo cu-tag round" v-if="category">
-						<text>类目:{{ category }}</text>
-						<text class="wlIcon-shanchu2"></text>
+				<view class="search-form round" style="background: #F7F7F7;" @tap="search()">
+					<!-- <text class="wlIcon-sousuo1 text-bold"></text> -->
+					<image src="../../static/images/user/seachr.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
+					<view class="searchinfo cu-tag round" style="background: #F31064;opacity:0.26;" v-if="category">
+						<text style="color: white;">类目:{{ category }}</text>
+						<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
+						<!-- <text class="wlIcon-shanchu2"></text> -->
 					</view>
-					<view class="searchinfo cu-tag round text-df" v-else-if="params.search">
-						<text>{{ params.search }}</text>
-						<text class="wlIcon-shanchu2"></text>
+					<view class="searchinfo cu-tag round text-df" style="background: #F31064;opacity:0.26;" v-else-if="params.search">
+						<text style="color: white;">{{ params.search }}</text>
+						<!-- <text class="wlIcon-shanchu2"></text> -->
+						<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
 					</view>
 					<view v-else>搜索</view>
 				</view>
@@ -60,7 +63,7 @@
 					<view class="item solid-bottom" v-if="drawerData.brand.length > 0">
 						<view class="title">品牌</view>
 						<view class="list">
-							<text v-for="(bd, index) in drawerData.brand" :key="bd.id" :class="{ active: bd.choice }" data-key="brand" :data-attribute="index" @tap="onDraver">
+							<text v-for="(bd, index) in drawerData.brand" :key="bd.id" style="border-radius: 500rpx;" :class="{ active: bd.choice }" data-key="brand" :data-attribute="index" @tap="onDraver">
 								{{ bd.name }}
 							</text>
 						</view>
@@ -68,9 +71,9 @@
 					<view class="item solid-bottom">
 						<view class="title">价格区间</view>
 						<view class="from">
-							<input type="number" placeholder="最低价" v-model="drawerData.price.low" value="" />
+							<input type="number" style="border-radius: 500rpx;" placeholder="最低价" v-model="drawerData.price.low" value="" />
 							<text class="">—</text>
-							<input type="number" placeholder="最高价" v-model="drawerData.price.high" value="" />
+							<input type="number" style="border-radius: 500rpx;" placeholder="最高价" v-model="drawerData.price.high" value="" />
 						</view>
 					</view>
 					<view class="item solid-bottom">
@@ -79,13 +82,13 @@
 							<text :class="[drawerType.city ? 'wlIcon-fanhui3' : 'wlIcon-fanhui4']"></text>
 						</view>
 						<view class="list">
-							<text class="wlIcon-weizhi" style="border-radius: 30rpx;" data-key="sameCity" :class="{ active: drawerData.sameCity.choice }" :data-data="drawerData.sameCity.name" @tap="onDraver">
+							<text class="wlIcon-weizhi" style="border-radius: 500rpx;" data-key="sameCity" :class="{ active: drawerData.sameCity.choice }" :data-data="drawerData.sameCity.name" @tap="onDraver">
 								{{ drawerData.sameCity.name }}
 							</text>
 						</view>
 						<view class="title" v-if="drawerType.city"><text>城市</text></view>
 						<view class="list" v-if="drawerType.city">
-							<text v-for="(cy, index) in drawerData.city" :key="cy.name" :class="{ active: cy.choice }" style="border-radius: 30rpx;" data-key="city" :data-attribute="index" @tap="onDraver">
+							<text v-for="(cy, index) in drawerData.city" :key="cy.name" :class="{ active: cy.choice }" style="border-radius: 500rpx;" data-key="city" :data-attribute="index" @tap="onDraver">
 								{{ cy.name }}
 							</text>
 						</view>
@@ -536,7 +539,6 @@ export default {
 
 <style>
 	.cu-custom .search-form{
-		border: 3rpx solid #fe6600;
 		background-color: #fff;
 	}
 	.cu-tag:not([class*="bg"]):not([class*="line"]){

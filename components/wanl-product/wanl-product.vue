@@ -101,10 +101,10 @@
 				</view>
 			</view>
 			<!-- 普通布局 -->
-			<view class="product_list" :class="dataStyle" v-else>
-				<view class="item" v-for="(item, index) in dataList" :key="index" @tap="handleGoods(item.id)">
-					<view class="img-wrap">
-						<image :src="$wanlshop.oss(item.image, 125, 125)" mode="aspectFill"></image>
+			<view class="product_list"  :class="dataStyle" v-else>
+				<view class="item" style="width: 687rpx;height: 227rpx;margin: 0 auto;margin-top: 30rpx;" v-for="(item, index) in dataList" :key="index" @tap="handleGoods(item.id)">
+					<view class="" style="margin-top: 24rpx;margin-bottom: 24rpx;">
+						<image :src="$wanlshop.oss(item.image, 125, 125)" mode="aspectFill" style="width: 178rpx;height: 178rpx;margin-left: 20rpx;"></image>
 					</view>
 					<view class="content padding-sm">
 						<view class="content" style="padding: 15rpx 0;">
@@ -130,7 +130,7 @@
 						</view>
 						<view class="flex align-center justify-between">
 							<view class="text-red text-bold text-lg">
-								<text class="text-price">{{ item.price }}</text>
+								<text class="text-price" style="margin: 0 14rpx;">{{ item.price }}</text>
 							</view>
 							<!-- <view class="text-sm wanl-gray">
 								<text class="margin-right">{{$wanlshop.toFormat(item.comment, 'hundred')}} 评价</text>
@@ -290,10 +290,6 @@
 </script>
 
 <style lang="scss" scoped>
-	// .img-wrap{
-	// 	height: 340rpx;
-	// 	width: 340rpx;
-	// }
 	.wanl-waterfall {
 		display: flex;
 		flex-direction: row;
