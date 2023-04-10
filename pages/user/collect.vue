@@ -38,18 +38,11 @@
 										</view>
 									</view>
 								</view>
-<<<<<<< HEAD
-								<view class="move" style="left: 77%;width: 170rpx;margin-top: -20rpx;">
-									<view class="bg-red" style="height: 220rpx;"
-										@click.stop="loadFollow(item.id, index)">取消收藏</view>
-								</view>
-=======
 							</view>
 							<view class="move" style="width: 170rpx;right: -4rpx;">
-								<view class="bg-gradual-orange" style="height: 220rpx;border-radius: 13rpx;"
+								<view class="bg-gradual-orange" style="height: 225rpx;border-radius: 13rpx;"
 									@click.stop="loadFollow(item.id, index)">
 									取消收藏</view>
->>>>>>> 652008d686259c4a72279c96f03e7512573438a6
 							</view>
 						</view>
 					</view>
@@ -64,18 +57,15 @@
 					</view>
 				</template>
 			</wanl-empty>
+			<view class="wanlian cu-bar foot" style="margin-bottom: 20rpx;" v-if="navList[0].dataList.length != 0 && cang">
+				<button class="wanl-bg-orange" v-if="navList[0].dataList.every(i=>i.checked==false)"
+					style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;opacity: 0.4;">取消收藏</button>
+				<button v-else class="wanl-bg-orange"
+					style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;"
+					@click="allCancel">取消收藏</button>
+			</view>
 		</view>
 		<uni-cart :goodsData="selegoods" v-if="showcart" @hidecart="hidecart"></uni-cart>
-<<<<<<< HEAD
-=======
-		<view class="wanlian cu-bar foot" style="margin-bottom: 20rpx;" v-if="navList[0].dataList.length != 0 && cang">
-			<button class="wanl-bg-orange" v-if="navList[0].dataList.every(i=>i.checked==false)"
-				style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;opacity: 0.4;">取消收藏</button>
-			<button v-else class="wanl-bg-orange"
-				style="width: 470rpx;margin-bottom: 22rpx;border-radius: 40rpx;font-size: 30rpx;"
-				@click="allCancel">取消收藏</button>
-		</view>
->>>>>>> 652008d686259c4a72279c96f03e7512573438a6
 	</view>
 </template>
 

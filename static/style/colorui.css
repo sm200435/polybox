@@ -1139,7 +1139,7 @@ button.wlIcon.lg {
 }
 
 .cu-list>.cu-item.move-cur {
-	transform: translateX(-260rpx)
+	transform: translateX(-180rpx)
 }
 
 .cu-list>.cu-item .move {

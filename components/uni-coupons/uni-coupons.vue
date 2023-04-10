@@ -10,7 +10,7 @@
 			</view>
 		</view> -->
 		<view class="coupons-list" v-if="couponsArray.length==1">
-			<view class="coupons-item list-one" v-for="(item,index) of couponsArray">
+			<view class="coupons-item list-one" v-for="(item,index) of couponsArray" :key="index">
 				<view class="list-one-left">
 					<view class="list-left-top">
 						<text style="font-size: 39rpx;font-weight: 500;color: #F31064;line-height: 53rpx;">
@@ -108,6 +108,9 @@
 			return {
 				couponsArray:[]
 			};
+		},
+		onshow(){
+			
 		},
 		mounted() {
 			this.couponsArray=this.couponsList

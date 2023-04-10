@@ -8,7 +8,7 @@
 						<view class="warter left" v-for="(item, index) in leftList" :key="index"
 							@tap="handleGoods(item.id)">
 							<view class="img-wrap">
-								<image class="image" :src="item.image" mode="widthFix"></image>
+								<image class="image" style="border-radius: 13rpx;" :src="item.image" mode="widthFix"></image>
 							</view>
 							<view class="content" style="padding: 15rpx 0;">
 								<view class="text-cut-2" style="margin: 0 14rpx;">
@@ -56,7 +56,7 @@
 						<view class="warter right" v-for="(item, index) in rightList" :key="index"
 							@tap="handleGoods(item.id)">
 							<view class="img-wrap">
-								<image class="image"  :src="item.image" mode="widthFix"></image>
+								<image class="image" style="border-radius: 13rpx;" :src="item.image" mode="widthFix"></image>
 							</view>
 							<view class="content" style="padding: 15rpx 0;">
 								<view class="text-cut-2 text-lg" style="margin: 0 14rpx;">

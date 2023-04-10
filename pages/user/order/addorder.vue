@@ -1,5 +1,5 @@
 <template>
-	<view class="orderDetail">
+	<view class="orderDetail" style="height: 100%;">
 		<view class="edgeInsetTop"></view>
 		<view class="wanl-order">
 			<view class="address cu-list menu-avatar margin-bj radius-bock">
@@ -756,7 +756,6 @@
 
 <style lang="scss" scoped>
 	.orderDetail {
-		height: 100%;
 		background-color: #F7F7F7
 	}
 

@@ -1353,7 +1353,52 @@
 						}
 					}
 				}
-			]
+			    ,{
+                    "path" : "invoice/invoice",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "发票中心",
+                    "enablePullDownRefresh": false
+                }
+                
+                },
+				{
+				    "path" : "invoice/confirmation",
+				    "style" :                                                                                    
+				{
+				    "navigationBarTitleText": "发票确认书",
+				    "enablePullDownRefresh": false
+				}
+				
+				},
+				{
+				    "path" : "invoice/message",
+				    "style" :                                                                                    
+				{
+				    "navigationBarTitleText": "开票详情",
+				    "enablePullDownRefresh": false
+				}
+				
+				},
+				{
+				    "path" : "invoice/succeed",
+				    "style" :                                                                                    
+				{
+				    "navigationBarTitleText": "开票成功",
+				    "enablePullDownRefresh": false
+				}
+				
+				},
+				{
+				    "path" : "invoice/detail",
+				    "style" :                                                                                    
+				{
+				    "navigationBarTitleText": "发票进程",
+				    "enablePullDownRefresh": false
+				}
+				
+				}
+            ]
 		},
 		/* 商家店铺 */
 		{

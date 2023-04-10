@@ -12,6 +12,11 @@
 		>	
 			<view :style="{ height: headHeight + 'px', paddingTop: headTop + 'px' }" >
 				<image class="home-logo" style="margin-top: 30rpx;" src="/static/images/home/logo.png"></image><br/>
+				<view>
+					<!-- <view style="width: 400rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 30rpx 0 10rpx 28rpx;">
+						{{address}}
+					</view> -->
+				</view>
 				<view class="navigater flex align-center justify-between">
 					<!-- <view class="flex" @tap="scanCode"> -->
 						<!-- <view class="text-xxl"><text class="wlIcon-saoyisao"></text></view> -->
@@ -223,6 +228,7 @@ export default {
 	},
 	data() {
 		return {
+			address:"",
 			headHeight: 75,
 			windowHeight: 0,
 			headTop: 0,
@@ -237,7 +243,43 @@ export default {
 			}
 		};
 	},
+	onLoad() {
+		var QQMapWX = require('@/components/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
+		var qqmapsdk;
+		qqmapsdk = new QQMapWX({
+		      key: 'FFCBZ-PGFKT-LPGXQ-VETEY-FQPUS-CEFBD'
+		    });
+		 qqmapsdk.reverseGeocoder({
+		    success: function(res) {
+		      console.log("地理位置777777",res);
+		    }
+		   })
+	},
 	onShow() {
+		// 加载位置，后续版本开启加载写入全局
+		uni.getLocation({
+			type: 'wgs84',
+			geocode: true,
+			success: mres=> {
+				console.log('当前位置的经度：' + mres.longitude);
+				console.log('当前位置的纬度：' + mres.latitude);
+				uni.request({
+				    url: 'https://restapi.amap.com/v3/geocode/regeo',
+				    data: {
+						key: this.$wanlshop.config('amapkey'),
+						location: mres.longitude+','+mres.latitude
+				    },
+				    success: res=> {
+						if(res.statusCode == 200){
+							this.address = res.data.regeocode.formatted_address;
+						}
+				    }
+				});
+			},
+			fail(res) {
+				console.log(res)
+			}
+		});
 		// #ifdef APP-PLUS
 		plus.navigator.setFullscreen(false);
 		// #endif

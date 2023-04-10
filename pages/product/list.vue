@@ -225,6 +225,8 @@ export default {
 			type: 'wgs84',
 			geocode: true,
 			success: mres=> {
+				console.log('当前位置的经度：' + mres.longitude);
+				console.log('当前位置的纬度：' + mres.latitude);
 				uni.request({
 				    url: 'https://restapi.amap.com/v3/geocode/regeo',
 				    data: {

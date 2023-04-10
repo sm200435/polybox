@@ -1,6 +1,6 @@
 <template>
-	<view style="background: #f7f7f7;height: 100%;">
-		<view v-if="show" style="height: 100%;">
+	<view style="background: #f7f7f7;min-height: 100vh;">
+		<view v-if="show">
 			<!-- 导航条 -->
 			<view class="cu-custom" :style="{ height: $wanlshop.wanlsys().height + 'px' }">
 				<view class="cu-bar fixed bg-bgcolor" :style="{
@@ -22,7 +22,7 @@
 			</view>
 			<block v-if="cart.list.length > 0">
 				<view class="wanl-cart-shop radius-bock margin-bj padding-bj" v-for="(item, index) in cart.list"
-					:key="index" style="height: 100%;">
+					:key="index">
 					<view class="wanl-cart-goods" v-for="(goods, keys) in item.products" :key="keys" v-if="goods.sku.stock!=0">
 						<!-- 商品选择 -->
 						<view class="text-xxl margin-right-sm" @tap="choose({ index: index, keys: keys })">
@@ -44,7 +44,7 @@
 									{{ goods.sku.price }}
 								</view>
 								
-								<view class="wanl-numberBox solid">
+								<view class="wanl-numberBox">
 									<view @tap="bcsub(goods)">
 										<!-- <text class="wlIcon-jian round text-gray"></text> -->
 										<image src="../static/images/user/jian.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
@@ -116,7 +116,7 @@
 			<view class="safeAreaBottom"></view>
 			<!-- 操作栏 -->
 			<view v-if="cart.list.length!=0">
-				<view class="wanl-cart-foot fixedView solid-top edit" v-if="cart.operate">
+				<view class="wanl-cart-foot fixedView edit" v-if="cart.operate">
 					<view class="flex align-center" @tap="toCartchoose()">
 						<view class="text-xxl">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="cart.status"></image>
@@ -136,7 +136,7 @@
 						<button v-else class="cu-btn round bg-gradual-orange" style="width: 195rpx;height: 72rpx;font-size: 28rpx;" @tap="toEmpty()">删除</button>
 					</view>
 				</view>
-				<view class="wanl-cart-foot fixedView solid-top account" v-else>
+				<view class="wanl-cart-foot fixedView account" v-else>
 					<view class="flex align-center" @tap="toCartchoose()">
 						<view class="text-xxl">
 							<image src="../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;" v-if="cart.status"></image>
@@ -172,6 +172,7 @@
 						登录后才能查看购物车哦
 					</view>
 				</view>
+				
 				<view class="cart_btn" @click="goLogin">立即登录</view>
 			</view>
 		</view>
