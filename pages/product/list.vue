@@ -1,22 +1,19 @@
 <template>
 	<view class="wanl-list" style="height: 100%;">
 		<!-- 导航条 -->
-		<view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
+		<!-- <view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
 			<view class="cu-bar bg-bgcolor fixed" style="background: white;" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
 				<view class="action" @tap="$wanlshop.back(1)">
 					<text class="wlIcon-fanhui1"></text>
 				</view>
 				<view class="search-form round" style="background: #F7F7F7;" @tap="search()">
-					<!-- <text class="wlIcon-sousuo1 text-bold"></text> -->
 					<image src="../../static/images/user/seachr.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
 					<view class="searchinfo cu-tag round" style="background: #F31064;opacity:0.26;" v-if="category">
 						<text style="color: white;">类目:{{ category }}</text>
 						<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
-						<!-- <text class="wlIcon-shanchu2"></text> -->
 					</view>
 					<view class="searchinfo cu-tag round text-df" style="background: #F31064;opacity:0.26;" v-else-if="params.search">
 						<text style="color: white;">{{ params.search }}</text>
-						<!-- <text class="wlIcon-shanchu2"></text> -->
 						<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
 					</view>
 					<view v-else>搜索</view>
@@ -26,7 +23,29 @@
 					<text class="wlIcon-liebiao" v-else></text>
 				</view>
 			</view>
+		</view> -->
+		
+		<view class="cu-custom cu-bar" style="width: 100%;display: flex;justify-content: space-between;">
+			
+			<view class="search-form round" style="width: 568rpx;height: 66rpx;background: #F7F7F7;" @tap="search()">
+				<image src="../../static/images/user/seachr.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
+				<view class="searchinfo cu-tag round" style="height: 39rpx;background: #F31064;opacity:0.26;" v-if="category">
+					<text style="color: white;font-size: 22rpx;">类目:{{ category }}</text>
+					<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
+				</view>
+				<view class="searchinfo cu-tag round" style="height: 39rpx;background: #F31064;opacity:0.26;" v-else-if="params.search">
+					<text style="color: white;font-size: 22rpx;">{{ params.search }}</text>
+					<image src="../../static/images/user/cha.png" style="width: 14rpx;height: 14rpx;margin-left: 9rpx;"></image>
+				</view>
+				<view v-else>搜索</view>
+			</view>
+			<view class="action" @tap="editListstyle()">
+				<text class="wlIcon-listing-jf" v-if="liststyle == 'col-2-20'"></text>
+				<text class="wlIcon-liebiao" v-else></text>
+			</view>
+			
 		</view>
+		
 		<view class="head" :class="{ headtop: scrollStype }">
 			<view class="cue">
 				<view class="bar" style="background: white;">

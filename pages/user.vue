@@ -127,13 +127,6 @@
 				</view>
 				<!-- </view> -->
 				
-				<view class="my-coupons wanl-user-order-s margin-bj padding-sm" @tap="$wanlshop.auth('/pages/user/invoice/invoice')" v-if="user.isLogin">
-						<view class="coupons">发票中心</view>
-						<view class="coupons-right">
-							<image class="clickview-img" src="../static/images/user/right.png"></image>
-						</view>
-				</view>
-				
 				<view class="wanl-user-order padding-sm margin-bj" v-if="user.isLogin">
 					<view class="myorder">我的订单</view>
 					<view class="project text-sm wanl-gray-dark" style="padding-bottom: 20rpx;">
@@ -286,6 +279,15 @@
 							<image class="clickview-img" src="../static/images/user/right.png"></image>
 						</view>
 					</view>
+					<view class="clickview" @click="invoice()" v-if="user.isLogin">
+						<view class="clickview-left">
+							<image class="clickview-img" src="../static/images/user/invoic.png"></image>
+							<view class="clickview-text">发票中心</view>	
+						</view>
+						<view class="clickview-right">
+							<image class="clickview-img" src="../static/images/user/right.png"></image>
+						</view>
+					</view>
 					<view class="clickview" @click="aboutclick()">
 						<view class="clickview-left">
 							<image class="clickview-img" src="../static/images/user/concerning.png"></image>
@@ -416,6 +418,9 @@ export default {
 		//地址
 		addressclick(){
 			this.$wanlshop.to('/pages/user/address/address');
+		},
+		invoice(){
+			this.$wanlshop.to('/pages/user/invoice/invoice');
 		},
 		//关于我们
 		aboutclick(){
