@@ -29,7 +29,7 @@
 					<!-- </view> -->
 					<view class="search flex align-center margin-lr-sm round">
 						<view class="text-df text-bold wanl-gray-dark" style="margin-left: 16rpx;margin-right: 6rpx;">
-							<image src="../../../static/images/user/searchs.png" style="width: 33rpx;height: 33rpx;"></image>
+							<image src="../static/images/user/searchs.png" style="width: 33rpx;height: 33rpx;"></image>
 						</view>
 						<swiper vertical autoplay circular interval="3000">
 							<swiper-item @tap="handleSearch('')">

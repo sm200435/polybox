@@ -1360,6 +1360,7 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "发票中心",
+					"navigationBarBackgroundColor": "#ffffff",
                     "enablePullDownRefresh": false
                 }
                 
@@ -1369,6 +1370,7 @@
 				    "style" :                                                                                    
 				{
 				    "navigationBarTitleText": "发票确认书",
+					"navigationBarBackgroundColor": "#ffffff",
 				    "enablePullDownRefresh": false
 				}
 				
@@ -1378,6 +1380,7 @@
 				    "style" :                                                                                    
 				{
 				    "navigationBarTitleText": "开票详情",
+					"navigationBarBackgroundColor": "#ffffff",
 				    "enablePullDownRefresh": false
 				}
 				
@@ -1387,6 +1390,7 @@
 				    "style" :                                                                                    
 				{
 				    "navigationBarTitleText": "开票成功",
+					"navigationBarBackgroundColor": "#ffffff",
 				    "enablePullDownRefresh": false
 				}
 				
@@ -1396,6 +1400,7 @@
 				    "style" :                                                                                    
 				{
 				    "navigationBarTitleText": "发票进程",
+					"navigationBarBackgroundColor": "#ffffff",
 				    "enablePullDownRefresh": false
 				}
 				

@@ -10,24 +10,68 @@
 
 		<swiper :current="tabCurrentIndex" style="height: calc(100% - 60rpx)" duration="300" @change="changeTab">
 			<swiper-item class="tab-content" v-for="(tag, key) in navList" :key="tag.state">
-				<scroll-view class="list-scroll-content" scroll-y @scrolltolower="loadData">
+				<scroll-view class="list-scroll-content" style="background: #f7f7f7;" scroll-y
+					@scrolltolower="loadData">
 					<!-- 空白页 -->
 					<wanl-empty text="还没有优惠券" src="/static/images/user/wucollect.png"
 						v-if="tag.loaded === true && tag.cardList.length === 0" />
 					<!-- 订单列表 -->
 					<view class="wanl-coupon">
-						<view style="width: 90%;margin: 0 auto;display: flex;justify-content: space-between;margin-top: 10rpx;">
-							<view>多选</view>
-							<view @tap="onMessage()">开票信息</view>
+						<view class="infor">
+							<view>
+								<!-- 多选 -->
+							</view>
+							<view style="color: #141414;font-size: 30rpx;" @tap="onMessage()">开票信息</view>
 						</view>
 						<view v-for="(coupon, seat) in tag.cardList" :key="coupon.id"
-							:class="[coupon.state == 1 ? coupon.type : 'wanl-gray']" >
+							:class="[coupon.state == 1 ? coupon.type : 'wanl-gray']">
 							<view v-if="coupon.state == 1">
 								<!-- 11111111111222222222222 -->
+								<view class="time">
+									<view style="color: #909090;font-size: 24rpx;padding: 30rpx 77rpx;">2023-4-11 14:19:23</view>
+									<view style="width: 700rpx;height: 174rpx;display: flex;">
+										<view style="padding-top: 8rpx;margin-left: 16rpx;">
+											<!-- <image src="../../../static/images/user/xuanze.png" style="width: 36rpx;height: 36rpx;"></image> -->
+											<image src="../../../static/images/user/danxuan.png"
+												style="width: 36rpx;height: 36rpx;"></image>
+										</view>
+										<image
+											style="width: 117rpx;height: 117rpx;margin-left: 24rpx;margin-right: 24rpx;"
+											src="https://img.sandingtv.com/20190930/0c82d162395c19118c7dc979fe129f7b.jpg">
+										</image>
+										<view>
+											<view style="display: flex;width: 500rpx;justify-content: space-between;">
+												<view style="color: #2D2D2D;font-size: 30rpx;">农家土鸡蛋</view>
+												<view
+													style="color: #353535;font-size: 31rpx;font-weight: bold;margin-right: 20rpx;">
+													￥124</view>
+											</view>
+											<view style="color: #909090;font-size: 20rpx;margin-top: 16rpx;">鲜鸡蛋2斤装
+											</view>
+										</view>
+									</view>
+								</view>
 							</view>
 
 							<view v-if="coupon.state == 2">
 								<!-- 222222222444444444 -->
+							</view>
+
+							<view class="wanl-cart-foot fixedView" style="width: 100%;height: 160rpx;">
+								<view class="amount">
+									<view style="width: 217rpx;color: #F31064;font-size: 24rpx;line-height: 60rpx;">
+										实际金额以发票为主</view>
+								</view>
+
+								<view
+									style="height: 120rpx;background: white;display: flex;justify-content: space-between;">
+									<view class="margin-left-sm" style="display: flex;margin-top: 30rpx;">
+										<view style="color: #141414;font-size: 27rpx;">共</view>
+										<view style="color: #F31064;font-size: 30rpx;">￥124</view>
+									</view>
+									<view class="piao">
+										去开票</view>
+								</view>
 							</view>
 
 						</view>
@@ -78,6 +122,19 @@
 			this.loadData();
 		},
 		methods: {
+			// async list() {
+			// 	uni.request({
+			// 		url: `${this.$wanlshop.config('appurl')}/wanlshop/product/hot_list`,
+			// 		method: 'POST',
+			// 		success: (res) => {
+			// 			console.log("res", res.data.data)
+			// 			this.navList = res.data.data
+			// 		},
+			// 		fail: (err) => {
+			// 			console.log(err)
+			// 		}
+			// 	})
+			// },
 			//swiper 切换
 			changeTab(e) {
 				this.tabCurrentIndex = e.target.current;
@@ -136,7 +193,7 @@
 					}
 				});
 			},
-			onMessage(){
+			onMessage() {
 				this.$wanlshop.on('/pages/user/invoice/message');
 			}
 		}
@@ -144,5 +201,47 @@
 </script>
 
 <style lang="scss">
-
+	.infor{
+		width: 90%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		margin-top: 30rpx;
+	}
+	.time{
+		width: 700rpx;
+		height: 241rpx;
+		background: white;
+		margin: 0 auto;
+		margin-top: 30rpx;
+		border-radius: 12rpx;
+	}
+	.imtus{
+		width: 117rpx;
+		height: 117rpx;
+		margin-left: 24rpx;
+		margin-right: 24rpx;
+	}
+	.amount{
+		height: 60rpx;
+		background: #F5DFE7;
+		border-top-left-radius: 15rpx;
+		border-top-right-radius: 15rpx;
+		display: flex;
+		justify-content: center;
+		text-align: center;
+	}
+	.piao{
+		width: 195rpx;
+		height: 72rpx;
+		border-radius: 40rpx;
+		background: #F31064;
+		text-align: center;
+		line-height: 70rpx;
+		font-size: 28rpx;
+		color: white;
+		opacity: 0.4;
+		margin-top: 20rpx;
+		margin-right: 25rpx;
+	}
 </style>

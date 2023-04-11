@@ -67,7 +67,7 @@
 							</view>
 						</view>
 						<view style="text-align: right;margin-right: 30rpx;margin-bottom: 20rpx;">
-							<view class="tui" style="margin-right: 10rpx;" @tap="$wanlshop.auth('/pages/user/invoice/invoice')">开具发票</view>
+							<view class="tui" style="margin-right: 10rpx;" @tap="$wanlshop.auth('/pages/user/invoice/invoice')" v-if="orderData.state == 2 || orderData.state == 3 || orderData.state == 4 || orderData.state == 6 ">开具发票</view>
 							<!-- 1.0.2升级 取消订单后去掉退款按钮 -->
 							<view class="tui" @tap="onRefund(orderData.id, item.refund_status, item.refund_id, index)" v-if="orderData.state == 2 || orderData.state == 3 || orderData.state == 4 || orderData.state == 6 "> {{getRefund(item.refund_status)}}</view>
 						</view>

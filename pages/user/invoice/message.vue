@@ -3,7 +3,7 @@
 	<view style="background: #f7f7f7;">
 		<view>
 			<view class="fil">发票详情（必填）</view>
-			<view class="padding-sm">
+			<view class="padding-sm " style="border-radius: 13rpx;background: white;margin: 10rpx 20rpx;">
 				<view class="messases">
 					<view>抬头类型</view>
 					<!-- <radio-group>
@@ -28,7 +28,7 @@
 
 		<view>
 			<view class="fil">其他信息（非必填）</view>
-			<view class="padding-sm">
+			<view class="padding-sm" style="border-radius: 13rpx;background: white;margin: 10rpx 20rpx;">
 				<view class="messases">
 					<view>开户银行</view>
 					<input style="text-align: right;font-size: 30rpx;" placeholder="用于开具发票使用" />
@@ -77,9 +77,9 @@
 	}
 
 	.messases {
-		width: 100%;
+		// width: 100%;
 		margin: 0 auto;
-		background: white;
+		// background: white;
 		display: flex;
 		justify-content: space-between;
 		padding-top: 30rpx;
