@@ -1,16 +1,21 @@
 <template>
 	<view class="wanl-search">
 		<!-- 导航条 -->
-		<view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
+		<!-- <view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
 			<view class="cu-bar fixed" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
 				<view class="action" @tap="$wanlshop.back(1)">
 					<text class="wlIcon-fanhui1"></text>
 				</view>
 				<view class="search-form round" style="background: #F7F7F7;">
-					<!-- <text class="wlIcon-sousuo1 text-bold"></text> -->
 					<image src="../../static/images/user/sousuo.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
 					<input type="text" maxlength="12" confirm-type="search" placeholder-style="color: #ccc" :placeholder="searchKeywords ? searchKeywords : `搜索 ${searchTypeText[searchType]}`" @confirm="onSearchInputConfirmed" @input="onSearchInputChanged" focus />
 				</view>
+			</view>
+		</view> -->
+		<view class="cu-custom cu-bar">
+			<view class="search-form round" style="background: #F7F7F7;">
+				<image src="../../static/images/user/sousuo.png" style="width: 33rpx;height: 33rpx;margin-left: 16rpx;margin-right: 6rpx;"></image>
+				<input type="text" maxlength="12" style="padding-left: 5rpx;" confirm-type="search" placeholder-style="color: #ccc" :placeholder="searchKeywords ? searchKeywords : `搜索 ${searchTypeText[searchType]}`" @confirm="onSearchInputConfirmed" @input="onSearchInputChanged" focus />
 			</view>
 		</view>
 		<view class="history padding-lr" v-if="isHistory">

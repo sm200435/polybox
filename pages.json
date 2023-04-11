@@ -245,8 +245,9 @@
 				{
 					"path": "list",
 					"style": {
-						"enablePullDownRefresh": true, //开启上拉
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "搜索",
+						"navigationBarBackgroundColor": "#ffffff",
+						"enablePullDownRefresh": true //开启上拉
 					}
 				},
 				{
@@ -285,7 +286,8 @@
 				{
 					"path": "search",
 					"style": {
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "搜索",
+						"navigationBarBackgroundColor": "#ffffff"
 					}
 				},
 				{
