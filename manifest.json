@@ -206,7 +206,7 @@
                 "desc" : "你的位置信息将用于小程序定位展示"
             }
         },
-        "requiredPrivateInfos" : [ "getLocation","chooseAddress"],
+        "requiredPrivateInfos" : [ "getLocation","chooseAddress","chooseLocation"],
         "uniStatistics" : {
             "enable" : false
         },

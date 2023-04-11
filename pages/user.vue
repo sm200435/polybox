@@ -413,7 +413,7 @@ export default {
 		},
 		//关于我们
 		aboutclick(){
-			this.$wanlshop.to('/pages/user/setting/about');
+			this.$wanlshop.to('/pages/article/details');
 		},
 		outclick() {
 			this.$api.get({

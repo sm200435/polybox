@@ -96,7 +96,7 @@
 				{
 					"path": "details",
 					"style": {
-						"navigationBarTitleText": "详情",
+						"navigationBarTitleText": "关于我们",
 						"navigationBarBackgroundColor": "#ffffff",
 						"app-plus": {
 							"titleNView": {
