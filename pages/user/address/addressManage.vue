@@ -16,11 +16,13 @@
 			<view class="title">所在地区</view>
 			<input type="text" :value="addressData.formatted_address" placeholder="选择地区" disabled />
 		</view>
-		<view class="cu-form-group align-start">
-			<view class="title">详细地址</view>
+		<view class="cu-form-group align-start" style="padding-top: 40rpx;">
+			<view class="title" style="margin-top: 0;">详细地址</view>
 			<!-- 1.1.5升级 -->
 			<textarea 
+			style="margin: 0;"
 			maxlength="-1" 
+			disable-default-padding
 			@input="getInputtips"
 			@focus="focusInputtips" 
 			@confirm="confirmInputtips" 

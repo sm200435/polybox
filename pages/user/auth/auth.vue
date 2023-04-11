@@ -17,11 +17,13 @@
 					<!-- #endif -->
 				</view>
 				<!-- 同意服务条款 -->
-				<radio-group :class="checked == 1 ? 'shake-horizontal' : ''" class="auth-clause" @change="CheckboxChange">
+				<radio-group :class="checked == 1 ? 'shake-horizontal' : ''" class="auth-clause">
 					<!-- <radio style="transform:scale(0.7)" :class="checked == 2 ? 'checked' : ''" :checked="checked == 2 ? true : false" value="2" /> -->
 					<view>
-						<radio style="transform:scale(0.7)" :class="checked == 2 ? 'checked' : ''" :checked="checked == 2 ? true : false" value="2" />
-						我已认真阅读并同意多美盒数字智能<text @tap="onDetails($store.state.common.appConfig.user_agreement, '用户协议')">《用户协议》</text>、<text @tap="onDetails($store.state.common.appConfig.privacy_protection, '隐私保护')">《隐私政策》</text>
+						<!-- <radio style="transform:scale(0.7)" :class="checked == 2 ? 'checked' : ''" :checked="checked == 2 ? true : false" value="2" /> -->
+						<image style="width: 24.15rpx;height: 24.15rpx;margin-right: 5rpx;" src="../../../static/images/user/shi.png" mode="" v-if="checked==0" @click="checked=2"></image>
+						<image style="width: 24.15rpx;height: 24.15rpx;margin-right: 5rpx;" src="../../../static/images/user/xuanze.png" mode="" v-else @click="checked=0"></image>
+						我已认真阅读并同意多美盒数字智能<text @tap="goUserAgreement($store.state.common.appConfig.user_agreement, '用户协议')">《用户协议》</text>、<text @tap="goUserAgreement($store.state.common.appConfig.privacy_protection, '隐私保护')">《隐私政策》</text>
 					</view>
 				</radio-group>
 			</form>
@@ -162,6 +164,12 @@
 			// #endif
 		},
 		methods: {
+			// 跳转用户协议
+			goUserAgreement(id,title){
+				uni.navigateTo({
+					url:`/pages/article/userAgreement?id=${id}&title=${title}`
+				})
+			},
 			CheckboxChange(e) {
 				this.checked = e.detail.value;
 			},
@@ -210,8 +218,8 @@
 					url: '/wanlshop/user/third_web',
 					data: {
 						platform: provider.platform,
-						client_id: uni.getStorageSync("wanlshop:chat_client_id")?uni.getStorageSync("wanlshop:chat_client_id") : null
-					},
+							client_id: uni.getStorageSync("wanlshop:chat_client_id")?uni.getStorageSync("wanlshop:chat_client_id") : null
+						},
 					success: res => {
 						uni.hideLoading();
 						this.$store.dispatch('user/login', res);
@@ -236,9 +244,6 @@
 					})
 					return
 				}
-				uni.showLoading({
-				    title: '登录中'
-				});
 				// uni.login({
 				// 	provider: 'weixin',
 				// 	success: (loginRes) => {
@@ -270,6 +275,9 @@
 				// 	}
 				// });
 				if (e.detail.errMsg != "getPhoneNumber:fail user deny") {
+					uni.showLoading({
+					    title: '登录中'
+					});
 					that.$api.post({
 						url: '/wanlshop/user/phone',
 						data: {
@@ -284,7 +292,10 @@
 							// 返回页面
 							// uni.reLaunch({url: decodeURIComponent(this.pageroute)});
 							uni.navigateBack()
-						}
+							uni.showToast({
+							    title: '登录成功'
+							});
+						},
 					});
 				}
 			},

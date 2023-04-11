@@ -295,7 +295,7 @@
 							<image class="clickview-img" src="../static/images/user/right.png"></image>
 						</view>
 					</view>
-					<view class="clickview" @tap="onDetails($store.state.common.appConfig.user_agreement, '用户协议')">
+					<view class="clickview" @tap="goUserAgreement($store.state.common.appConfig.user_agreement, '用户协议')">
 						<view class="clickview-left">
 							<image class="clickview-img" src="../static/images/user/agreement.png"></image>
 							<view class="clickview-text">用户协议</view>	
@@ -371,6 +371,12 @@ export default {
 		}
 	},
 	methods: {
+		// 跳转用户协议
+		goUserAgreement(id,title){
+			uni.navigateTo({
+				url:`/pages/article/userAgreement?id=${id}&title=${title}`
+			})
+		},
 		async loadData() {
 			this.$api.post({
 				url: '/wanlshop/user/refresh',

@@ -113,6 +113,25 @@
 					}
 				},
 				{
+					"path": "userAgreement",
+					"style": {
+						"navigationBarTitleText": "用户协议",
+						"navigationBarBackgroundColor": "#ffffff",
+						"app-plus": {
+							"titleNView": {
+								"type": "float",
+								"backgroundColor": "",
+								"blurEffect": "light"
+							}
+						},
+						"h5": {
+							"titleNView": {
+								"backgroundColor": "#f7f7f7"
+							}
+						}
+					}
+				},
+				{
 					"path": "advert",
 					"style": {
 						"navigationBarTitleText": "加载中..",

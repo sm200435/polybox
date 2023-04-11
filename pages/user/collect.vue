@@ -23,7 +23,7 @@
 										style="width: 36rpx;height: 36rpx;" v-else></image>
 								</view>
 								<view class="cu-avatar margin-right-bj radius"
-									:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}"></view>
+									:style="{backgroundImage: `url(${$wanlshop.oss(item.image, 88, 88)})`}" @click="handleGoods(item.id)"></view>
 								<view class="subject" @click="handleGoods(item.id)">
 									<view class="text-cut-2" style="font-size: 30rpx;color: #353535;font-weight: bold;">
 										{{item.title}}

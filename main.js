@@ -161,6 +161,7 @@ const prePage = () => {
 const wanlsys = () => {
 	const sys = uni.getSystemInfoSync();
 	const data = {
+		// 手机状态栏的高度
 		top: sys.statusBarHeight,
 		height: sys.statusBarHeight + uni.upx2px(90),
 		screenHeight: sys.screenHeight,

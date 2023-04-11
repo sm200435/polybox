@@ -213,7 +213,8 @@
         "navigateToMiniProgramAppIdList" : [ "wx6885acbedba59c14" ],
         "unipush" : {
             "enable" : false
-        }
+        },
+		"lazyCodeLoading": "requiredComponents"
     },
     "mp-qq" : {
         "appid" : "11*****49",

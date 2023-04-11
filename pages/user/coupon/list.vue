@@ -1,6 +1,6 @@
 <template>
 	<view class="wanl-order-list" style="background: url(https://www.duomeihe.shop/uploads/20230327/lexiang.png) no-repeat 0 0rpx;;background-size: 100% 100%;padding-top: 42vh;">
-		<view class="wanl-order-nav">
+		<view class="wanl-order-nav" :style="{paddingTop: wanlsys.top + 'px',height:wanlsys.height + 'px'}" style="margin-top: 10rpx;">
 			<view @click="retreat">
 				<image src="/static/images/user/left.png" mode="" style="width: 48rpx;height: 48rpx;"></image>
 			</view>
@@ -125,6 +125,7 @@
 		data() {
 			return {
 				tabCurrentIndex: 0,
+				wanlsys: {},
 				navList: [
 					// {
 					// 	type: 'reduction',
@@ -163,6 +164,7 @@
 			};
 		},
 		onLoad(options) {
+			this.wanlsys = this.$wanlshop.wanlsys();
 			this.loadData();
 		},
 		methods: {
@@ -274,9 +276,7 @@
 		display: flex;
 		width: 100%;
 		height: 10vh;
-		background-color: #e53a53;
 		justify-content: space-between;
-		padding: 6vh 20rpx 0 0rpx;
 	}
 	.mytest {
 		position: absolute;

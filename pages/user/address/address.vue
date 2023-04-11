@@ -11,7 +11,7 @@
 					:data-target="'move-box-' + index">
 					<!-- <view style="width: 100%;background: white;display: flex;justify-content: space-between;border-radius: 24rpx;"> -->
 						<view class="cu-avatar round lg"
-							style="background-color: #F31064;justify-content: center;left: 20rpx;">
+							style="background-color: #Fddde9;justify-content: center;left: 20rpx;color:#f42a75">
 							{{ item.name.substring(0, 1) }}
 						</view>
 						<view class="content" style="margin: 30rpx 30rpx 24rpx 18rpx;left: 120rpx;">
@@ -20,12 +20,14 @@
 								<text class="wanl-gray-light text-sm">{{ item.mobile }}</text>
 							</view>
 							<view class="text-sm wanl-pip text-cut-2" style="line-height: 1.3;padding-top: 6rpx;">
-								<text class="wlIcon-dizhi text-red margin-right-xs" v-if="item.default == 1"></text>
+								<text v-if="item.default == 1" style="width: 46rpx;height: 32rpx;font-size: 23rpx;font-weight: 400;color: #F31064;line-height: 32rpx;background: url(/static/images/user/addressBg.png) no-repeat 100% 100%;margin-right: 5rpx;">
+									默认
+								</text>
 								{{ item.province }} {{ item.city }} {{ item.district }} {{ item.address_full }}
 							</view>
 						</view>
 						<view class="action" style="left: 85%;position: absolute" @tap.stop="addAddress('edit', item)">
-							<text class="wlIcon-xiugaioryijian text-xl"></text>
+							<image style="width: 28.38rpx;height: 28.38rpx;" src="../../../static/images/user/addressEdit.png" mode=""></image>
 						</view>
 						<view class="move" style="height: 185rpx;right: -2rpx;width: 160rpx;">
 							<!-- <view class="bg-grey" @tap.stop="addAddress('edit', item)">编辑</view> -->
