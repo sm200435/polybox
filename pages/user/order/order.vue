@@ -362,6 +362,7 @@
 											signType: res.signType,
 											timeStamp: res.timeStamp,
 											success: (e) => {
+												console.log(data[0]);
 												this.paySuccess(data[0]
 													.type);
 											},

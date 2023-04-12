@@ -1,5 +1,5 @@
 <template>
-	<view class="wanl-list" style="height: 100%;">
+	<view class="wanl-list" style="height: 100% !important;" :style="showRight?'overflow:hidden':''">
 		<!-- 导航条 -->
 		<!-- <view class="cu-custom" :style="{height: $wanlshop.wanlsys().height + 'px' }">
 			<view class="cu-bar bg-bgcolor fixed" style="background: white;" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px'}">
@@ -79,7 +79,7 @@
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer">
 			<view class="drawer">
 				<scroll-view scroll-y="true" class="scroll" :style="{ height: $wanlshop.wanlsys().windowHeight + 'px' }">
-					<view class="item solid-bottom" v-if="drawerData.brand.length > 0">
+					<view class="item" v-if="drawerData.brand.length > 0">
 						<view class="title">品牌</view>
 						<view class="list">
 							<text v-for="(bd, index) in drawerData.brand" :key="bd.id" style="border-radius: 500rpx;" :class="{ active: bd.choice }" data-key="brand" :data-attribute="index" @tap="onDraver">
@@ -87,7 +87,7 @@
 							</text>
 						</view>
 					</view>
-					<view class="item solid-bottom">
+					<view class="item">
 						<view class="title">价格区间</view>
 						<view class="from">
 							<input type="number" style="border-radius: 500rpx;" placeholder="最低价" v-model="drawerData.price.low" value="" />
@@ -95,7 +95,7 @@
 							<input type="number" style="border-radius: 500rpx;" placeholder="最高价" v-model="drawerData.price.high" value="" />
 						</view>
 					</view>
-					<view class="item solid-bottom">
+					<view class="item">
 						<view class="title" data-key="city" @tap="onDraverTitle">
 							<text>发货地</text>
 							<text :class="[drawerType.city ? 'wlIcon-fanhui3' : 'wlIcon-fanhui4']"></text>
@@ -113,7 +113,7 @@
 						</view>
 					</view>
 					<block v-if="drawerData.attribute.length > 0" v-for="(att, index) in drawerData.attribute" :key="att.name">
-						<view class="item solid-bottom">
+						<view class="item">
 							<view class="title" :data-key="index" @tap="onDraverTitle">
 								<text>{{ att.name }}</text>
 								<text :class="[drawerData.attribute[index].fold ? 'wlIcon-fanhui3' : 'wlIcon-fanhui4']"></text>
@@ -224,6 +224,20 @@ export default {
 				contentnomore: '没有更多数据了'
 			}
 		};
+	},
+	watch:{
+		showRight:{
+			handler(newval,oldval){
+				if(newval==true){
+					page
+					document.body.style.overflow = 'hidden'
+				}
+				else{
+					document.body.style.overflow = 'scroll'
+				}
+			},
+			deep:true
+		}
 	},
 	onLoad(option) {
 		if (option.type) {

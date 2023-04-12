@@ -1,6 +1,6 @@
 <template>
-	<view style="background: #f7f7f7;height: 100vh;">
-		<view class="wanl-product">
+	<view>
+		<view class="wanl-product" style="background-color: #f7f7f7;">
 			<view class="product_warter" :class="dataStyle"
 				v-if="dataStyle == 'col-2-10' || dataStyle == 'col-2-15' || dataStyle == 'col-2-20' || dataStyle == 'col-2-25' || dataStyle == 'col-2-30'">
 				<view class="wanl-waterfall">

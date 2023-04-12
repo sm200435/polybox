@@ -1,5 +1,5 @@
 <template>
-	<view class="orderDetail" style="height: 100%;">
+	<view class="orderDetail" style="min-height: 100vh;">
 		<view class="edgeInsetTop"></view>
 		<view class="wanl-order">
 			<view class="address cu-list menu-avatar margin-bj radius-bock">
@@ -95,7 +95,7 @@
 
 					<view class="cu-form-group align-start">
 						<view class="wanl-gray-light title" style="font-weight: 500;color: black;">备注</view>
-						<textarea maxlength="100" v-model="shop.remarks" placeholder="订单备注可选" style="height: 229.47rpx;"></textarea>
+						<textarea disable-default-padding maxlength="100" v-model="shop.remarks" placeholder="订单备注可选" style="height: 229.47rpx;"></textarea>
 					</view>
 				</form>
 			</view>

@@ -128,9 +128,9 @@
 
 		.experience {
 			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 100rpx;
+			// left: 0;
+			right: 20rpx;
+			bottom: 40rpx;
 			display: flex;
 			justify-content: center;
 		}

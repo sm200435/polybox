@@ -63,7 +63,7 @@
 			</view>
 			<view class="cu-form-group margin-top-bj">
 				<view class="title">退款理由</view>
-				<input placeholder="选填" v-model="refund.refund_content"></input>
+				<input placeholder=" " v-model="refund.refund_content"></input>
 			</view>
 		</view>
 		<view class="edgeInsetBottom"> </view>
@@ -157,27 +157,38 @@ export default {
 				this.$wanlshop.msg('请选择退款原因');
 				return false;
 			}
+			if(this.refund.money == ""){
+				this.$wanlshop.msg('退款金额不能为空');
+				return false
+			}
 			if (this.refund.money <= 0 ) {
 				uni.showModal({
 				    title: '重要提示',
 				    content: '你的退款金额可能是零元，可能失去售后机会是否确认',
-				    success: function (res) {
-				       if (res.cancel)  return false;
-				    }
+				    success: (res)=>{
+						if(res.confirm){
+							// 提交
+							this.$api.post({
+								url: '/wanlshop/refund/addApply',
+								data: this.refund,
+								success: res => {
+									this.$store.commit('statistics/order', {
+										customer: this.$store.state.statistics.order.customer + 1
+									});
+									// 跳转到退款详情页
+									uni.redirectTo({
+										url:`/pages/user/refund/details?id=${res}`
+									})
+								}
+							});
+						}
+						else{
+							return
+						}
+				    },
+					
 				});
 			}
-			// 提交
-			this.$api.post({
-				url: '/wanlshop/refund/addApply',
-				data: this.refund,
-				success: res => {
-					this.$store.commit('statistics/order', {
-						customer: this.$store.state.statistics.order.customer + 1
-					});
-					// 跳转到退款详情页
-					this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
-				}
-			});
 		},
 		chooseImage(index) {
 			uni.chooseImage({
@@ -221,6 +232,7 @@ export default {
 		},
 		// 退款金额
 		moneyInput(e) {
+			console.log(e.detail.value);
 			let money = e.detail.value;
 			if (money > this.amount.total) {
 				this.$wanlshop.msg(this.amount.info);

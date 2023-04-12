@@ -1281,7 +1281,7 @@
 				{
 					"path": "refund/apply",
 					"style": {
-						"navigationBarTitleText": "申请售后",
+						"navigationBarTitleText": "退款申请",
 						"navigationBarBackgroundColor": "#ffffff",
 						"app-plus": {
 							"titleNView": {

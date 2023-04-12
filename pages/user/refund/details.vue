@@ -9,13 +9,15 @@
 					<view>
 						<view class="status-text" style="font-size: 42rpx;font-weight: 500;color: #141414;line-height: 59rpx;">{{getStateText(refundData.state)}}</view>
 						<view class="reason">
-							<text class="reason-text"  style="font-size: 30rpx;font-weight: 400;color: #141414;line-height: 42rpx;">{{refundData.statetime}}</text>
+							<text class="reason-text" v-if="getStateText(refundData.state)=='卖家拒绝退款'" style="font-size: 30rpx;font-weight: 400;color: #141414;line-height: 42rpx;">{{refundData.statetime}}</text>
+							<text class="reason-text" v-else style="font-size: 30rpx;font-weight: 400;color: #141414;line-height: 42rpx;">{{refundData.statetime}}</text>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view style="margin: 0 25rpx 25rpx; border-radius: 13rpx;">
-				<view class="bg-white padding-bj" v-if="refundData.state != 4">
+			
+			<view style="border-radius: 13rpx;margin: 0 25rpx 30rpx;">
+				<view class="bg-white padding-bj" v-if="refundData.state != 4" style="border-bottom: 1rpx solid #C5C6C8;padding: 30rpx 25rpx;">
 					{{getStateInfo(refundData.state)}}
 				</view>
 				<!-- 退款状态:0=申请退款,1=卖家同意,2=卖家拒绝,3=申请平台介入,4=成功退款,5=退款已关闭,6=已提交退货,7=第三方退款中 -->
@@ -31,6 +33,15 @@
 					<view class="flex justify-end margin-top">
 						<button class="cu-btn line-black margin-lr-xs" @tap="closeRefund(refundData.id)">关闭退款</button>
 						<button class="cu-btn line-orange" @tap="editRefund(refundData.id)">修改申请</button>
+					</view>
+				</view>
+				<view class="bg-white solid-top padding-bj current " style="padding: 30rpx 25rpx;" v-if="refundData.state == 2">
+					<view class="text-sm">
+						<text style="font-size: 27rpx;font-weight: 400;color: #141414;line-height: 37rpx;">拒绝理由：</text><text class="wanl-gray">{{refundData.refuse_content}}</text>
+					</view>
+					<view class="flex margin-top">
+						<button class="cu-btn round line-black" style="margin-right: 13rpx;" @tap="arbitrationRefund(refundData.id)">平台介入</button>
+						<button class="cu-btn round margin-lr-bj line-orange" style="margin: 0;" @tap="editRefund(refundData.id)">修改申请</button>
 					</view>
 				</view>
 			</view>
@@ -95,15 +106,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="bg-white solid-top padding-bj current " v-if="refundData.state == 2">
-				<view class="text-sm">
-					拒绝理由：<text class="wanl-gray">{{refundData.refuse_content}}</text>
-				</view>
-				<view class="flex justify-end margin-top">
-					<button class="cu-btn line-black" @tap="arbitrationRefund(refundData.id)">平台介入</button>
-					<button class="cu-btn line-orange margin-left-xs" @tap="editRefund(refundData.id)">修改申请</button>
-				</view>
-			</view>
+			
 			<view class="bg-white solid-top padding-bj current" v-if="refundData.state == 3">
 				<view class="wanl-gray text-sm">
 					<view>

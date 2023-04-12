@@ -27,7 +27,7 @@
 		</view>
 		<view style="position: absolute;top:98vw;left: 0;border-radius: 20rpx 20rpx 13rpx 13rpx;background-color: #ffffff;">
 			<!-- 产品 -->
-			<view style="background-color: #f9f9f9;margin: 30rpx 25rpx 35rpx;padding: 20rpx 0 30rpx 20rpx;">	
+			<view style="background-color: #f9f9f9;margin: 30rpx 25rpx 35rpx;padding: 20rpx 0 30rpx 20rpx;border-radius: 13.29rpx;">	
 				<!-- 普通 -->
 				<view class="margin-bottom-sm" style="display: flex;justify-content: space-between;">
 					<view style="display: flex;">
@@ -59,10 +59,10 @@
 						</view>
 					</view> -->
 				</view>
-				<view style="margin: 10rpx 0 30rpx 0;font-size: 25rpx;font-weight: 400;color: #848689;line-height: 36rpx;">
+				<!-- <view style="margin: 10rpx 0 30rpx 0;font-size: 25rpx;font-weight: 400;color: #848689;line-height: 36rpx;">
 					农家散养土鸡蛋，蛋白嫩滑，蛋黄绵密
-				</view>
-				<view style="display: flex;width: 658rpx;height: 114rpx;background: #FFFFFF;border-radius: 13rpx;padding: 22rpx 0rpx;">
+				</view> -->
+				<!-- <view style="display: flex;width: 658rpx;height: 114rpx;background: #FFFFFF;border-radius: 13rpx;padding: 22rpx 0rpx;">
 					<view style="flex:1;border-right: 2rpx solid #EBEBEB;text-align: center;">
 						<view style="font-size: 25rpx;font-weight: 500;color: #2D2D2D;line-height: 36rpx;">
 							夏小美
@@ -95,7 +95,7 @@
 							推荐理由
 						</view>
 					</view>
-				</view>
+				</view> -->
 <!-- 				<view class="block text-min padding-lr padding-bottom-bj" style="padding: 0 25rpx 25rpx 0;">
 					<view class="wanl-gray">
 						<text class="wlIcon-weizhi margin-right-xs"></text>
@@ -115,10 +115,10 @@
 			<view style="width: 699rpx;background: #F9F9F9;border-radius: 13rpx; margin: 0 auto;padding: 30rpx 0 30rpx 20rpx;">
 				<!-- 领卷 -->
 				<view class="promotion text-sm">
-					<view class="item" @tap="showModal('coupon')" v-if="goodsData.coupon.length != 0" style="padding: 0;">
-						<view class="label" style="font-size: 25rpx;font-weight: 400;color: #848689;">领券</view>
-						<scroll-view scroll-x="true" class="conten flex " style="white-space: nowrap;width: 70%;height: 48rpx;line-height: 48rpx;">
-							<view class="wanl-ticket text-sm" style="display: inline-flex;background-color: #F31064;border-radius: 8rpx;padding: 0 18rpx;flex: 1;" v-for="(item, index) in goodsData.coupon" :key="index">
+					<view class="item" @tap="showModal('coupon')" v-if="goodsData.coupon.length != 0" style="padding: 0;margin-bottom: 30rpx;">
+						<view class="label" style="font-size: 25rpx;font-weight: 400;color: #848689;height: 48rpx;line-height: 48rpx;">领券</view>
+						<scroll-view scroll-x="true" class="conten flex " style="white-space: nowrap;width: 70%;height: 48rpx;">
+							<view class="wanl-ticket text-sm" style="display: inline-flex;background-color: #F31064;border-radius: 8rpx;padding: 0 18rpx;flex: 1;margin: 10rpx 5rpx 10rpx 0;" v-for="(item, index) in goodsData.coupon" :key="index">
 								<block v-if="item.type == 'reduction' || (item.type == 'vip' && item.usertype == 'reduction')">
 									<!-- <view class="ticket-price"> ￥{{Number(item.price)}} </view> -->
 									<view class="ticket-title" style="color: #ffffff;background-color: #F31064;border: 0;height: 33rpx;"> <text>满{{Number(item.limit)}}减{{Number(item.price)}}</text> </view>
@@ -139,7 +139,7 @@
 					</view>
 				</view>
 				<!-- 配送 -->
-				<view style="display: flex;margin-top: 30rpx;">
+				<view style="display: flex;">
 					<view class="label" style="font-size: 25rpx;font-weight: 400;color: #848689;line-height: 36rpx;">配送</view>
 					<view style="margin-left: 30rpx;font-size: 25rpx;font-weight: 400;color: #2D2D2D;line-height: 36rpx;">
 						3h内发货

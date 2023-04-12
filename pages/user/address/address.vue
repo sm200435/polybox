@@ -20,7 +20,7 @@
 								<text class="wanl-gray-light text-sm">{{ item.mobile }}</text>
 							</view>
 							<view class="text-sm wanl-pip text-cut-2" style="line-height: 1.3;padding-top: 6rpx;">
-								<text v-if="item.default == 1" style="width: 46rpx;height: 32rpx;font-size: 23rpx;font-weight: 400;color: #F31064;line-height: 32rpx;background: url(/static/images/user/addressBg.png) no-repeat 100% 100%;margin-right: 5rpx;">
+								<text v-if="item.default == 1" style="width: 46rpx;height: 32rpx;font-size: 23rpx;font-weight: 400;color: #F31064;line-height: 32rpx;background-color:#fedfea;margin-right: 5rpx;">
 									默认
 								</text>
 								{{ item.province }} {{ item.city }} {{ item.district }} {{ item.address_full }}

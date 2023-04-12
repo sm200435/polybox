@@ -1,5 +1,5 @@
 <template>
-	<view class="wanl-order-list" style="background: url(https://www.duomeihe.shop/uploads/20230327/lexiang.png) no-repeat 0 0rpx;;background-size: 100% 100%;padding-top: 42vh;">
+	<view class="wanl-order-list" style="background: url(https://www.duomeihe.shop/uploads/20230327/lexiang.png) no-repeat 0 0rpx;background-size: 100% 100%;padding-top: 42vh;">
 		<view class="wanl-order-nav" :style="{paddingTop: wanlsys.top + 'px',height:wanlsys.height + 'px'}" style="margin-top: 10rpx;">
 			<view @click="retreat">
 				<image src="/static/images/user/left.png" mode="" style="width: 48rpx;height: 48rpx;"></image>
@@ -15,108 +15,110 @@
 		<!-- <view class="navbar">
 			<view class="nav-item text-df" v-for="(item, index) in navList" :key="index" :class="{ current: tabCurrentIndex === index }" @tap="tabClick(index)"> {{ item.text }} </view>
 		</view> -->
-		<swiper :current="tabCurrentIndex" duration="300" @change="changeTab" style="padding-bottom: 2rpx;height: 100%;">
-			<swiper-item class="tab-content" v-for="(tag, key) in navList" :key="key">
-				<!-- <scroll-view class="list-scroll-content" scroll-y @scrolltolower="loadData"> -->
-					<!-- 空白页 -->
-					<wanl-empty text="没有找到任何优惠券" src="ticket_default3x"
-						v-if="tag.loaded === true && tag.cardList.length === 0" />
-					<!-- 订单列表 -->
-					<view class="wanl-coupon">
-						<view v-for="(coupon, seat) in tag.cardList" :key="seat" :class="coupon.type"
-							class="item margin-bj radius-bock borders" @tap="onDetails(coupon)">
-							<!-- <image :src="$wanlshop.appstc('/coupon/bg_coupon_3x.png')" class="coupon-bg"></image> -->
-							<image :src="$wanlshop.appstc('/coupon/img_couponcentre_received_3x.png')"
-								class="coupon-sign" v-if="coupon.state"></image>
-							<view class="item-left lef" style="background-color: white;">
-								<block
-									v-if="coupon.type == 'reduction' || (coupon.type == 'vip' && coupon.usertype == 'reduction')">
-									<view class="colour">
-										<text class="text-price"></text>
-										<text class="price">{{Number(coupon.price)}}</text>
-									</view>
-									<view class="wanl-orange radius text-sm">
-										满{{Number(coupon.limit)}}减{{Number(coupon.price)}}
-									</view>
-								</block>
-								<block
-									v-if="coupon.type == 'discount' || (coupon.type == 'vip' && coupon.usertype == 'discount')">
-									<view class="colour">
-										<text class="price">{{Number(coupon.discount)}}</text>
-										<text class="discount">折</text>
-									</view>
-									<view class="wanl-orange radius text-sm">
-										满{{Number(coupon.limit)}}打{{Number(coupon.discount)}}折
-									</view>
-								</block>
-								<block v-if="coupon.type == 'shipping'">
-									<view class="colour">
-										<text class="price">包邮</text>
-									</view>
-									<view class="wanl-orange radius text-sm">
-										满{{Number(coupon.limit)}}元包邮
-									</view>
-								</block>
-								<block
-									v-if="coupon.type == 'vip' || (coupon.type == 'vip' && coupon.usertype == 'vip')">
-
-
-								</block>
-							</view>
-							<view class="item-right padding-bj" style="background-color: white;">
-								<!-- <view class="shop" @tap="onShop(coupon.shop_id)">
-									<view class="name">
-										<text class="wlIcon-dianpu margin-right-xs"></text> {{coupon.shop.shopname}}
-									</view>
-									<view>
-										<text class="wlIcon-fanhui2"></text>
-									</view>
-								</view> -->
-								<view class="title">
-									<!-- <view class="cu-tag sm radius margin-right-xs tagstyle">
-										{{coupon.type_text}}
-									</view> -->
-									<text class="text-cut wanl-gray text-min"
-										style="color: #141414;font-size: 35rpx;font-weight: bold;">{{coupon.name}}</text>
-								</view>
-								<view class="content text-min">
-									<view class="wanl-gray">
-										<view v-if="coupon.pretype == 'fixed'">
-											<text></text>有效期至 {{coupon.enddate}}
+		<view style="min-height: 58vh;height: 100%;">
+			<swiper :current="tabCurrentIndex" duration="300" @change="changeTab" style="padding-bottom: 2rpx;height: 100%;">
+						<swiper-item class="tab-content" v-for="(tag, key) in navList" :key="key">
+							<!-- <scroll-view class="list-scroll-content" scroll-y @scrolltolower="loadData"> -->
+								<!-- 空白页 -->
+								<wanl-empty text="没有找到任何优惠券" src="ticket_default3x"
+									v-if="tag.loaded === true && tag.cardList.length === 0" />
+								<!-- 订单列表 -->
+								<view class="wanl-coupon" style="overflow-y: auto;height: 100%;">
+									<view v-for="(coupon, seat) in tag.cardList" :key="seat" :class="coupon.type"
+										class="item margin-bj radius-bock borders" @tap="onDetails(coupon)">
+										<!-- <image :src="$wanlshop.appstc('/coupon/bg_coupon_3x.png')" class="coupon-bg"></image> -->
+										<image :src="$wanlshop.appstc('/coupon/img_couponcentre_received_3x.png')"
+											class="coupon-sign" v-if="coupon.state"></image>
+										<view class="item-left lef" style="background-color: white;">
+											<block
+												v-if="coupon.type == 'reduction' || (coupon.type == 'vip' && coupon.usertype == 'reduction')">
+												<view class="colour">
+													<text class="text-price"></text>
+													<text class="price">{{Number(coupon.price)}}</text>
+												</view>
+												<view class="wanl-orange radius text-sm">
+													满{{Number(coupon.limit)}}减{{Number(coupon.price)}}
+												</view>
+											</block>
+											<block
+												v-if="coupon.type == 'discount' || (coupon.type == 'vip' && coupon.usertype == 'discount')">
+												<view class="colour">
+													<text class="price">{{Number(coupon.discount)}}</text>
+													<text class="discount">折</text>
+												</view>
+												<view class="wanl-orange radius text-sm">
+													满{{Number(coupon.limit)}}打{{Number(coupon.discount)}}折
+												</view>
+											</block>
+											<block v-if="coupon.type == 'shipping'">
+												<view class="colour">
+													<text class="price">包邮</text>
+												</view>
+												<view class="wanl-orange radius text-sm">
+													满{{Number(coupon.limit)}}元包邮
+												</view>
+											</block>
+											<block
+												v-if="coupon.type == 'vip' || (coupon.type == 'vip' && coupon.usertype == 'vip')">
+			
+			
+											</block>
 										</view>
-										<view v-else-if="coupon.pretype == 'appoint' && coupon.validity != 0">
-											<text></text>{{$wanlshop.timeFormat(coupon.createtime + coupon.validity * 86400)}}
-											前有效
+										<view class="item-right padding-bj" style="background-color: white;">
+											<!-- <view class="shop" @tap="onShop(coupon.shop_id)">
+												<view class="name">
+													<text class="wlIcon-dianpu margin-right-xs"></text> {{coupon.shop.shopname}}
+												</view>
+												<view>
+													<text class="wlIcon-fanhui2"></text>
+												</view>
+											</view> -->
+											<view class="title">
+												<!-- <view class="cu-tag sm radius margin-right-xs tagstyle">
+													{{coupon.type_text}}
+												</view> -->
+												<text class="text-cut wanl-gray text-min"
+													style="color: #141414;font-size: 35rpx;font-weight: bold;">{{coupon.name}}</text>
+											</view>
+											<view class="content text-min">
+												<view class="wanl-gray">
+													<view v-if="coupon.pretype == 'fixed'">
+														<text></text>有效期至 {{coupon.enddate}}
+													</view>
+													<view v-else-if="coupon.pretype == 'appoint' && coupon.validity != 0">
+														<text></text>{{$wanlshop.timeFormat(coupon.createtime + coupon.validity * 86400)}}
+														前有效
+													</view>
+													<view v-else>
+														<text></text>未使用前 长期 有效
+													</view>
+												</view>
+											</view>
+											<view class="people">
+												新人福利
+											</view>
+											<view class="content text-min">
+												<view style="padding-bottom: 11rpx;">
+													<text></text>{{coupon.rangetype_text}}
+												</view>
+												<view class="cu-btn sm round " @tap.stop="onReceive(key,seat)" v-if="coupon.is_lin==0">
+													立即领取
+												</view>
+												<view class="cu-btn sm round line-colour"
+													style="background: rgba(243, 16, 100, 0.14);color: #F31064;"
+													@tap.stop="onApply(coupon.id)" v-else>
+													立即使用
+												</view>
+											</view>
 										</view>
-										<view v-else>
-											<text></text>未使用前 长期 有效
-										</view>
 									</view>
 								</view>
-								<view class="people">
-									新人福利
-								</view>
-								<view class="content text-min">
-									<view style="padding-bottom: 11rpx;">
-										<text></text>{{coupon.rangetype_text}}
-									</view>
-									<view class="cu-btn sm round " @tap.stop="onReceive(key,seat)" v-if="coupon.is_lin==0">
-										立即领取
-									</view>
-									<view class="cu-btn sm round line-colour"
-										style="background: rgba(243, 16, 100, 0.14);color: #F31064;"
-										@tap.stop="onApply(coupon.id)" v-else>
-										立即使用
-									</view>
-								</view>
-							</view>
-						</view>
-					</view>
-					<uni-load-more :status="tag.loadingType" :content-text="contentText" />
-					<view class="edgeInsetBottom"></view>
-				<!-- </scroll-view> -->
-			</swiper-item>
-		</swiper>
+								<uni-load-more :status="tag.loadingType" :content-text="contentText" />
+								<view class="edgeInsetBottom"></view>
+							<!-- </scroll-view> -->
+						</swiper-item>
+					</swiper>
+		</view>
 	</view>
 </template>
 

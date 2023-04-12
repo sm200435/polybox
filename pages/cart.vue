@@ -166,7 +166,7 @@
 			<view>
 				<view style="text-align: center;">
 					<view>
-						<image src="/static/images/cart/暂未登录.png" mode="" style="width: 274.15rpx;height: 315.22rpx;"></image>
+						<image src="/static/images/cart/wuCart.png" mode="" style="width: 274.15rpx;height: 315.22rpx;"></image>
 					</view>
 					<view style="font-size: 24rpx;color: #999999;margin:36rpx 0 178rpx 0">
 						登录后才能查看购物车哦
@@ -215,16 +215,16 @@
 			...mapState(['cart', 'common'])
 		},
 		onShow() {
-			let cart = uni.getStorageSync("wanlshop:cart");
-			this.$api.post({
-							url: '/wanlshop/cart/synchro',
-							data: {
-								cart: cart ? cart: null
-							},
-							success: res => {
-								console.log(res);
-							}
-						});
+			// let cart = uni.getStorageSync("wanlshop:cart");
+			// this.$api.post({
+			// 				url: '/wanlshop/cart/synchro',
+			// 				data: {
+			// 					cart: cart ? cart: null
+			// 				},
+			// 				success: res => {
+			// 					console.log(res);
+			// 				}
+			// 			});
 			setTimeout(() => {
 				uni.setNavigationBarColor({
 					frontColor: this.$store.state.common.appStyle.cart_font_color == 'light' ?

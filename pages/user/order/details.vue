@@ -14,8 +14,8 @@
 			<!-- 详情 -->
 			<view class="address cu-list menu-avatar">
 				<!-- 物流状态 -->
-				<navigator style="width: 699.28rpx;margin: auto;border-radius: 13rpx;" open-type="navigate" app-id="wx6885acbedba59c14" target="miniProgram" :path="'pages/result/result?nu='+orderData.express_no+'&com='+orderData.express_name+'&querysource=third_xcx'">
-					<view style="width: 100%;display: inline-flex; align-items: center; padding: 20rpx 20rpx;background-color: #fff;" class="cu-item"  v-if="orderData.state != 7 && orderData.state != 1 && orderData.state != 2 && logisticsType">
+				<navigator style="width: 699.28rpx;margin: auto;" open-type="navigate" app-id="wx6885acbedba59c14" target="miniProgram" :path="'pages/result/result?nu='+orderData.express_no+'&com='+orderData.express_name+'&querysource=third_xcx'">
+					<view style="width: 100%;display: inline-flex; align-items: center;border-radius: 13rpx; padding: 20rpx 20rpx;background-color: #fff;" class="cu-item"  v-if="orderData.state != 7 && orderData.state != 1 && orderData.state != 2 && logisticsType">
 						<view class="cu-avatar round wanl-bg-blue"><text class="wlIcon-yunshuzhong"></text></view>
 						<view class="content" style="flex: 1;margin-left: 20rpx;">
 							<view>
@@ -49,7 +49,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="lists bg-white"  v-if="orderData.order_no" style="border-bottom: 2rpx #C5C6C8 solid;margin-top: 30rpx;border-radius: 13rpx 13rpx 0 0;">
+			<view class="lists bg-white"  v-if="orderData.order_no" style="border-bottom: 2rpx #E0E0E0 solid;margin-top: 30rpx;border-radius: 13rpx 13rpx 0 0;">
 				<view class="cu-list menu-avatar" style="padding: 30rpx 0 0;">
 					<block v-for="(item, index) in orderData.goods" :key="item.id">
 						<view class="cu-item">
@@ -132,15 +132,15 @@
 					</view>
 				</view> -->
 			</view>
-			<view class="wanl-cart-foot fixedView solid-top account" v-if="orderData.state==1">
+			<view class="wanl-cart-foot fixedView solid-top account" style="align-items: flex-start;padding-top: 15rpx;height: 150rpx; !important" v-if="orderData.state==1">
 				<view class="text-sm text-right" style="display: flex;align-items: center;flex-direction: column;">
 					<view style="margin-bottom: 8rpx;">
-						<text style="font-size: 28rpx;font-weight: 500;">合计</text>
-						<text class="text-price wanl-orange">{{orderData.pay.price}}</text>
+						<text style="font-size: 28rpx;font-weight: 500;">合计 </text>
+						<text class="text-price wanl-orange" style="font-weight: 500;margin-left: 6rpx;"> {{orderData.pay.price}}</text>
 					</view>
 					<view style="font-size: 22rpx;">
-						共优惠：
-						<text class="text-price wanl-orange">{{orderData.pay.discount_price}}</text>
+						共优惠 
+						<text class="text-price wanl-orange" style="margin-left: 6rpx;"> {{orderData.pay.discount_price}}</text>
 					</view>
 				</view>
 				<view class="flex">
@@ -333,14 +333,16 @@ export default {
 		 */
 		onRefund(order_id, refund_status, refund_id, index){
 			if (refund_status == 0) { //申请退款
-				this.$wanlshop.to(`/pages/user/refund/apply?data=${JSON.stringify({
+				uni.redirectTo({
+					url:`/pages/user/refund/apply?data=${JSON.stringify({
 						order_id: this.orderData.id,
 						order_type: 'goods',
 						goods: this.orderData.goods[index],
 						freight_type: this.orderData.freight_type,
 						discount_price: this.orderData.pay.discount_price,
 						goods_number: this.orderData.goods.length
-					})}`);
+					})}`
+				})
 			}else{ // 查看详情
 				this.$wanlshop.to(`/pages/user/refund/details?id=${refund_id}`);
 			}
