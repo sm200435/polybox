@@ -1,7 +1,7 @@
 <template>
 	<view class="wanl-order-list" style="background: #f7f7f7;">
 
-		<view style="background-color: white;padding:10px 0;">
+		<view style="background-color: white;padding:30rpx 0;">
 			<view class="order-btnn">
 				<!-- <view class="icon"> -->
 				<!-- <text class="wlIcon-sousuo1"></text> -->
@@ -13,8 +13,8 @@
 			</view>
 		</view>
 
-		<view class="navbar" style="background: white;">
-			<view class="nav-item text-df" v-for="(item, index) in navList" :key="item.state"
+		<view class="navbar" style="background: white;padding-bottom: 8rpx;">
+			<view class="nav-item" style="font-size: 30rpx;padding-bottom: 16rpx;" v-for="(item, index) in navList" :key="item.state"
 				:class="{ current: tabCurrentIndex === index }" @tap="tabClick(index)">
 				{{ item.text }}
 			</view>
@@ -45,10 +45,10 @@
 								:style="{backgroundImage: 'url('+$wanlshop.oss(goods.image, 70, 70)+')'}"> </view>
 							<view class="content margin-right-bj">
 								<view class="describe">
-									<view class="text-cut-2 text-lg">
+									<view class="text-cut-2" style="font-size: 30rpx;">
 										{{goods.title}}
 									</view>
-									<view class="wanl_sku text-min">
+									<view style="font-size: 24rpx;color: #909090;margin-top: 35rpx;display: inline-flex;">
 										<text class="wanl-gray-dark">{{goods.difference}}</text>
 									</view>
 								</view>
@@ -57,11 +57,11 @@
 										style="font-size: 30rpx;color: #141414;font-weight: bold;">
 										{{ goods.price }}
 									</view>
-									<view class="text-min wanl-gray" style="font-size: 24rpx;">
+									<view class="text-min wanl-gray">
 										x {{ goods.number }}
 									</view>
 									<!-- 退款状态:0=未退款,1=退款中,2=待退货,3=退款完成 -->
-									<view class="text-min text-pink" v-if="goods.refund_status != 0">
+									<view class="text-min wanl-orange" v-if="goods.refund_status != 0">
 										{{getRefund(goods.refund_status)}}
 									</view>
 								</view>
@@ -110,8 +110,8 @@
 							<!-- <button class="cu-btn round margin-lr-bj line-black" @tap="commentOrder(order.id)">评论订单</button> -->
 						</view>
 					</view>
-					<uni-load-more :status="tag.loadingType" :content-text="contentText" />
-					<view class="edgeInsetBottom"></view>
+					<!-- <uni-load-more :status="tag.loadingType" :content-text="contentText" /> -->
+					<!-- <view class="edgeInsetBottom"></view> -->
 				</scroll-view>
 			</swiper-item>
 		</swiper>

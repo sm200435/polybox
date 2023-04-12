@@ -1,11 +1,11 @@
 <template>
 	<view class="uni-numbox">
-		<view @tap="_calcValue('minus')">
+		<view style="width: 60rpx;height: 60rpx;" @tap="_calcValue('minus')">
 			<!-- <text class="uni-numbox--text wlIcon-jian" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }"></text> -->
 			<image src="../../static/images/user/jian.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 		</view>
 		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
-		<view @tap="_calcValue('plus')">
+		<view style="width: 60rpx;height: 60rpx;" @tap="_calcValue('plus')">
 			<!-- <text class="uni-numbox--text wlIcon-tianjia" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }"></text> -->
 			<image src="../../static/images/user/jia.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 		</view>

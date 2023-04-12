@@ -175,7 +175,10 @@ export default {
 						customer: this.$store.state.statistics.order.customer + 1
 					});
 					// 跳转到退款详情页
-					this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
+					uni.redirectTo({
+						url:`/pages/user/refund/details?id=${res}`
+					})
+					// this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
 				}
 			});
 		},

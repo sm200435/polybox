@@ -32,7 +32,7 @@
 										<view class="text-red text-bold text-lg">
 											<text class="text-price">{{ item.price }}</text>
 										</view>
-										<view class="text-sm" style="margin-right: 10rpx;">
+										<view class="text-sm">
 											<image class="addcart" src="../../static/images/user/jiahao.png"
 												@tap.stop="addcartclick(item)"></image>
 										</view>
