@@ -65,8 +65,8 @@
 
 								<view
 									style="height: 120rpx;background: white;display: flex;justify-content: space-between;">
-									<view class="margin-left-sm" style="display: flex;margin-top: 30rpx;">
-										<view style="color: #141414;font-size: 27rpx;">共</view>
+									<view class="margin-left-sm" style="height: 40rpx;display: flex;margin-top: 30rpx;">
+										<view style="color: #141414;font-size: 27rpx;padding-top: 4rpx;">共</view>
 										<view style="color: #F31064;font-size: 30rpx;">￥124</view>
 									</view>
 									<view class="piao">
@@ -241,7 +241,7 @@
 		font-size: 28rpx;
 		color: white;
 		opacity: 0.4;
-		margin-top: 20rpx;
+		margin-top: 10rpx;
 		margin-right: 25rpx;
 	}
 </style>

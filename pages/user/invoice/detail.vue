@@ -1,7 +1,7 @@
 <template>
 	<!-- 发票进度详情 -->
 	<view class="bg-gray">
-		<view class="margin-bj" style="border-radius: 13rpx;background: white;">
+		<view class="margin-bj padding-bj" style="border-radius: 13rpx;background: white;">
 			<view class="wen">我们将会在3个工作日内开具，请耐心等待</view>
 			<view class="hangs">
 				<view style="width: 200rpx;height: 160rpx;">
@@ -37,7 +37,7 @@
 				<view style="margin-left: 20rpx;">483345875@qq.com</view>
 			</view>
 
-			<view class="time" style="width: 700rpx;height: 241rpx;background: white;margin: 0 auto;margin-top: 20rpx;border-radius: 12rpx;">
+			<view class="time" style="background: white;margin: 0 auto;margin-top: 20rpx;border-radius: 12rpx;">
 				<view style="color: #909090;font-size: 24rpx;padding: 30rpx 30rpx;">2023-4-11 14:19:23</view>
 				<view style="width: 700rpx;height: 174rpx;display: flex;">
 					<image style="width: 117rpx;height: 117rpx;margin-left: 24rpx;margin-right: 24rpx;"

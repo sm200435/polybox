@@ -189,6 +189,24 @@ export default {
 					
 				});
 			}
+<<<<<<< HEAD
+=======
+			// 提交
+			this.$api.post({
+				url: '/wanlshop/refund/addApply',
+				data: this.refund,
+				success: res => {
+					this.$store.commit('statistics/order', {
+						customer: this.$store.state.statistics.order.customer + 1
+					});
+					// 跳转到退款详情页
+					uni.redirectTo({
+						url:`/pages/user/refund/details?id=${res}`
+					})
+					// this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
+				}
+			});
+>>>>>>> 9707e00460cc4ea18b4684e735acdab54af754a3
 		},
 		chooseImage(index) {
 			uni.chooseImage({

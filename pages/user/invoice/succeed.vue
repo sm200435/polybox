@@ -3,14 +3,12 @@
 		<view class="wanl-success">
 			<view class="content">
 				<text class="icon wlIcon-pintuantuangouchenggong"></text>
-				<text class="text-lg margin-tb">{{ title }}已成功</text>
-				<view class="button padding-xl margin-top-lg">
-					<button
-						class="cu-btn block wanl-bg-orange margin-tb-sm lg"
-						@tap="$wanlshop.on('/pages/user/invoice/detail')">
+				<text class="text-lg margin-tb" style="width: 618rpx;height: 94rpx;color: #000000;font-size: 30rpx;">您的发票申请成功，我们将于3个工作日内将电子发票发送至您的邮箱</text>
+				<view style="display: flex;margin-top: 140rpx;">
+					<button class="wancont" style="color: #141414;background: white;border: 2rpx solid #999999;" @tap="$wanlshop.on('/pages/user/invoice/detail')">
 						查看详情
 					</button>
-					<button class="cu-btn block line-gray margin-tb-sm lg" @tap="onIndex">
+					<button class="wancont" style="background: #F31064;color: white;margin-left: 30rpx;" @tap="onIndex">
 						返回主页
 					</button>
 				</view>
@@ -53,7 +51,10 @@
 		color: #3aa112;
 		margin-top: 150rpx;
 	}
-	.wanl-success .content .button {
-		width: 100%;
+	.wancont {
+		width: 233rpx;
+		height: 72rpx;
+		font-size: 29rpx;
+		border-radius: 40rpx;
 	}
 	</style>

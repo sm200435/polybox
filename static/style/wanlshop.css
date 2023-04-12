@@ -2082,18 +2082,19 @@ page {
 
 .wanl-order-list .navbar .nav-item.current {
 	color: #F31064;
+	font-weight: bold;
 }
 
 .wanl-order-list .navbar .nav-item.current:after {
 	content: "";
 	position: absolute;
-	left: 50%;
+	/* left: 50%; */
 	bottom: 0;
-	transform: translateX(-50%);
-	width: 40%;
+	/* transform: translateX(-50%); */
+	width: 69rpx;
 	height: 0;
-	border-bottom: 2px solid #F31064;
-	border-radius: 3rpx;
+	border-bottom: 5rpx solid #F31064;
+	border-radius: 500px;
 }
 
 /* 商品 */
