@@ -188,9 +188,7 @@ export default {
 				    },
 					
 				});
-			}
-<<<<<<< HEAD
-=======
+			};
 			// 提交
 			this.$api.post({
 				url: '/wanlshop/refund/addApply',
@@ -206,7 +204,6 @@ export default {
 					// this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
 				}
 			});
->>>>>>> 9707e00460cc4ea18b4684e735acdab54af754a3
 		},
 		chooseImage(index) {
 			uni.chooseImage({
