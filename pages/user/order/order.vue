@@ -23,7 +23,7 @@
 			<swiper-item class="tab-content" v-for="(tag, key) in navList" :key="tag.state">
 				<scroll-view class="list-scroll-content" scroll-y @scrolltolower="loadData">
 					<!-- 空白页 -->
-					<wanl-empty text="没有找到任何订单" v-if="tag.loaded === true && tag.orderList.length === 0" />
+					<wanl-empty text="没有找到任何订单" src="/static/images/user/wucollect.png" v-if="tag.loaded === true && tag.orderList.length === 0" />
 					<!-- 订单列表 -->
 					<view v-for="(order, okey) in tag.orderList" :key="order.id" class="order-item radius-bock">
 						<view class="head">

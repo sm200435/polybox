@@ -191,7 +191,11 @@ export default {
 				    },
 					
 				});
+<<<<<<< HEAD
 			}
+=======
+			};
+>>>>>>> 43fa60e201ee290d53332b5f628f94ce982bd364
 			// 提交
 			this.$api.post({
 				url: '/wanlshop/refund/addApply',

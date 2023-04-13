@@ -1,6 +1,19 @@
 <template>
 	<!-- 开票信息详情 -->
 	<view style="background: #f7f7f7;">
+		
+		<view class="cu-custom text-white" :style="{color: common.appStyle.user_font_color == 'light'?'#ffffff':'#222222'}">
+			<view class="cu-bar fixed" :style="{ height: $wanlshop.wanlsys().height + 'px', paddingTop: $wanlshop.wanlsys().top + 'px' }">
+				<!-- 背景 -->
+				<view class="bar-bg" v-if="headerOpacity > 0" :style="{ 
+					height: $wanlshop.wanlsys().height + 'px', 
+					opacity: headerOpacity,
+					backgroundColor: common.appStyle.user_nav_color?'#ff6e98':'#f7f7f7',
+					backgroundImage: 'url(' + $wanlshop.oss(common.appStyle.user_nav_image, 414, 0, 1, 'transparent', 'png') + ')'
+				}"></view>
+			</view>
+		</view>
+		
 		<view>
 			<view class="fil">发票详情（必填）</view>
 			<view style="width: 700rpx;height: 455rpx;border-radius: 13rpx;background: white;margin: 10rpx 20rpx;">
