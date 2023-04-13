@@ -30,7 +30,7 @@
 				<button
 					v-if="type == 'pay'"
 					class="cu-btn block wanl-bg-orange margin-tb-sm lg"
-					@tap="$wanlshop.on('/pages/user/order/order')"
+					@tap="$wanlshop.on(`/pages/user/order/details?id=${id}`)"
 				>
 					查看订单
 				</button>
@@ -82,10 +82,12 @@ export default {
 	data() {
 		return {
 			type: '',
-			title: ''
+			title: '',
+			id:''
 		};
 	},
 	onLoad(options) {
+		this.id=uni.getStorageSync('order_id')
 		if (options.type == 'pay') {
 			this.title = '支付';
 		} else if (options.type == 'comment') {

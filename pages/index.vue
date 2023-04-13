@@ -16,10 +16,10 @@
 					<view style="margin-right: 8rpx;">
 						<image style="width: 33.82rpx;height: 35.02rpx;" src="../static/images/home/address.png" mode=""></image>
 					</view>
-					<view style="max-width: 400rpx;min-width: 60rpx;;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+					<view style="max-width: 400rpx;min-width: 60rpx;;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 30rpx;font-weight: 500;line-height: 35rpx;">
 						{{address}}
 					</view>
-					<view style="margin-top: 4rpx;">
+					<view style="margin-top: 2rpx;">
 						<image style="width: 35.02rpx;height: 35.02rpx;" src="../static/images/home/right.png" mode=""></image>
 					</view>
 				</view>
@@ -28,7 +28,7 @@
 						<!-- <view class="text-xxl"><text class="wlIcon-saoyisao"></text></view> -->
 					<!-- </view> -->
 					<view class="search flex align-center margin-lr-sm round">
-						<view class="text-df text-bold wanl-gray-dark" style="margin-left: 16rpx;margin-right: 6rpx;">
+						<view class="text-df text-bold wanl-gray-dark" style="margin-left: 16rpx;margin-right: 6rpx;margin-top: 8rpx;">
 							<image src="../static/images/user/searchs.png" style="width: 33rpx;height: 33rpx;"></image>
 						</view>
 						<swiper vertical autoplay circular interval="3000">

@@ -32,8 +32,8 @@
 						<view class="picture" @tap="onGoods(goods.goods_id)">
 							<image :src="$wanlshop.oss(goods.image, 100, 100, 1)" mode="aspectFill"></image>
 						</view>
-						<view class="content">
-							<view class="text-cut-2 wanl-gray-dark text-lg" @tap="onGoods(goods.goods_id)">
+						<view class="content" @tap="onGoods(goods.goods_id)">
+							<view class="text-cut-2 wanl-gray-dark text-lg">
 								{{ goods.title }}
 							</view>
 							<view class="cu-tag wanl-gray opt" style="background-color: #ffffff;">
@@ -45,15 +45,15 @@
 								</view>
 								
 								<view class="wanl-numberBox">
-									<view @tap="bcsub(goods)">
+									<view @tap.stop="bcsub(goods)">
 										<!-- <text class="wlIcon-jian round text-gray"></text> -->
 										<image src="../static/images/user/jian.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 									</view>
-									<view class="text-number" style="font-size: 24rpx;">
+									<view class="text-number" @tap.stop="numberInput($event,goods)" style="font-size: 24rpx;">
 										<!-- {{ goods.number }}	 -->
-										<input type="number" v-model="goods.number" :data-index="keys" @input="numberInput($event,goods)" @blur="numberBlur($event,goods)"/>
+										<input type="number" v-model="goods.number" :data-index="keys" @input.stop="numberInput($event,goods)" @blur.stop="numberBlur($event,goods)"/>
 									</view>
-									<view @tap="bcadd(goods)">
+									<view @tap.stop="bcadd(goods)">
 										<!-- <text class="wlIcon-tianjia round text-gray"></text> -->
 										<image src="../static/images/user/jia.png" style="width: 40rpx;height: 40rpx;margin-top: 14rpx;"></image>
 									</view>
@@ -83,8 +83,8 @@
 							</view>
 							<image :src="$wanlshop.oss(goods.image, 100, 100, 1)" mode="aspectFill" style="opacity: 0.4;"></image>
 						</view>
-						<view class="content" style="opacity: 0.4;">
-							<view class="text-cut-2 wanl-gray-dark text-lg" @tap="onGoods(goods.goods_id)">
+						<view class="content" style="opacity: 0.4;" @tap="onGoods(goods.goods_id)">
+							<view class="text-cut-2 wanl-gray-dark text-lg">
 								{{ goods.title }}
 							</view>
 							<view class="cu-tag wanl-gray opt" style="background-color: #ffffff;">
@@ -146,7 +146,7 @@
 							<text>{{ cart.status ? '取消' : '全选' }}</text>
 						</view>
 					</view>
-					<view class="text-sm text-right" style="display: flex;align-items: center;">
+					<view class="text-sm text-right" style="display: flex;align-items: center;margin-bottom: 3rpx;">
 						<view>
 							合计：
 							<text class="text-price wanl-orange text-lg">{{ cart.allsum }} </text>

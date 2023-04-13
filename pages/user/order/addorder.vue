@@ -55,12 +55,12 @@
 					</view> -->
 					<view class="box-ky">
 						<view class="cu-form-group list-height">
-							<view class="title" style="font-weight: 500;">快递运费</view>
-							<view class="picker" style="font-weight: 400;font-size: 29rpx;">{{shop.freight.name}} <text
+							<view class="title" style="font-weight: 500;font-size: 29rpx;color: #2D2D2D;">快递运费</view>
+							<view class="picker" style="font-size: 29rpx;font-weight: 400;color: #141414;">{{shop.freight.name}} <text
 									class="text-price margin-left-xs">{{shop.freight.price}}</text></view>
 						</view>
 						<view class="cu-form-group list-height" @tap="queryCoupon(index)">
-							<view class="title" style="font-weight: 500;">优惠券</view>
+							<view class="title"  style="font-weight: 500;font-size: 29rpx;color: #2D2D2D;">优惠券</view>
 							<view class="picker">
 								<block v-if="couponData[index]">
 									<text class="wlIcon-youhuiquantuangou text-red margin-right-xs"></text>
@@ -79,7 +79,7 @@
 									</block>
 								</block>
 								<block v-else>
-									<text class="text-gray" style="font-size: 26rpx;">请选择</text>
+									<text class="text-gray" style="font-size: 29rpx;">请选择</text>
 								</block>
 								<text class="wlIcon-fanhui2" style="margin-left: 15rpx;"></text>
 							</view>
@@ -87,14 +87,14 @@
 					</view>
 					
 					<view class="cu-form-group align-start list-height" style="margin-bottom: 30rpx;align-items: center;">
-						<view class="title" style="margin: 0;font-weight: 500;">支付方式</view>
-						<view class="title" style="padding: 0;margin: 0;">
+						<view class="title" style="font-weight: 500;font-size: 29rpx;color: #2D2D2D;margin: 0;">支付方式</view>
+						<view class="title" style="padding: 0;margin: 0;font-size: 29rpx;font-weight: 400;color: #141414;;">
 							微信支付
 						</view>
 					</view>
 
 					<view class="cu-form-group align-start">
-						<view class="wanl-gray-light title" style="font-weight: 500;color: black;">备注</view>
+						<view class="wanl-gray-light title" style="font-weight: 500;font-size: 29rpx;color: #2D2D2D;">备注</view>
 						<textarea disable-default-padding maxlength="100" v-model="shop.remarks" placeholder="订单备注可选" style="height: 229.47rpx;"></textarea>
 					</view>
 				</form>
@@ -793,7 +793,7 @@
 			border-radius: 13rpx;
 
 			.text-cut {
-				width: 70%;
+				width: 400rpx;
 				margin-bottom: 12rpx;
 				font-size: 29rpx;
 				font-weight: 500;

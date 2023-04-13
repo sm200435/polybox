@@ -829,14 +829,14 @@ page {
 	color: #F31064;
 }
 
-.wanl-list .drawer .scroll .list .active::before {
+/* .wanl-list .drawer .scroll .list .active::before {
 	font-family: "wlIcon";
 	content: "\e6db";
 	position: absolute;
 	right: -1px;
 	top: -1px;
 	font-size: 30rpx;
-}
+} */
 
 .wanl-list .drawer .footer {
 	position: fixed;

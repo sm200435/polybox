@@ -8,7 +8,7 @@
 				<!-- </view> -->
 				<image src="../../../static/images/user/searchs.png" style="width: 33rpx;height: 33rpx;"></image>
 				<view style="margin-left: 11rpx;flex: 1;font-size: 24rpx;">
-					<input style="width: 100%;color: #C2C2C2;" placeholder="请输入您的订单" @blur="finshisearch" />
+					<input style="width: 100%;color: #C2C2C2;" placeholder-style="color:#c2c2c2" placeholder="请输入您的订单" @blur="finshisearch" />
 				</view>
 			</view>
 		</view>

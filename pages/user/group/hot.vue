@@ -1,17 +1,19 @@
 <template>
-	<view class="hotts">
-		<view class="hot" v-for="(item, index) in listdata" :key="index" @tap="handleGoods(item.id)">
-			<image class="hoimg" :src="$wanlshop.oss(item.image, 125, 125)" mode="aspectFit"></image>
-			<view class="content">
-				<view >
-					<text style="font-size: 30rpx;">{{item.title}}</text>
-				</view>
-				<view class="flex align-center justify-between" style="width: 420rpx; height: 50rpx;text-align: center;">
-					<view class="text-black text-bold" style="font-size: 31rpx;">
-						<text>￥{{item.price}}</text>
+	<view class="hotts" style="min-height: 100vh;overflow-y: auto;">
+		<view style="height: 100%;">
+			<view class="hot" v-for="(item, index) in listdata" :key="index" @tap="handleGoods(item.id)">
+				<image class="hoimg" :src="$wanlshop.oss(item.image, 125, 125)" mode="aspectFit"></image>
+				<view class="content">
+					<view >
+						<text style="font-size: 30rpx;">{{item.title}}</text>
 					</view>
-					<view>
-						<image class="addcart" style="width: 40rpx;height: 40rpx;margin-top: 12rpx;" src="../../../static/images/user/jiahao.png" @tap.stop="addcartclick(item)"></image>
+					<view class="flex align-center justify-between" style="width: 420rpx; height: 50rpx;text-align: center;">
+						<view class="text-black text-bold" style="font-size: 31rpx;">
+							<text>￥{{item.price}}</text>
+						</view>
+						<view>
+							<image class="addcart" style="width: 40rpx;height: 40rpx;margin-top: 12rpx;" src="../../../static/images/user/jiahao.png" @tap.stop="addcartclick(item)"></image>
+						</view>
 					</view>
 				</view>
 			</view>

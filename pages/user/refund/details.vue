@@ -17,7 +17,7 @@
 			</view>
 			
 			<view style="border-radius: 13rpx;margin: 0 25rpx 30rpx;">
-				<view class="bg-white padding-bj" v-if="refundData.state != 4" style="border-bottom: 1rpx solid #C5C6C8;padding: 30rpx 25rpx;">
+				<view class="bg-white padding-bj" v-if="refundData.state != 4" style="padding: 30rpx 25rpx;border-radius: 13rpx;">
 					{{getStateInfo(refundData.state)}}
 				</view>
 				<!-- 退款状态:0=申请退款,1=卖家同意,2=卖家拒绝,3=申请平台介入,4=成功退款,5=退款已关闭,6=已提交退货,7=第三方退款中 -->
@@ -47,8 +47,8 @@
 			</view>
 			
 			
-			<view v-if="refundData.state == 1">
-				<view class="bg-white solid-top padding-bj receipt">
+			<view v-if="refundData.state == 1" style="width: 700rpx;margin: auto;">
+				<view class="bg-white solid-top padding-bj receipt" style="border-radius: 13rpx 13rpx 0 0;">
 					<view class="icon">
 						<text class="wlIcon-guanzhu1"></text>
 					</view>
@@ -63,7 +63,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="bg-white padding-bj solid-top">
+				<view class="bg-white padding-bj solid-top" style="border-radius: 0rpx 0rpx 13rpx 13rpx;">
 					<view class="wanl-gray text-sm">
 						<view>
 							<text class="wlIcon-dot margin-right-sm"></text>请勿使用平邮或到付，以免商家无法收到退货
@@ -73,7 +73,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="cu-form-group margin-top-bj">
+				<view class="cu-form-group margin-top-bj" style="border-radius: 13rpx 13rpx 0rpx 0rpx;">
 					<view class="title">快递单号：</view>
 					<input placeholder="请填写快递单号" name="input" v-model="returnData.express_no"></input>
 				</view>
@@ -85,17 +85,17 @@
 						</view>
 					</picker>
 				</view>
-				<view class="bg-white padding-bj current">
+				<view class="bg-white padding-bj current" style="border-radius: 0rpx 0rpx 13rpx 13rpx;margin-bottom: 30rpx;">
 					<view class="flex justify-end">
 						<button class="cu-btn line-orange margin-lr-xs" @tap="toExpress(refundData.id)">确认退货</button>
 					</view>
 				</view>
 			</view>
-			<view class="bg-white current" v-if="refundData.state == 6">
-				<view class="bg-white solid-top padding-bj">
+			<view class="bg-white current" v-if="refundData.state == 6" style="width: 699.40rpx;border-radius: 13rpx;margin: 0 auto 30rpx;">
+				<view class="solid-top padding-bj">
 					退货物流：<text class="wanl-gray">{{refundData.express_name}}({{refundData.express_no}})</text>
 				</view>
-				<view class="bg-white solid-top padding-bj current">
+				<view class="solid-top padding-bj current">
 					<view class="wanl-gray text-sm">
 						<view>
 							<text class="wlIcon-dot margin-right-sm"></text>如果退款被拒绝，您可以修改申请重新发起
@@ -129,7 +129,7 @@
 				<view class="bg-white padding-bj margin-top-bj text-lg" style="padding: 0 20rpx;margin: 0;">
 					退款详情
 				</view>
-				<view class="padding-bj flex" style="padding: 30rpx 20rpx;margin: 0;border-bottom: 2rpx solid #C5C6C8;">
+				<view class="padding-bj flex" style="padding: 30rpx 20rpx;margin: 0;border-bottom: 1rpx solid #e5e5e5;">
 					<view class="cu-avatar xl margin-right-bj" :style="{backgroundImage: 'url('+$wanlshop.oss(refundData.goods.image, 70, 70)+')'}"> </view>
 					<view class="text-sm" style="width: calc(100% - 128rpx);">
 						<view class="margin-bottom-xs">

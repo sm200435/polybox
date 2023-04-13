@@ -1,7 +1,7 @@
 <template>
-	<view>
+	<view style="min-height: 100vh;height: 100%;background-color: #f7f7f7;">
 		<view class="edgeInsetTop"></view>
-		<view class="bg-white padding-bj flex">
+		<view class="bg-white padding-bj flex" style="width: 699.28rpx;margin: 0 auto 30rpx;border-radius: 13rpx;">
 			<view class="cu-avatar xl margin-right-bj" :style="{backgroundImage: 'url('+$wanlshop.oss(goods.image, 70, 70)+')'}"> </view>
 			<view class="text-sm" style="width: calc(100% - 128rpx);">
 				<view class="margin-bottom-xs">
@@ -16,38 +16,41 @@
 		</view>
 		
 		<view class="margin-top-bj">
-			<view class="cu-form-group">
-				<view class="title">物流状态</view>
-				<picker @change="expressChange" :value="refund.expressType" :range="expressList">
-					<view class="picker">
-						<text v-if="refund.expressType > -1">{{expressList[refund.expressType]}}</text>
-						<text class="wanl-gray-light" v-else>是否收到货</text>
-					</view>
-				</picker>
+			<view style="width: 699.28rpx;margin: auto;border-radius: 13rpx;">
+				<view class="cu-form-group" style="border: 0;">
+					<view class="title">物流状态</view>
+					<picker @change="expressChange" :value="refund.expressType" :range="expressList">
+						<view class="picker" style="background: url(/static/images/user/tui-right.png) no-repeat 470rpx 30rpx;background-size: 42rpx 42rpx;padding-right: 25rpx;">
+							<text v-if="refund.expressType > -1">{{expressList[refund.expressType]}}</text>
+							<text class="wanl-gray-light" v-else>是否收到货</text>
+						</view>
+					</picker>
+				</view>
+				<view class="cu-form-group" style="border: 0;">
+					<view class="title">退款类型</view>
+					<picker @change="typeChange" :value="refund.type" :range="typeList">
+						<view class="picker"  style="background: url(/static/images/user/tui-right.png) no-repeat 470rpx 30rpx;background-size: 42rpx 42rpx;padding-right: 25rpx;">
+							<text v-if="refund.type > -1">{{typeList[refund.type]}}</text>
+							<text class="wanl-gray-light" v-else>选择退款类型</text>
+						</view>
+					</picker>
+				</view>
+				<view class="cu-form-group" style="border: 0;">
+					<view class="title">退款原因</view>
+					<picker @change="reasonChange" :value="refund.reason" :range="reasonList">
+						<view class="picker" style="background: url(/static/images/user/tui-right.png) no-repeat 470rpx 30rpx;background-size: 42rpx 42rpx;padding-right: 25rpx;">
+							<text v-if="refund.reason > -1">{{reasonList[refund.reason]}}</text>
+							<text class="wanl-gray-light" v-else>退款的原因</text>
+						</view>
+					</picker>
+				</view>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">退款类型</view>
-				<picker @change="typeChange" :value="refund.type" :range="typeList">
-					<view class="picker">
-						<text v-if="refund.type > -1">{{typeList[refund.type]}}</text>
-						<text class="wanl-gray-light" v-else>选择退款类型</text>
-					</view>
-				</picker>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">退款原因</view>
-				<picker @change="reasonChange" :value="refund.reason" :range="reasonList">
-					<view class="picker">
-						<text v-if="refund.reason > -1">{{reasonList[refund.reason]}}</text>
-						<text class="wanl-gray-light" v-else>退款的原因</text>
-					</view>
-				</picker>
-			</view>
-			<view class="cu-form-group margin-top-bj">
+			
+			<view class="cu-form-group margin-top-bj" style="width: 699.28rpx;margin: 30rpx auto 0;border-radius: 13.29rpx;">
 				<view class="title">退款金额</view>
 				<input type="digit" :placeholder="amount.placeholder" @input="moneyInput" :disabled="amount.total == 0"></input>
 			</view>
-			<view class="bg-white margin-top-bj">
+			<view class="bg-white margin-top-bj" style="width: 699.28rpx;margin: 30rpx auto 0;border-radius: 13rpx;">
 				<view class="cu-form-group">
 					<view class="title">上传凭证</view>
 				</view>
@@ -56,12 +59,12 @@
 						<image :src="$wanlshop.oss(item, 90, 90)" mode="aspectFill"></image>
 						<view class="cu-tag bg-red" @tap.stop="delImg(index)"><text class="wlIcon-31guanbi"></text></view>
 					</view>
-					<view class="dashed" @tap="chooseImage" v-if="refund.images.length < 4">
+					<view class="" @tap="chooseImage" v-if="refund.images.length < 4" style="border: 1rpx solid #999999;border-radius: 12rpx;">
 						<text class="wlIcon-31paishe"></text>
 					</view>
 				</view>
 			</view>
-			<view class="cu-form-group margin-top-bj">
+			<view class="cu-form-group margin-top-bj" style="width: 699.28rpx;margin: 30rpx auto 0;border-radius: 13rpx;">
 				<view class="title">退款理由</view>
 				<input placeholder=" " v-model="refund.refund_content"></input>
 			</view>
@@ -189,8 +192,6 @@ export default {
 					
 				});
 			}
-<<<<<<< HEAD
-=======
 			// 提交
 			this.$api.post({
 				url: '/wanlshop/refund/addApply',
@@ -206,7 +207,6 @@ export default {
 					// this.$wanlshop.to(`/pages/user/refund/details?id=${res}`);
 				}
 			});
->>>>>>> 9707e00460cc4ea18b4684e735acdab54af754a3
 		},
 		chooseImage(index) {
 			uni.chooseImage({

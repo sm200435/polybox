@@ -216,17 +216,20 @@
 				if (!this.tempList.length) return;
 				let rightRect = await this.getRect('#wanl-right-cloumn');
 				let leftRect = await this.getRect('#wanl-left-cloumn');
+				// console.log("rightRect",rightRect);
+				// console.log("leftRect",leftRect);
 				// 如果左边小于或等于右边，就添加到左边，否则添加到右边
 				let item = this.tempList[0];
 				if(!item) return ;
 				item.image = this.$wanlshop.oss(item.image, 172, 0, 1);
 				item.comment = this.$wanlshop.toFormat(item.comment, 'hundred');
 				item.praise = item.comment > 0 ? parseInt((item.praise / item.comment) * 100) : 0;
-				if (leftRect.height < rightRect.height) {
-					this.leftList.push(item);
-				} else if (leftRect.height > rightRect.height) {
-					this.rightList.push(item);
-				} else {
+				// if (leftRect.height < rightRect.height) {
+				// 	this.leftList.push(item);
+				// } else if (leftRect.height > rightRect.height) {
+				// 	this.rightList.push(item);
+				// } 
+				// else {
 					// 这里是为了保证第一和第二张添加时，左右都能有内容
 					// 因为添加第一张，实际队列的高度可能还是0，这时需要根据队列元素长度判断下一个该放哪边
 					if (this.leftList.length <= this.rightList.length) {
@@ -234,7 +237,7 @@
 					} else {
 						this.rightList.push(item);
 					}
-				}
+				// }
 				// 移除临时列表的第一项
 				this.tempList.splice(0, 1);
 				// 如果临时数组还有数据，继续循环
@@ -243,6 +246,8 @@
 						this.splitData();
 					}, this.addTime)
 				}
+				// console.log('leftList',this.leftList);
+				// console.log('rightList',this.rightList);
 			},
 			// 复制而不是引用对象和数组
 			cloneData(data) {

@@ -20,7 +20,7 @@
 				<view class="title">手机号</view>
 				<input placeholder="请输入用户名" disabled="false" name="username" :value="user.mobile"></input>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">个性签名</view>
 				<input placeholder="请输入个性签名" name="bio" :value="user.bio"></input>
 			</view>
@@ -41,7 +41,7 @@
 						{{user.birthday || '1992-08-23'}}
 					</view>
 				</picker>
-			</view>
+			</view> -->
 			<view class="padding-bj flex flex-direction">
 				<button form-type="submit" style="width: 100%;" class="cu-btn wanl-bg-redorange margin-tb lg">保存</button>
 				<!-- <button class="cu-btn line-red lg" @tap="logout()">退出登录</button> -->

@@ -83,7 +83,7 @@ api.interceptor.response = ((res, config) => {
 			delta:1,
 		})
 	}
-	else if(res.msg=='页面安全令牌已过期！请重返此页'){
+	else if(res.msg=='库存不足'){
 		uni.navigateBack({
 			delta:1,
 		})

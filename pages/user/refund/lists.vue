@@ -1,5 +1,5 @@
 <template>
-	<view class="wanl-order-list" style="background: #f7f7f7;">
+	<view class="wanl-order-list" style="background: #f7f7f7;float: left;width: 100%;overflow-y: auto;">
 		<view class="edgeInsetTop"> </view>
 		<view class="order-item radius-bock" v-for="(item, index) in dataList" :key="item.id">
 			<view class="head">
@@ -31,12 +31,12 @@
 				</view>
 			</view>
 			<!-- 底部 -->
-			<view class="bg-bgcolor padding-bj margin-tb-bj margin-right-bj radius text-cente wanl-gray-light" style="font-size: 30rpx">
-				<text class="margin-lr-bj wanl-black ">{{getStateText(item.state)}}</text> {{getStateInfo(item.state)}}
+			<view class="bg-bgcolor padding-bj margin-tb-bj margin-right-bj radius text-cente wanl-gray-light" style="font-size: 30rpx;padding: 25rpx 25rpx 25rpx 50rpx;">
+				<text class="margin-lr-bj wanl-black " style="margin-left: 0;">{{getStateText(item.state)}}</text> {{getStateInfo(item.state)}}
 			</view>
 			<!-- 1.0.2升级 售后列表完成退款项目显示关闭按钮 -->
 			<view class="action-box padding-bottom-bj">
-				<button class="cu-btn round line-black" v-if="item.state == 0 || item.state == 1 || item.state == 2 || item.state == 3 || item.state == 6" @tap="closeRefund(index)">关闭退款</button>
+				<button class="cu-btn round line-black" style="margin: 0;" v-if="item.state == 0 || item.state == 1 || item.state == 2 || item.state == 3 || item.state == 6" @tap="closeRefund(index)">关闭退款</button>
 				<button class="cu-btn round margin-lr-bj line-orange" @tap="onRefund(item.id)">查看详情</button>
 			</view>
 		</view>

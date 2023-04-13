@@ -272,7 +272,7 @@
 					<view class="myorder" v-if="user.isLogin">设置</view>
 					<view class="clickview" @click="addressclick()" v-if="user.isLogin">
 						<view class="clickview-left">
-							<image class="clickview-img" src="../static/images/user/addres.png"></image>
+							<image class="clickview-img" src="../static/images/user/addres.png" style="width: 36.23rpx;height: 36.23rpx;"></image>
 							<view class="clickview-text">收货地址</view>	
 						</view>
 						<view class="clickview-right">
@@ -281,7 +281,7 @@
 					</view>
 					<view class="clickview" @click="invoice()" v-if="user.isLogin">
 						<view class="clickview-left">
-							<image class="clickview-img" src="../static/images/user/invoic.png"></image>
+							<image class="clickview-img" src="../static/images/user/invoic.png" style="width: 36.23rpx;height: 30.19rpx;"></image>
 							<view class="clickview-text">发票中心</view>	
 						</view>
 						<view class="clickview-right">
@@ -290,7 +290,7 @@
 					</view>
 					<view class="clickview" @click="aboutclick()">
 						<view class="clickview-left">
-							<image class="clickview-img" src="../static/images/user/concerning.png"></image>
+							<image class="clickview-img" src="../static/images/user/concerning.png" style="width: 36.23rpx;height: 36.23rpx;"></image>
 							<view class="clickview-text">关于我们</view>	
 						</view>
 						<view class="clickview-right">
@@ -299,7 +299,7 @@
 					</view>
 					<view class="clickview" @tap="goUserAgreement($store.state.common.appConfig.user_agreement, '用户协议')">
 						<view class="clickview-left">
-							<image class="clickview-img" src="../static/images/user/agreement.png"></image>
+							<image class="clickview-img" src="../static/images/user/agreement.png" style="width: 36.23rpx;height: 37.44rpx;"></image>
 							<view class="clickview-text">用户协议</view>	
 						</view>
 						<view class="clickview-right">

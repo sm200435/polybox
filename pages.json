@@ -1282,7 +1282,7 @@
 					"path": "refund/apply",
 					"style": {
 						"navigationBarTitleText": "退款申请",
-						"navigationBarBackgroundColor": "#ffffff",
+						"navigationBarBackgroundColor": "#f7f7f7",
 						"app-plus": {
 							"titleNView": {
 								"type": "float",

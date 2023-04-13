@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-load-more" @tap="onClick">
+	<view class="uni-load-more" @tap="onClick" style="background-color: #f7f7f7;">
 		<!-- #ifdef APP-NVUE -->
 		<loading-indicator v-if="!webviewHide && status === 'loading' && showIcon" :style="{color: color,width:iconSize+'px',height:iconSize+'px'}" :animating="true" class="uni-load-more__img uni-load-more__img--nvue"></loading-indicator>
 		<!-- #endif -->

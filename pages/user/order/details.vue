@@ -15,7 +15,7 @@
 			<view class="address cu-list menu-avatar">
 				<!-- 物流状态 -->
 				<navigator style="width: 699.28rpx;margin: auto;" open-type="navigate" app-id="wx6885acbedba59c14" target="miniProgram" :path="'pages/result/result?nu='+orderData.express_no+'&com='+orderData.express_name+'&querysource=third_xcx'">
-					<view style="width: 100%;display: inline-flex; align-items: center;border-radius: 13rpx; padding: 20rpx 20rpx;background-color: #fff;" class="cu-item"  v-if="orderData.state != 7 && orderData.state != 1 && orderData.state != 2 && logisticsType">
+					<view style="width: 100%;display: inline-flex; align-items: center;border-radius: 13rpx;padding: 20rpx 20rpx;background-color: #fff;" class="cu-item"  v-if="orderData.state != 7 && orderData.state != 1 && orderData.state != 2 && logisticsType">
 						<view class="cu-avatar round wanl-bg-blue"><text class="wlIcon-yunshuzhong"></text></view>
 						<view class="content" style="flex: 1;margin-left: 20rpx;">
 							<view>
@@ -31,19 +31,19 @@
 					</view>
 				</navigator>
 				<!-- 地址 -->
-				<view class="cu-item" style="padding: 0;" v-if="orderData.state!=3">
+				<view class="cu-item" style="padding: 0;height: 131.64rpx;" v-if="orderData.state!=3">
 					<view class="content" style="left: 0 !important;width: 100%;height: 100%;">
-						<view style="overflow: hidden;right: 20rpx;position: absolute;right: 20rpx;top: 90rpx;font-size: 25rpx;">
+						<view style="overflow: hidden;right: 20rpx;position: absolute;right: 20rpx;top: 70rpx;font-size: 25rpx;">
 							<text class="wanl-pip margin-right-sm">{{orderData.address.name}}</text>
 							<text class="wanl-gray text-sm">{{orderData.address.mobile}}</text>
 						</view>
-						<view style="width: 100%;display: flex;justify-content: space-between;position: absolute;right: 0;top: 20rpx;">
+						<view style="width: 100%;display: flex;justify-content: space-between;position: absolute;right: 0;top: 30rpx;padding-right: 10rpx;">
 							<view style="font-size: 25rpx;font-weight: 400;color: #999999;line-height: 36rpx;padding-left: 20rpx;">
 								详细地址
 							</view>
-							<view class="wanl-pip text-cut-2 text-sm" style="width: 50%;font-size: 25rpx;">
+							<view class="wanl-pip text-sm" style="width: 60%;font-size: 25rpx;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
 								{{orderData.address.address.replace(/\//g,' ')}}
-								<text class="margin-left-xs" v-if="orderData.address.address_name">（{{orderData.address.address_name}}）附近</text>
+								{{orderData.address.address_name}}
 							</view>
 						</view>
 					</view>
@@ -85,11 +85,11 @@
 			
 			<view class="lists bg-white"  v-if="orderData.order_no" style="border-radius: 0rpx 0rpx 13rpx 13rpx;padding-top: 30rpx;">
 				<view class="price padding-lr-bj padding-bottom-bj text-sm">
-					<view style="padding: 15rpx 0;"> <text class="grayTitle"> 商品总价 </text> <text class="text-price"> {{orderData.pay.order_price}} </text> </view>
+					<view style="padding: 15rpx 0;"> <text class="grayTitle"> 商品金额 </text> <text class="text-price"> {{orderData.pay.order_price}} </text> </view>
 					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 运费 </text> <text class="text-price"> {{orderData.pay.freight_price}} </text> </view>
 					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 优惠</text> <text class="text-price"> {{orderData.pay.discount_price}} </text> </view>
-					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 实付款 </text> <text class="text-price"> {{orderData.pay.price}} </text> </view>
-					<view style="margin: 15rpx 0;" class="text-sm" v-if="orderData.pay.actual_payment != 0"> <text> 实付款 </text> <text class="text-price wanl-orange"> {{orderData.pay.actual_payment}} </text> </view>
+					<view style="margin: 15rpx 0;"> <text class="grayTitle"> 总价 </text> <text class="text-price"> {{orderData.pay.price}} </text> </view>
+					<view style="margin: 15rpx 0;" class="text-sm" v-if="orderData.pay.actual_payment != 0"> <text class="grayTitle"> 实付款 </text> <text class="text-price wanl-orange"> {{orderData.pay.actual_payment}} </text> </view>
 				</view>
 			</view>
 			
@@ -226,14 +226,14 @@ export default {
 										signType: res.signType,
 										timeStamp: res.timeStamp,
 										success: (e) => {
-											this.paySuccess(data[0].type);
+											this.paySuccess();
 										},
 										fail: (e) => {
 											// uni.showModal({
-											//     content: "支付失败,原因为: " + e.errMsg,
+											//     content: "支付失败" ,
 											//     showCancel: false,
 											// })
-											this.payErr(data, token, code);
+											// this.payErr(data, token, code);
 										}
 									})
 								}
@@ -248,6 +248,11 @@ export default {
 					})
 				}
 			});	
+		},
+		paySuccess() {
+			uni.redirectTo({
+				url:'/pages/page/success?type=pay&order_type=pay'
+			})
 		},
 		// 获取订单
 		async loadData(data) {
